@@ -6,6 +6,10 @@
   75% { transform: rotate(45deg); }
   100% { transform: rotate(0deg); }
 }
+
+@keyframes back {
+  to { transform: rotate(0deg); }
+}
 .nav_flex {
   display: flex;
   justify-content: center;
@@ -27,11 +31,14 @@
   img {
     margin-right: 10px !important;
     border: 1px gray solid !important;
-    border-radius: 50% !important;
+    border-radius: 50%;
+    transform: rotate(0deg);
+    transition: all 1s;
     &:hover {
-      animation: rotation_log 2s 1;
+      animation: rotation_log 3s 1;
     }
   }
+  
 }
 
 .hover {

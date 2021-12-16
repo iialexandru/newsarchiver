@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+
+.flexbox_n {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+}
+
+.container {
+    font-family: 'Libre Baskerville', sans;
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+
+    select { 
+        max-height: 50px;
+        overflow-y: scroll;
+        border-radius: 50px;
+        font-family: 'Libre Baskerville', sans;
+        margin-top: 3vh;
+        
+        &:nth-child(1) {
+            margin-top: 5vh;
+        }
+
+        option { 
+            font-family: 'Libre Baskerville', sans;
+        }
+    }
+}
+
+@keyframes fade_b_opac {
+    from { transform: translateY(-50%); transform-origin: top; opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.item {
+    margin-left: 1vw;
+    align-self: center;
+    animation: fade_b_opac .5s 1;
+}
+
+@keyframes fade_lr_opac {
+    from { transform: translateX(-50%); transform-origin: left; opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade_rl_opac {
+    from { transform: translateX(50%); transform-origin: right; opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.all_news_container {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
+    row-gap: 5vh;
+    margin-bottom: 40px;
+
+    &:nth-child(0n + 2) {
+        .item_flex {
+            animation: fade_rl_opac .5s 1 !important;
+        }
+    }
+
+    .item_flex {
+        width:  80%;
+        height: calc(60vmin + .94em);
+        border: 1px solid gray;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.6);
+        animation: fade_lr_opac .5s 1;
+        transition: all .4s ease-in;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        
+        &:hover {
+            transform: scale(1.1);
+            transition: transform .4s ease-out;
+        }
+    }
+
+    .image { 
+        margin-top: .95em !important;
+        margin-left: calc(50% - 200px) !important;
+    }
+
+    .headline {
+        margin: 0;
+        margin-top: 5px;
+        text-align: center;
+        max-height: 23%;
+        overflow: hidden;
+        font-size: 1rem;
+    }
+
+    .intro_paragraph {
+        position: relative;
+        z-index: -1;
+        font-size: 1rem;
+        font-weight: normal;
+        width: 95%;
+        text-align: center;
+    }
+}
