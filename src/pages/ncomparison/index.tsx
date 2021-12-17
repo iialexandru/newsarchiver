@@ -1,10 +1,7 @@
 import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
-import { useState, useEffect } from 'react'
-import countries from '../../utils/NewsComparison/countrySelect'
 import styles from '../../styles/scss/NewsComparison.module.scss'
 import axios from 'axios'
-import Image from 'next/image'
 import Selection from '../../components/selectionMenu'
 import { useRouter } from 'next/router'
 
@@ -21,8 +18,6 @@ interface News {
 }
 
 const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
-    // const[ selectCountry, setSelectCountry ] = useState({ country1: '', country2: ''})
-    // const[ selectNews, setSelectNews ] = useState({ news1: '', news2: ''})
 
     const router = useRouter()
 
@@ -39,14 +34,6 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
             query: { ...router.query, news_s: encodeURIComponent(news.toLowerCase()) }
         })
     }
-    
-    // const[ selectCountry, setSelectCountry ] = useState({ country1: '', country2: ''})
-    // const[ selectNews, setSelectNews ] = useState({ news1: '', news2: ''})
-
-    // const newsRomania: string[] = ['DIGI24', 'Antena3']
-    // const newsGermany: string[] = ['WELT', 'DW']
-    // const newsFrance: string[] = ['France24', 'Lemonde']
-    // const allNews = [newsRomania, newsGermany, newsFrance]
 
     return (
         <div className={styles.container}>

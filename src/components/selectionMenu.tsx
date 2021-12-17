@@ -1,9 +1,8 @@
 import styles from '../styles/scss/NewsComparison.module.scss'
-import { FC, Dispatch, SetStateAction } from 'react'
+import { FC } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
 import Image from 'next/image'
 import { useState } from 'react'
-import selectCountry from '../utils/NewsComparison/countrySelect'
 
 interface Default {
     allPage: {[
