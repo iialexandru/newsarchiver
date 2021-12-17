@@ -7,5 +7,5 @@ export default function selectCountry(country: string, news: string[][]) {
         case 'france':
             return news[2]
     }
-    return news[0]
+    return ['ERR', 'ERR', 'ERR', 'ERR', 'ERR']
 }

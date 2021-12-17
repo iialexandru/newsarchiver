@@ -1,9 +1,9 @@
 import styles from '../styles/scss/NewsComparison.module.scss'
 import { FC, Dispatch, SetStateAction } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState } from 'react'
+import selectCountry from '../utils/NewsComparison/countrySelect'
 
 interface Default {
     allPage: {[
@@ -12,59 +12,45 @@ interface Default {
     }
 }
 
-interface News {
-    news: Default
+interface ChildPropsComponent {
+    news: Default;
+    change_news_query: (news: string) => void;
+    URL: string | string[] | undefined;
 }
 
-const selectionMenu: FC<News> = ({ news }) => {
-    const router = useRouter()
+const selectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }) => {
 
-    const[ selectCountry, setSelectCountry ] = useState({ country1: '', country2: ''})
-    const[ selectNews, setSelectNews ] = useState({ news1: '', news2: ''})
-    
-    const change_first_news = (news: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, news_f: encodeURIComponent(news.toLowerCase()) }
-        })
-    }
-
-    const change_second_news = (news: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, news_s: encodeURIComponent(news.toLowerCase()) }
-        })
-    }
+    const [ selectCountry, setSelectCountry ] = useState("")
+    const [ selectNews, setSelectNews ] = useState<string>("default")
 
     const newsRomania: string[] = ['DIGI24', 'Antena3']
     const newsGermany: string[] = ['WELT', 'DW']
     const newsFrance: string[] = ['France24', 'Lemonde']
     const allNews = [newsRomania, newsGermany, newsFrance]
 
-
     return (
         <div className={styles.flexbox_n}>
         <div className={styles.item}>
             <label>Country: </label>
-            <select value={selectCountry.country1} onChange={e => { setSelectCountry({...selectCountry, country1: e.target.value});setSelectNews({...selectNews, news1: ""}) }}>
+            <select value={selectCountry} onChange={e => { setSelectCountry(e.target.value); setSelectNews("") }}>
                 <option value="" disabled>Please select country:</option>
                 <option value="romania">Romania</option>
                 <option value="germany">Germany</option>
                 <option value="france">France</option>
             </select>
         </div>
-        {selectCountry.country1 !== "" && 
+        {selectCountry !== "" && 
         <>
             <div className={styles.item}>
                 <label>News Site: </label>
-                <select value={selectNews.news1} onChange={e => { setSelectNews({...selectNews, news1: e.target.value}); change_first_news(e.target.value)}}>
+                <select value={selectNews} onChange={e => { setSelectNews(e.target.value); change_news_query(e.target.value)}}>
                     <option value="" disabled>Please choose news site:</option>
-                    {countries(selectCountry.country1, allNews).map((n: any, i: any) => {
+                    {countries(selectCountry, allNews).map((n: string, i: number) => {
                         return <option key={i} value={n.toLowerCase()}>{n}</option>
                     }) }
                 </select>
             </div>
-            {(selectNews.news1 === router.query.news_f) && 
+            {(selectNews === URL && selectNews !== '') && 
             <>
                 {news ?
                         <div className={styles.all_news_container}>
@@ -89,4 +75,4 @@ const selectionMenu: FC<News> = ({ news }) => {
     )
 }
 
-export default selectionMenu
+export default selectionMenu;
