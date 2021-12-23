@@ -44,10 +44,10 @@ const Home: NextPage = () => {
 
         <div className={styles.mc_flex}>
           <div ref={ref} className={inView ? styles.desc_text : styles.vis_none}>
-            <p>News Archived is a medium sized web scraping project in which the latest news (5-9) from different websites is taken 
+            <p>News Archived is a web scraping project in which the news from different websites is taken 
               automatically, so the users will be able to compare them. <Link href="/ncomparison">Check it out</Link>
             </p>
-            <p>FYI: All the news are taken from the actuality section of the respective sites</p>
+            <p>FYI: All the news are taken from the most recent section of the respective sites</p>
           </div>
 
           <video className={styles.video_home_a} width="500px" muted autoPlay loop>

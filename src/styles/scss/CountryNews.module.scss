@@ -1,0 +1,50 @@
+.item_flex {
+    position: relative;
+    width:  40%;
+    height: auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.6);
+    animation: fade_lr_opac .5s 1;
+    transition: all .4s ease-in;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+
+    &:nth-child(even) {
+        margin-left: 100px;
+    }
+    
+    &:hover {
+        transform: scale(1.1);
+        border-color: #949398FF;
+        border-width: 1.5px;
+        transition: transform .4s ease-out, border-color .4s;
+    }
+}
+
+.image { 
+    margin-top: .95em !important;
+    margin-left: calc(50% - 200px) !important;
+    
+    img {
+        border-radius: 2px !important;
+    }
+}
+
+
+.intro_paragraph {
+    position: relative;
+    z-index: -1;
+    font-size: 1rem;
+    font-weight: normal;
+    width: 95%;
+    text-align: center;
+    font-family: 'Libre Baskerville', sans;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis
+}

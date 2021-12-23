@@ -2,6 +2,7 @@ import styles from '../styles/scss/NewsComparison.module.scss'
 import { FC } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 interface Default {
@@ -54,12 +55,18 @@ const selectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
                 {news ?
                         <div className={styles.all_news_container}>
                                 {news.allPage.map((article: any, index: number) => {
-                                    return(
-                                    <div className={styles.item_flex}>
-                                        <h5 className={styles.headline}>{article.title}</h5>
-                                        <div className={styles.image}><Image src={article.image} alt='article-title' width={400} height={200}/></div>
-                                        <p className={styles.intro_paragraph}>{article.desc}</p>
-                                    </div>
+                                    return (
+                                    <Link href={article.linkURL}>
+                                        <a target="_blank" href={article.linkURL} className={styles.item_flex}>
+                                            <div key={index}>
+                                                <h5 key={index} className={styles.headline}>{article.title}</h5>
+                                                <div key={index + 1} className={styles.image}>
+                                                    <Image key={index}src={article.image} alt='article-title' width={400} height={250}/>
+                                                </div>
+                                                <p key={index + 2} className={styles.intro_paragraph}>{article.desc}</p>
+                                            </div>
+                                        </a>
+                                    </Link>
                                     )
                                 })}
                         </div>

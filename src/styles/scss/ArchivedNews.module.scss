@@ -1,0 +1,79 @@
+.flexbox {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 2em;
+}
+
+.mini_flexbox {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    a { 
+        cursor: pointer !important;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+.country_name_listed {
+    position: relative;
+    font-family: 'Libre Baskerville', cursive;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: gray;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.5s ease-out;
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+}
+
+@counter-style right-hand {
+    system: cyclic;
+    symbols: ☛;
+    suffix: "";
+}
+
+.list_all_channels {
+    position: relative;
+    background-color: rgba(230, 230, 230, 1);
+    width: 30vw;
+    margin-left: -5vw;
+    height: auto;
+    padding: 1em 0;
+
+    ul { 
+        font-family: 'Libre Baskerville', cursive;
+        list-style-type: right-hand;
+
+        li { 
+            transform: scaleX(1);
+            transition: transform 0.25s ease-out;
+            width: min-content;
+            
+            &:nth-child(n + 1) {
+                margin-top: 5px;
+            }
+
+            &:hover {
+                transform: scaleX(1.15) translateY(-5px);
+                transition: transform 0.25s ease-in;
+            }
+        }
+
+    }
+}

@@ -3,11 +3,9 @@ import { NextResponse, NextRequest, NextFetchEvent } from 'next/server'
 const allowedParams = ['news_f', 'news_s']
 
 export async function middleware(req: NextRequest, ev: NextFetchEvent) {
-    const { pathname } = req.nextUrl
     const url = req.nextUrl
 
     const allowedParamsPresent = ['news_f', 'news_s']
-    let notPresent = true
     let changed = false
 
     url.searchParams.forEach((_, key) =>{
@@ -33,5 +31,6 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     if(changed) {
         return NextResponse.redirect(url)
     }
+
     return NextResponse.next()
 }
