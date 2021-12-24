@@ -66,7 +66,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
       }
         
       setArrCurBtn(tempNumberOfPages)
-    }, [currentButton, dotsInitial, dotsLeft, dotsRight])
+    }, [currentButton, dotsInitial, dotsLeft, dotsRight, numberPages])
 
     return (
         <div className={styles.flexbox_n}>
