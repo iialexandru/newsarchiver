@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest, NextFetchEvent } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 const allowedParams = ['news_f', 'news_s']
 
-export async function middleware(req: NextRequest, ev: NextFetchEvent) {
+export function middleware(req: NextRequest) {
     const url = req.nextUrl
 
     const allowedParamsPresent = ['news_f', 'news_s']
