@@ -28,7 +28,7 @@ const ArchivedNews: NextPage = () => {
         return(
             <div className={styles.mini_flexbox}>
                 <Image src={url.toString()}
-                        width={30} height={30} />
+                        width={30} height={30} alt={`${name.toLowerCase()}_flag`}/>
                 <Link href={`#`}>
                     <a onClick={e => { setListNews({romania: false, germany: false, france: false, [name.toString().toLowerCase()]: true}); }}>
                         <span className={styles.country_name_listed}>{name}</span>

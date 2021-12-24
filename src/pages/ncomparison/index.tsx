@@ -4,12 +4,14 @@ import styles from '../../styles/scss/NewsComparison.module.scss'
 import axios from 'axios'
 import Selection from '../../components/selectionMenu'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
 interface Data {
     allPage: {[
         key: string
     ]: any
-    }
+    };
+    totalPages: number;
 }
 
 interface News { 
@@ -38,8 +40,8 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
     return (
         <div className={styles.container}>
 
-            <Selection news={latestNews_1} change_news_query={change_first_news} URL={router.query.news_f} />
-            <Selection news={latestNews_2} change_news_query={change_second_news} URL={router.query.news_s} />
+                <Selection news={latestNews_1} change_news_query={change_first_news} URL={router.query.news_f} />
+                <Selection news={latestNews_2} change_news_query={change_second_news} URL={router.query.news_s} />
 
         </div>
     )

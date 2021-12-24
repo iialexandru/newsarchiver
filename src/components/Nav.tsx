@@ -10,7 +10,7 @@ const Nav = () => {
       <nav className={styles.nav_flex}>
       <span className={`${animation ? styles.animation_stop_sm : ''}`} >
           <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1639219388/NewsArchiver/LOGONA_fdsbs3.svg"
-                 width={100} height={100} onMouseLeave={e => setAnimation(!animation)} onMouseEnter={e => setAnimation(!animation)} priority/>
+                 width={100} height={100} onMouseLeave={e => setAnimation(!animation)} onMouseEnter={e => setAnimation(!animation)} alt="logo" priority/>
       </span>
       <span className={styles.hover}><Link href="/">Home of NA</Link></span>
       <span className={styles.hover}><Link href="/archived">Archived News</Link></span>

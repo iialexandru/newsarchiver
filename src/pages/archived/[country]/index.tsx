@@ -5,6 +5,7 @@ import styles from '../../../styles/scss/NewsComparison.module.scss'
 import specStyles from '../../../styles/scss/CountryNews.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
 interface Data {
     allPage: {[
@@ -16,12 +17,14 @@ interface Data {
 interface News { news: Data }
 
 const SingleCountryNews: NextPage<News> = ({ news }) => {
+
+
     return (
         <div className={styles.all_news_container}>
         {news.allPage.map((article: any, index: number) => {
             return(
-            <Link href={article.linkURL}>
-                <a target="_blank"  className={specStyles.item_flex} href={article.linkURL}>
+            <Link key={index} href={article.linkURL} >
+                <a key={index + 1} target="_blank" rel="noreferrer" className={specStyles.item_flex} href={article.linkURL}>
                     <div key={index}>
                         <h5 key={index} className={styles.headline}>{article.title}</h5>
                         <div key={index + 1} className={specStyles.image}>

@@ -1,15 +1,16 @@
 import styles from '../styles/scss/NewsComparison.module.scss'
-import { FC } from 'react'
+import { FC, useState, useEffect } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 interface Default {
     allPage: {[
         key: string
     ]: any
-    }
+    };
+    totalPages: number;
 }
 
 interface ChildPropsComponent {
@@ -18,7 +19,9 @@ interface ChildPropsComponent {
     URL: string | string[] | undefined;
 }
 
-const selectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }) => {
+const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }) => {
+
+    const router = useRouter()
 
     const [ selectCountry, setSelectCountry ] = useState("")
     const [ selectNews, setSelectNews ] = useState<string>("default")
@@ -27,6 +30,43 @@ const selectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
     const newsGermany: string[] = ['WELT', 'DW']
     const newsFrance: string[] = ['France24', 'Lemonde']
     const allNews = [newsRomania, newsGermany, newsFrance]
+
+    const[ arrCurBtn, setArrCurBtn] = useState<any[]>([])
+    const [currentButton, setCurrentButton] = useState(parseInt(router.query.page as string) >= 0 ? parseInt(router.query.page as string) : 1)
+  
+    let numberPages: number[] = []
+    for(let i = 1; i <= news.totalPages; i++)
+       numberPages.push(i)
+  
+    let dotsInitial: string = '...'
+    let dotsLeft: string = '... '
+    let dotsRight: string = ' ...'
+    useEffect(() => {
+      let tempNumberOfPages: any = [...numberPages]
+  
+      if(numberPages.length <= 6){
+        const sliced = numberPages.slice(0, 6)
+        tempNumberOfPages = [...sliced]
+      }
+      else if(currentButton >= 1 && currentButton < 3){
+        tempNumberOfPages = [1, 2, 3, dotsInitial, numberPages.length]
+      }
+      else if(currentButton >= 3 && currentButton <= 4){
+        const sliced = numberPages.slice(0, 5)
+        tempNumberOfPages = [...sliced, dotsInitial, numberPages.length]
+      }
+      else if(currentButton > 4 && currentButton < numberPages.length - 2){
+        const sliced1 = numberPages.slice(currentButton - 2, currentButton)
+        const sliced2 = numberPages.slice(currentButton, currentButton + 1)
+        tempNumberOfPages = ([1, dotsLeft, ...sliced1, ...sliced2, dotsRight, numberPages.length])
+      }
+      else if(currentButton > numberPages.length - 3){
+        const sliced = numberPages.slice(numberPages.length - 4)
+        tempNumberOfPages = ([1,  dotsLeft, ...sliced])
+      }
+        
+      setArrCurBtn(tempNumberOfPages)
+    }, [currentButton, dotsInitial, dotsLeft, dotsRight])
 
     return (
         <div className={styles.flexbox_n}>
@@ -56,8 +96,8 @@ const selectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
                         <div className={styles.all_news_container}>
                                 {news.allPage.map((article: any, index: number) => {
                                     return (
-                                    <Link href={article.linkURL}>
-                                        <a target="_blank" href={article.linkURL} className={styles.item_flex}>
+                                    <Link key={index} href={article.linkURL}>
+                                        <a key={index + 1} target="_blank" href={article.linkURL} className={styles.item_flex} rel="noreferrer">
                                             <div key={index}>
                                                 <h5 key={index} className={styles.headline}>{article.title}</h5>
                                                 <div key={index + 1} className={styles.image}>
@@ -81,4 +121,4 @@ const selectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
     )
 }
 
-export default selectionMenu;
+export default SelectionMenu;

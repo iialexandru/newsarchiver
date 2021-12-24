@@ -1,4 +1,5 @@
-import { NextResponse, NextRequest, NextFetchEvent } from 'next/server'
+import type { NextRequest, NextFetchEvent } from 'next/server'
+import { NextResponse } from 'next/server'
 
 const allowedParams = ['news_f', 'news_s']
 
