@@ -1,4 +1,5 @@
 import styles from '../styles/scss/NewsComparison.module.scss'
+import nav from '../styles/scss/Navigation.module.scss'
 import { FC, useState, useEffect } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
 import Image from 'next/image'
@@ -32,7 +33,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
     const allNews = [newsRomania, newsGermany, newsFrance]
 
     const[ arrCurBtn, setArrCurBtn] = useState<any[]>([])
-    const [currentButton, setCurrentButton] = useState(parseInt(router.query.page as string) >= 0 ? parseInt(router.query.page as string) : 1)
+    const [currentButton, setCurrentButton] = useState<number>(parseInt(router.query.page as string) >= 0 ? parseInt(router.query.page as string) : 1)
   
     let numberPages: number[] = []
     for(let i = 1; i <= news.totalPages; i++)
@@ -66,7 +67,9 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
       }
         
       setArrCurBtn(tempNumberOfPages)
-    }, [currentButton, dotsInitial, dotsLeft, dotsRight, numberPages])
+    }, [currentButton, dotsInitial, dotsLeft, dotsRight])
+
+    console.log(currentButton)
 
     return (
         <div className={styles.flexbox_n}>
@@ -115,8 +118,16 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
                 }
             </> 
             }
+            <div className={nav.container_flex}>
+                <span>k</span>
+                {arrCurBtn.map((value: number) => 
+                        <button onClick={e => setCurrentButton(value)}>{value}</button>
+                )}
+                <span>k</span>
+            </div>
         </>
         }
+
     </div>
     )
 }
