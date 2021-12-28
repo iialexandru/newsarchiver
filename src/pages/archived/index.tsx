@@ -47,7 +47,7 @@ const ArchivedNews: NextPage = () => {
                         <ul>
                         {newsRomania.map((name, index) => {
                             return <li key={index}>
-                                        <Link href={`/archived/romania?news=${name.toLowerCase()}`}>{name}</Link>
+                                        <Link href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>{name}</Link>
                                    </li>
                         })}
                         </ul>
@@ -61,7 +61,7 @@ const ArchivedNews: NextPage = () => {
                             <ul>
                             {newsGermany.map((name, index) => {
                                 return <li key={index}>
-                                            <Link href={`/archived/germany?news=${name.toLowerCase()}`}>{name}</Link>
+                                            <Link key={index} href={`/archived/germany?news=${name.toLowerCase()}&page=1`}>{name}</Link>
                                        </li>
                             })}
                             </ul>
@@ -75,7 +75,7 @@ const ArchivedNews: NextPage = () => {
                             <ul>
                             {newsFrance.map((name, index) => {
                                 return <li key={index}>
-                                        <Link href={`/archived/france?news=${name.toLowerCase()}`}>{name}</Link>
+                                        <Link href={`/archived/france?news=${name.toLowerCase()}&page=1`}>{name}</Link>
                                        </li>
                             })}
                             </ul>

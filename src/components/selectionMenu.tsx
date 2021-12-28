@@ -2,6 +2,7 @@ import styles from '../styles/scss/NewsComparison.module.scss'
 import nav from '../styles/scss/Navigation.module.scss'
 import { FC, useState, useEffect } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
+import formatDate from '../utils/formatDate'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -17,10 +18,12 @@ interface Default {
 interface ChildPropsComponent {
     news: Default;
     change_news_query: (news: string) => void;
+    change_page_query: (page: string) => void;
+    PAGE: string | string[] | undefined;
     URL: string | string[] | undefined;
 }
 
-const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }) => {
+const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, change_page_query, PAGE, URL }) => {
 
     const router = useRouter()
 
@@ -33,7 +36,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
     const allNews = [newsRomania, newsGermany, newsFrance]
 
     const[ arrCurBtn, setArrCurBtn] = useState<any[]>([])
-    const [currentButton, setCurrentButton] = useState<number>(parseInt(router.query.page as string) >= 0 ? parseInt(router.query.page as string) : 1)
+    const [currentButton, setCurrentButton] = useState<number>(parseInt(PAGE as string) > 0 ? parseInt(PAGE as string) : 1)
   
     let numberPages: number[] = []
     for(let i = 1; i <= news.totalPages; i++)
@@ -67,10 +70,14 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
       }
         
       setArrCurBtn(tempNumberOfPages)
-    }, [currentButton, dotsInitial, dotsLeft, dotsRight])
+    }, [currentButton, dotsLeft, dotsRight, dotsInitial, selectNews, news.totalPages])
 
-    console.log(currentButton)
-
+    const changePage = (value: number) => {
+        setCurrentButton(value)
+        if(currentButton !== value)
+            change_page_query((value).toString());  
+    }
+    console.log(arrCurBtn)
     return (
         <div className={styles.flexbox_n}>
         <div className={styles.item}>
@@ -96,35 +103,37 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, URL }
             {(selectNews === URL && selectNews !== '') && 
             <>
                 {news ?
-                        <div className={styles.all_news_container}>
-                                {news.allPage.map((article: any, index: number) => {
-                                    return (
-                                    <Link key={index} href={article.linkURL}>
-                                        <a key={index + 1} target="_blank" href={article.linkURL} className={styles.item_flex} rel="noreferrer">
-                                            <div key={index}>
-                                                <h5 key={index} className={styles.headline}>{article.title}</h5>
-                                                <div key={index + 1} className={styles.image}>
-                                                    <Image key={index}src={article.image} alt='article-title' width={400} height={250}/>
-                                                </div>
-                                                <p key={index + 2} className={styles.intro_paragraph}>{article.desc}</p>
-                                            </div>
-                                        </a>
-                                    </Link>
-                                    )
-                                })}
-                        </div>
+                        <>
+                            <div className={styles.all_news_container}>
+                                    {news.allPage.map((article: any, index: number) => {
+                                        return (
+                                        <Link key={index} href={article.linkURL}>
+                                            <a key={index + 1} target="_blank" href={article.linkURL} className={styles.item_flex} rel="noreferrer">
+                                                    <h5 key={index} className={styles.headline}>{article.title}</h5>
+                                                    <div key={index + 1} className={styles.image}>
+                                                        <Image key={index} src={article.image} alt='article-title' width={400} height={250}/>
+                                                    </div>
+                                                    <span style={{fontWeight: 'bold', margin: "0", marginLeft: "9vw", position: "absolute", fontSize: ".9rem"}}>{formatDate(article.date)}</span>
+                                                    <p key={index + 2} className={styles.intro_paragraph}>{article.desc}</p>
+                                            </a>
+                                        </Link>
+                                        )
+                                    })}
+                            </div>
+                            <div className={nav.container_flex}>
+                                {arrCurBtn.map((value: number, index: number) => 
+                                        // { value.toString() !== (dotsInitial || dotsLeft || dotsRight ) ?
+                                        <button type="button" key={index} className={currentButton !== value ? nav.disactivated : ''} 
+                                        onClick={e => changePage(value)} >{value}</button>
+                                        // : <span key={index} className={nav.disactivated}>{value}</span> }
+                                )}  
+                            </div>
+                        </>
                 :
                 <h1>Loading...</h1>
                 }
             </> 
             }
-            <div className={nav.container_flex}>
-                <span>k</span>
-                {arrCurBtn.map((value: number) => 
-                        <button onClick={e => setCurrentButton(value)}>{value}</button>
-                )}
-                <span>k</span>
-            </div>
         </>
         }
 

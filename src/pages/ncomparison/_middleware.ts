@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const allowedParams = ['news_f', 'news_s']
+const allowedParams = ['news_f', 'news_s', 'page_f', 'page_s']
 
 export function middleware(req: NextRequest) {
     const url = req.nextUrl
 
-    const allowedParamsPresent = ['news_f', 'news_s']
+    const allowedParamsPresent = ['news_f', 'news_s', 'page_f', 'page_s']
     let changed = false
 
     url.searchParams.forEach((_, key) =>{
