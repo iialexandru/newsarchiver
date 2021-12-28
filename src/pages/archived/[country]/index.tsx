@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
-import axios from 'axios'
 import styles from '../../../styles/scss/NewsComparison.module.scss'
 import specStyles from '../../../styles/scss/CountryNews.module.scss'
 import nav from '../../../styles/scss/Navigation.module.scss'
@@ -117,8 +116,8 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             notFound: true
         }
 
-    const response = news && await axios.get(`http://localhost:9000/api/screenshots/${news}_nc?page=${(parseInt(page) - 1).toString()}`)
-    const data = response && await response.data
+    const response = news && await fetch(`http://localhost:9000/api/screenshots/${news}_nc?page=${(parseInt(page) - 1).toString()}`)
+    const data = response && await response.json()
 
     return {
         props: {
