@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import formatDate from '../../../utils/formatDate'
 import { DateTime } from 'luxon'
+import { server } from '../../../config/index'
 
 interface Data {
     allPage: {[
@@ -153,7 +154,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             notFound: true
         }
 
-    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`http://localhost:9000/api/news/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}`) : (news && await fetch(`http://localhost:9000/api/news/${news}_nc?page=${(parseInt(page) - 1).toString()}`) )
+    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`${server}/api/news/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}`) : (news && await fetch(`${server}/api/news/${news}_nc?page=${(parseInt(page) - 1).toString()}`) )
     const data = response && await response.json()
 
     return {

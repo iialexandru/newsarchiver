@@ -5,6 +5,7 @@ import axios from 'axios'
 import Selection from '../../components/selectionMenu'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import { server } from '../../config/index'
 
 interface Data {
     allPage: {[
@@ -74,8 +75,8 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
         return {
             notFound: true
         }
-    const response = (parseInt(year_f) && parseInt(month_f) && parseInt(day_f) && news_f) ? await axios.get(`http://localhost:9000/api/news/${news_f}_nc/filter_by_date?page=${(parseInt(page_f) - 1).toString()}&year=${year_f}&month=${month_f}&day=${day_f}`) : (news_f  && await axios.get(`http://localhost:9000/api/news/${news_f}_nc?page=${(parseInt(page_f) - 1).toString()}`))
-    const response_2 = (parseInt(year_s) && parseInt(month_s) && parseInt(day_s) && news_s) ? await axios.get(`http://localhost:9000/api/news/${news_s}_nc/filter_by_date?page=${(parseInt(page_s) - 1).toString()}&year=${year_s}&month=${month_s}&day=${day_s}`) : (news_s && await axios.get(`http://localhost:9000/api/news/${news_s}_nc?page=${(parseInt(page_s) - 1).toString()}`))
+    const response = (parseInt(year_f) && parseInt(month_f) && parseInt(day_f) && news_f) ? await axios.get(`${server}/api/news/${news_f}_nc/filter_by_date?page=${(parseInt(page_f) - 1).toString()}&year=${year_f}&month=${month_f}&day=${day_f}`) : (news_f  && await axios.get(`${server}/api/news/${news_f}_nc?page=${(parseInt(page_f) - 1).toString()}`))
+    const response_2 = (parseInt(year_s) && parseInt(month_s) && parseInt(day_s) && news_s) ? await axios.get(`${server}/api/news/${news_s}_nc/filter_by_date?page=${(parseInt(page_s) - 1).toString()}&year=${year_s}&month=${month_s}&day=${day_s}`) : (news_s && await axios.get(`${server}/api/news/${news_s}_nc?page=${(parseInt(page_s) - 1).toString()}`))
     const data = response && await response.data
     const data_2 = response_2 && await response_2.data
     
