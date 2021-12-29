@@ -18,8 +18,19 @@ a {
 @font-face {
   font-family: 'Cherry Swash';
   src: url('/fonts/CherrySwash/CherrySwash-Bold.woff2') format('woff2'),
-       url('/fonts/SongMyung/CherrySwash-Bold.woff') format('woff'),
-       url('/fonts/SongMyung/CherrySwash-Bold.ttf') format('truetype');
+       url('/fonts/CherrySwash/CherrySwash-Bold.woff') format('woff'),
+       url('/fonts/CherrySwash/CherrySwash-Bold.ttf') format('truetype');
   font-style: normal;
   font-display: swap;
 }
+
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/fonts/LibreBaskerville/LibreBaskerville-Regular.woff2') format('woff2'),
+       url('/fonts/LibreBaskerville/LibreBaskerville-Regular.woff') format('woff'),
+       url('/fonts/LibreBaskerville/LibreBaskerville-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
