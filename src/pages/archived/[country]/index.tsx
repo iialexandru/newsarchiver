@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import formatDate from '../../../utils/formatDate'
+import { DateTime } from 'luxon'
 
 interface Data {
     allPage: {[
@@ -27,6 +28,19 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
         router.replace({
             pathname: router.pathname,
             query: { ...router.query, page: encodeURIComponent(page.toLowerCase()) }
+        })
+    }
+
+    const [ year, setYear ] = useState<number>()
+    const [ month, setMonth ] = useState<number>()
+    const [ day, setDay ] = useState<number>()
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        const toUTC = (year && month && day) && DateTime.utc(year, month, day)
+        toUTC && router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year: encodeURIComponent(toUTC.year), month: encodeURIComponent(toUTC.month), day: encodeURIComponent(toUTC.day)}
         })
     }
 
@@ -73,8 +87,31 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             change_page((value).toString());  
     }
 
+    const resetFilter = (e: any) => {
+        e.preventDefault();
+        setYear(NaN)
+        setMonth(NaN)
+        setDay(NaN)
+        router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year: undefined, month: undefined, day: undefined}
+        })
+    }
+
     return (
         <>
+        <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => handleSubmit(e)}>
+                            <label>Date:</label>
+                            <div className={styles.flexbox_form_inputs}>
+                                <input type="number" id="year" name="year" min="2021" max="2022" placeholder="Year" value={year} onChange={e => setYear(parseInt(e.target.value))} />
+                                <span>/</span>
+                                <input type="number" id="month" name="month" min="1" max="12" placeholder="Month" value={month} onChange={e => setMonth(parseInt(e.target.value))} />
+                                <span>/</span>
+                                <input type="number" id="day" name="day" min="1" max="31" placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))} />
+                                <button type="submit">Filter</button>
+                                <button type="button" onClick={e => resetFilter(e)}>Reset</button>
+                            </div>
+                        </form>
             <div className={styles.all_news_container}>
                 {news.allPage.map((article: any, index: number) => {
                     return(
@@ -107,7 +144,7 @@ export default SingleCountryNews;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
-    const { news, page } = query;
+    const { news, page, year, month, day } = query;
 
     const variants = [ 'digi24', 'antena3' ]
  
@@ -116,7 +153,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             notFound: true
         }
 
-    const response = news && await fetch(`http://localhost:9000/api/screenshots/${news}_nc?page=${(parseInt(page) - 1).toString()}`)
+    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`http://localhost:9000/api/screenshots/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}`) : (news && await fetch(`http://localhost:9000/api/screenshots/${news}_nc?page=${(parseInt(page) - 1).toString()}`) )
     const data = response && await response.json()
 
     return {

@@ -6,6 +6,8 @@ import formatDate from '../utils/formatDate'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { DateTime } from 'luxon'
+
 
 interface Default {
     allPage: {[
@@ -16,6 +18,7 @@ interface Default {
 }
 
 interface ChildPropsComponent {
+    name: number;
     news: Default;
     change_news_query: (news: string) => void;
     change_page_query: (page: string) => void;
@@ -23,9 +26,13 @@ interface ChildPropsComponent {
     URL: string | string[] | undefined;
 }
 
-const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, change_page_query, PAGE, URL }) => {
+const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query, change_page_query, PAGE, URL }) => {
 
     const router = useRouter()
+
+    const [ year, setYear ] = useState<number>()
+    const [ month, setMonth ] = useState<number>()
+    const [ day, setDay ] = useState<number>()
 
     const [ selectCountry, setSelectCountry ] = useState("")
     const [ selectNews, setSelectNews ] = useState<string>("default")
@@ -77,7 +84,47 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, chang
         if(currentButton !== value)
             change_page_query((value).toString());  
     }
-    console.log(arrCurBtn)
+
+    const handleSubmit_f = (e: any) => {
+        e.preventDefault()
+        const toUTC = (year && month && day) && DateTime.utc(year, month, day)
+        toUTC && router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year_f: encodeURIComponent(toUTC.year), month_f: encodeURIComponent(toUTC.month), day_f: encodeURIComponent(toUTC.day)}
+        })
+    }
+
+    const handleSubmit_s = (e: any) => {
+        e.preventDefault()
+        const toUTC = (year && month && day) && DateTime.utc(year, month, day)
+        toUTC && router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year_s: encodeURIComponent(toUTC.year), month_s: encodeURIComponent(toUTC.month), day_s: encodeURIComponent(toUTC.day)}
+        })
+    }
+
+    const resetFilter_f = (e: any) => {
+        e.preventDefault();
+        setYear(NaN)
+        setMonth(NaN)
+        setDay(NaN)
+        router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year_f: undefined, month_f: undefined, day_f: undefined}
+        })
+    }
+
+    const resetFilter_s = (e: any) => {
+        e.preventDefault();
+        setYear(NaN)
+        setMonth(NaN)
+        setDay(NaN)
+        router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year_s: undefined, month_s: undefined, day_s: undefined}
+        })
+    }
+
     return (
         <div className={styles.flexbox_n}>
         <div className={styles.item}>
@@ -102,8 +149,20 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ news, change_news_query, chang
             </div>
             {(selectNews === URL && selectNews !== '') && 
             <>
-                {news ?
+                {news.allPage ?
                         <>
+                        <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => { if(name === 1) { handleSubmit_f(e); } else if(name === 2) { handleSubmit_s(e); } } }>
+                            <label>Date:</label>
+                            <div className={styles.flexbox_form_inputs}>
+                                <input type="number" id="year" name="year" min="2021" max="2022" placeholder="Year" value={year} onChange={e => setYear(parseInt(e.target.value))} />
+                                <span>/</span>
+                                <input type="number" id="month" name="month" min="1" max="12" placeholder="Month" value={month} onChange={e => setMonth(parseInt(e.target.value))} />
+                                <span>/</span>
+                                <input type="number" id="day" name="day" min="1" max="31" placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))} />
+                                <button type="submit">Filter</button>
+                                <button type="button" onClick={e => { if(name === 1) { resetFilter_f(e) } else if(name === 2) { resetFilter_s(e) } } }>Reset</button>
+                            </div>
+                        </form>
                             <div className={styles.all_news_container}>
                                     {news.allPage.map((article: any, index: number) => {
                                         return (

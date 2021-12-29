@@ -61,7 +61,7 @@
         list-style-type: right-hand;
 
         li { 
-            transform: scaleX(1);
+            transform: translateY(0);
             transition: transform 0.25s ease-out;
             width: min-content;
             
@@ -70,7 +70,7 @@
             }
 
             &:hover {
-                transform: scaleX(1.15) translateY(-5px);
+                transform: translateY(-1vh);
                 transition: transform 0.25s ease-in;
             }
         }

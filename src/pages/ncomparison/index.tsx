@@ -54,9 +54,9 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
     return (
         <div className={styles.container}>
 
-                <Selection news={latestNews_1} change_news_query={change_first_news} 
+                <Selection name={1} news={latestNews_1} change_news_query={change_first_news} 
                            change_page_query={change_first_page} PAGE={router.query.page_f} URL={router.query.news_f} />
-                <Selection news={latestNews_2} change_news_query={change_second_news} 
+                <Selection name={2} news={latestNews_2} change_news_query={change_second_news} 
                            change_page_query={change_second_page} PAGE={router.query.page_s} URL={router.query.news_s} />
 
         </div>
@@ -67,15 +67,15 @@ export default Comparison;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
-    const { news_f, news_s, page_f, page_s } = query;
+    const { news_f, news_s, page_f, page_s, year_f, month_f, day_f, year_s, month_s, day_s } = query;
     const variants = [ 'digi24', 'antena3' ]
  
     if((!variants.includes(news_f) && news_f) || (!variants.includes(news_s) && news_s) )
         return {
             notFound: true
         }
-    const response = news_f && await axios.get(`http://localhost:9000/api/screenshots/${news_f}_nc?page=${(parseInt(page_f) - 1).toString()}`)
-    const response_2 = news_s && await axios.get(`http://localhost:9000/api/screenshots/${news_s}_nc?page=${(parseInt(page_s) - 1).toString()}`)
+    const response = (parseInt(year_f) && parseInt(month_f) && parseInt(day_f) && news_f) ? await axios.get(`http://localhost:9000/api/screenshots/${news_f}_nc/filter_by_date?page=${(parseInt(page_f) - 1).toString()}&year=${year_f}&month=${month_f}&day=${day_f}`) : (news_f  && await axios.get(`http://localhost:9000/api/screenshots/${news_f}_nc?page=${(parseInt(page_f) - 1).toString()}`))
+    const response_2 = (parseInt(year_s) && parseInt(month_s) && parseInt(day_s) && news_s) ? await axios.get(`http://localhost:9000/api/screenshots/${news_s}_nc/filter_by_date?page=${(parseInt(page_s) - 1).toString()}&year=${year_s}&month=${month_s}&day=${day_s}`) : (news_s && await axios.get(`http://localhost:9000/api/screenshots/${news_s}_nc?page=${(parseInt(page_s) - 1).toString()}`))
     const data = response && await response.data
     const data_2 = response_2 && await response_2.data
     
