@@ -177,7 +177,8 @@
         width: 90%;
         margin: .3em auto;
         overflow: hidden;
-        text-overflow: ellipsis
+        text-overflow: ellipsis;
+        font-family: 'Libre Baskerville', sans-serif;
     }
 
     .intro_paragraph {
@@ -189,7 +190,7 @@
         margin: 0 auto;
         text-align: justify;
         text-justify: inter-word;
-        font-family: 'Libre Baskerville', sans;
+        font-family: 'Libre Baskerville', sans-serif;
         font-size: .8rem;
         overflow: hidden;
         text-overflow: ellipsis
