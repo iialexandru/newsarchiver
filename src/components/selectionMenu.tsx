@@ -224,7 +224,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                             <div className={nav.container_flex}>
                                 <button onClick={prevPage}>
                                     <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png" 
-                                        width={10} height={15} />
+                                        width={10} height={15} priority/>
                                 </button>
                                 {arrCurBtn.map((value: number, index: number) => 
                                         // { value.toString() !== (dotsInitial || dotsLeft || dotsRight ) ?
@@ -234,7 +234,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                 )}  
                                 <button onClick={nextPage}>
                                     <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
-                                        width={10} height={15} />
+                                        width={10} height={15} priority/>
                                 </button>
                             </div>
                         </>
