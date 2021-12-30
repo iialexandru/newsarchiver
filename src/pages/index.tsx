@@ -50,10 +50,12 @@ const Home: NextPage = () => {
             <p>FYI: All the news are taken from the most recent section of the respective sites</p>
           </div>
 
-          <video className={styles.video_home_a} width="500px" muted autoPlay loop>
+          {/* <video className={styles.video_home_a} width="500px" muted autoPlay loop>
             <source src="https://res.cloudinary.com/media-cloud-dw/video/upload/v1639224480/NewsArchiver/3_Minutes_of_AMAZING_NATURE_SCENERY_on_Planet_Earth_The_Best_Relax_Music_-_1080p_HD_gjjz3g.mp4"
               type="video/mp4"/>
-          </video>
+          </video> */}
+          <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640864007/NewsArchiver/qprevcrop_wuhjld.png"
+          width={500} height={252} priority />
         </div>
 
       </div>
