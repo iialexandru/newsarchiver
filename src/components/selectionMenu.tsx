@@ -231,7 +231,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                         { value.toString() !== dotsInitial && value.toString() !== dotsRight && value.toString() !== dotsLeft ?
                                          <button type="button" key={index} className={currentButton !== value ? nav.disactivated : ''} 
                                         onClick={e => changePage(value)} >{value}</button>
-                                        : <span key={index} className={nav.disactivated}>{value}</span> }
+                                        : <span key={index}>{value}</span> }
                                 </>
                                 )}  
                                 <button onClick={nextPage}>
