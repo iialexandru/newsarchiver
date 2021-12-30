@@ -7,7 +7,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DateTime } from 'luxon'
-
+import Button from '@mui/material/Button';
+import { createTheme } from '@mui/material/styles'; 
 
 interface Default {
     allPage: {[
@@ -201,7 +202,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                 <input type="number" id="month" name="month" min="1" max="12" placeholder="Month" value={month} onChange={e => setMonth(parseInt(e.target.value))} />
                                 <span>/</span>
                                 <input type="number" id="day" name="day" min="1" max="31" placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))} />
-                                <button type="submit">Filter</button>
+                                <Button type="submit" variant="outlined" color="success">Filter</Button>
                                 <button type="button" onClick={e => { if(name === 1) { resetFilter_f(e) } else if(name === 2) { resetFilter_s(e) } } }>Reset</button>
                             </div>
                         </form>

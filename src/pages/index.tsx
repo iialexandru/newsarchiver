@@ -40,7 +40,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div className={styles.main_content}>
-        <h1>News Archived</h1>
+        {/* <h1>News Archived</h1> */}
 
         <div className={styles.mc_flex}>
           <div ref={ref} className={inView ? styles.desc_text : styles.vis_none}>
@@ -49,9 +49,8 @@ const Home: NextPage = () => {
             </p>
             <p>FYI: All the news are taken from the most recent section of the respective sites</p>
           </div>
-
-          <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640864007/NewsArchiver/qprevcrop_wuhjld.png"
-          width={500} height={252} priority />
+          <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640891680/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
+          width={700} height={450} priority />
         </div>
 
       </div>
