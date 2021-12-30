@@ -163,7 +163,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                     query: { ...router.query, page_s: encodeURIComponent(parseInt(router.query.page_s!.toString()) - 1)} 
                 })
                 setCurrentButton(parseInt(router.query.page_s!.toString()) - 1)
-            }
+            } 
         }
     }
 
@@ -227,10 +227,12 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                         width={10} height={15} priority/>
                                 </button>
                                 {arrCurBtn.map((value: number, index: number) => 
-                                        // { value.toString() !== (dotsInitial || dotsLeft || dotsRight ) ?
-                                        <button type="button" key={index} className={currentButton !== value ? nav.disactivated : ''} 
+                                <>
+                                        { value.toString() !== dotsInitial && value.toString() !== dotsRight && value.toString() !== dotsLeft ?
+                                         <button type="button" key={index} className={currentButton !== value ? nav.disactivated : ''} 
                                         onClick={e => changePage(value)} >{value}</button>
-                                        // : <span key={index} className={nav.disactivated}>{value}</span> }
+                                        : <span key={index} className={nav.disactivated}>{value}</span> }
+                                </>
                                 )}  
                                 <button onClick={nextPage}>
                                     <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
