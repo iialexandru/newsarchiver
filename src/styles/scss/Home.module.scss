@@ -1,7 +1,7 @@
 @keyframes rotation_log {
   0% { transform: rotate(0deg); }
-  25% { transform: rotate(-45deg); }
-  75% { transform: rotate(65deg); }
+  25% { transform: rotate(-25deg); }
+  75% { transform: rotate(25deg); }
   100% { transform: rotate(0deg); }
 }
 
@@ -14,7 +14,6 @@
   border-bottom: 1px#5C5248 solid;
   border-bottom-width: 3px;
   box-shadow: 0px 2px 10px gray;
-  padding-left: 1.5em;
   padding-top: .2em;
 
   span {
@@ -22,15 +21,15 @@
     font-family: 'Cherry Swash', cursive;
     font-size: 1.25em;
     cursor: default;
+    position: relative;
+
     &:nth-child(n + 2) {
-      justify-self: center !important; 
-    }
+      left: -3em;
+    } 
   }
 
   img {
-    margin-right: 10px !important;
-    border: 1px gray solid !important;
-    border-radius: 50%;
+    margin-left: -1em !important;
 
     &:hover {
       animation: rotation_log 3s 1;
