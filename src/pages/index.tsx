@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         <div className={styles.mc_flex}>
           <div ref={ref} className={inView ? styles.desc_text : styles.vis_none}>
             <p>News Archived is a web scraping project in which the news from different websites is taken 
-              automatically, so the users will be able to compare them. <Link href="/ncomparison">Check it out</Link>
+              automatically, so the users will be able to compare them. <Link href={{pathname: "/ncomparison", query: { news_f: undefined, news_s: undefined, page_f: undefined, page_s: undefined } }}>Check it out</Link>
             </p>
             <p>FYI: All the news are taken from the most recent section of the respective sites</p>
           </div>
