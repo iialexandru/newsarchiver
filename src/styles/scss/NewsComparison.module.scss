@@ -191,7 +191,7 @@
         text-align: justify;
         text-justify: inter-word;
         font-family: 'Libre Baskerville', sans-serif;
-        font-size: .8rem;
+        font-size: clamp(.6rem, .8rem, 1.2rem);
         overflow: hidden;
         text-overflow: ellipsis
     }

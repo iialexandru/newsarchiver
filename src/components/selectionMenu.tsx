@@ -125,6 +125,48 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
         })
     }
 
+    const nextPage = () => {
+        if(name === 1){
+            if(news.totalPages >= parseInt(PAGE!.toString()) + 1) {
+                router.replace({ 
+                    pathname: router.pathname, 
+                    query: { ...router.query, page_f: encodeURIComponent(parseInt(router.query.page_f!.toString()) + 1)} 
+                })
+                setCurrentButton(parseInt(router.query.page_f!.toString()) + 1)
+            }
+        }
+        else {
+            if(news.totalPages >= parseInt(PAGE!.toString()) + 1) {
+                router.replace({ 
+                    pathname: router.pathname, 
+                    query: { ...router.query, page_s: encodeURIComponent(parseInt(router.query.page_s!.toString()) + 1)} 
+                })
+                setCurrentButton(parseInt(router.query.page_s!.toString()) + 1)
+            }
+        }
+    }
+
+    const prevPage = () => {
+        if(name === 1) {
+            if(parseInt(PAGE!.toString()) - 1 >= 1) {
+                router.replace({ 
+                    pathname: router.pathname, 
+                    query: { ...router.query, page_f: encodeURIComponent(parseInt(router.query.page_f!.toString()) - 1)} 
+                })
+                setCurrentButton(parseInt(router.query.page_f!.toString()) - 1)
+            }
+        }
+        else { 
+            if(parseInt(PAGE!.toString()) - 1 >= 1) {
+                router.replace({ 
+                    pathname: router.pathname, 
+                    query: { ...router.query, page_s: encodeURIComponent(parseInt(router.query.page_s!.toString()) - 1)} 
+                })
+                setCurrentButton(parseInt(router.query.page_s!.toString()) - 1)
+            }
+        }
+    }
+
     return (
         <div className={styles.flexbox_n}>
         <div className={styles.item}>
@@ -180,12 +222,20 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                     })}
                             </div>
                             <div className={nav.container_flex}>
+                                <button onClick={prevPage}>
+                                    <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png" 
+                                        width={10} height={15} />
+                                </button>
                                 {arrCurBtn.map((value: number, index: number) => 
                                         // { value.toString() !== (dotsInitial || dotsLeft || dotsRight ) ?
                                         <button type="button" key={index} className={currentButton !== value ? nav.disactivated : ''} 
                                         onClick={e => changePage(value)} >{value}</button>
                                         // : <span key={index} className={nav.disactivated}>{value}</span> }
                                 )}  
+                                <button onClick={nextPage}>
+                                    <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
+                                        width={10} height={15} />
+                                </button>
                             </div>
                         </>
                 :
