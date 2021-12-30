@@ -102,6 +102,11 @@
   }
 }
 
+@keyframes img-right {
+  0% { transform: translateX(50%); transform-origin: right; opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+} 
+
 .mc_flex {
   display: flex;
   flex-flow: row nowrap;
@@ -109,6 +114,11 @@
   gap: 2em;
   margin-top: 1em;
   margin-bottom: 1em;
+
+  
+  img { 
+    animation: img-right .7s 1 !important;
+  }
 }
 
 .desc_text {
