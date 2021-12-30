@@ -168,11 +168,11 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                         return (
                                         <Link key={index} href={article.linkURL}>
                                             <a key={index + 1} target="_blank" href={article.linkURL} className={styles.item_flex} rel="noreferrer">
+                                                    <figure key={index + 1} className={styles.image}>
+                                                        <Image key={index} src={article.image} alt='article-title' width={500} height={330}/>
+                                                        <figcaption className={styles.date_creation}>{formatDate(article.date)}</figcaption>
+                                                    </figure>
                                                     <h5 key={index} className={styles.headline}>{article.title}</h5>
-                                                    <div key={index + 1} className={styles.image}>
-                                                        <Image key={index} src={article.image} alt='article-title' width={400} height={250}/>
-                                                    </div>
-                                                    <span style={{fontWeight: 'bold', margin: "0", marginLeft: "9vw", position: "absolute", fontSize: ".9rem"}}>{formatDate(article.date)}</span>
                                                     <p key={index + 2} className={styles.intro_paragraph}>{article.desc}</p>
                                             </a>
                                         </Link>
