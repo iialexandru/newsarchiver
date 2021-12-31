@@ -26,8 +26,9 @@
     &:hover {
         transform: scale(1.1);
         border-color: #949398FF;
+        background-color: rgba(230, 230, 230, 1);
         border-width: 1.5px;
-        transition: transform .4s ease-out, border-color .4s;
+        transition: all .4s ease-out;
     }
 }
 
