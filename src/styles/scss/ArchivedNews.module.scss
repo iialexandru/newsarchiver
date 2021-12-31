@@ -1,15 +1,16 @@
 .flexbox {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column wrap;
     justify-content: center;
-    gap: 100px;
+    gap: 10px;
     margin-top: 2em;
+    margin-left: 1em;
 }
 
 .mini_flexbox {
     display: flex;
     flex-flow: row nowrap;
-    align-items: center;
+    align-items: center; 
 
     a { 
         cursor: pointer !important;
@@ -19,6 +20,7 @@
 .country_name_listed {
     position: relative;
     font-family: 'Libre Baskerville', cursive;
+    cursor: default;
 
     &::after {
         content: "";
@@ -50,9 +52,9 @@
     position: relative;
     background-color: rgba(230, 230, 230, 1);
     width: 30vw;
-    margin-left: -5vw;
     height: auto;
-    padding: 1em 0;
+    padding: .5em 0;
+    margin-left: 1em;
 
     ul { 
         font-family: 'Libre Baskerville', cursive;

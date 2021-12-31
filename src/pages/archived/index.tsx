@@ -30,9 +30,7 @@ const ArchivedNews: NextPage = () => {
                 <Image src={url.toString()}
                         width={30} height={30} alt={`${name.toLowerCase()}_flag`}/>
                 <Link href={`#`}>
-                    <a onClick={e => { setListNews({romania: false, germany: false, france: false, [name.toString().toLowerCase()]: true}); }}>
                         <span className={styles.country_name_listed}>{name}</span>
-                    </a>
                 </Link>
             </div>
             )
@@ -40,48 +38,46 @@ const ArchivedNews: NextPage = () => {
     return (
         <div>
             <div className={styles.flexbox}>
+                
                 <div>
-                <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640252545/NewsArchiver/flags/Flag_of_Romania_etbciq.svg" name="Romania"/>
-                {listNews.romania && 
+                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640252545/NewsArchiver/flags/Flag_of_Romania_etbciq.svg" name="Romania"/>
                     <div className={styles.list_all_channels}>
                         <ul>
-                        {newsRomania.map((name, index) => {
-                            return <li key={index}>
-                                        <Link href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>{name}</Link>
-                                   </li>
-                        })}
+                            {newsRomania.map((name, index) => {
+                                return <li key={index}>
+                                            <Link href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>{name}</Link>
+                                    </li>
+                            })}
                         </ul>
                     </div>
-                }
                 </div>
+
                 <div>
                     <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640252544/NewsArchiver/flags/Flag_of_Germany_hr9lyu.svg" name="Germany"/>
-                    {listNews.germany && 
-                        <div className={styles.list_all_channels}>
-                            <ul>
+                    <div className={styles.list_all_channels}>
+                        <ul>
                             {newsGermany.map((name, index) => {
                                 return <li key={index}>
                                             <Link key={index} href={`/archived/germany?news=${name.toLowerCase()}&page=1`}>{name}</Link>
-                                       </li>
+                                        </li>
                             })}
-                            </ul>
-                        </div>
-                    }
+                        </ul>
+                    </div>
                 </div>
+
                 <div>
-                <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640262682/NewsArchiver/flags/france-re_qsrpdn.png" name="France"/>
-                    {listNews.france && 
-                        <div className={styles.list_all_channels}>
-                            <ul>
+                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640262682/NewsArchiver/flags/france-re_qsrpdn.png" name="France"/>
+                    <div className={styles.list_all_channels}>
+                        <ul>
                             {newsFrance.map((name, index) => {
                                 return <li key={index}>
                                         <Link href={`/archived/france?news=${name.toLowerCase()}&page=1`}>{name}</Link>
-                                       </li>
+                                        </li>
                             })}
-                            </ul>
-                        </div>
-                    }
+                        </ul>
+                    </div>
                 </div>
+
             </div>
         </div>
     )
