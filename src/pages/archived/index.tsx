@@ -29,9 +29,7 @@ const ArchivedNews: NextPage = () => {
             <div className={styles.mini_flexbox}>
                 <Image src={url.toString()}
                         width={30} height={30} alt={`${name.toLowerCase()}_flag`}/>
-                <Link href={`#`}>
                         <span className={styles.country_name_listed}>{name}</span>
-                </Link>
             </div>
             )
     }
