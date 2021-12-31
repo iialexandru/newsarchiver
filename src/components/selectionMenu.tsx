@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DateTime } from 'luxon'
 import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 import { createTheme } from '@mui/material/styles'; 
 
 interface Default {
@@ -197,11 +198,11 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                         <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => { if(name === 1) { handleSubmit_f(e); } else if(name === 2) { handleSubmit_s(e); } } }>
                             <label>Date:</label>
                             <div className={styles.flexbox_form_inputs}>
-                                <input type="number" id="year" name="year" min="2021" max="2022" placeholder="Year" value={year} onChange={e => setYear(parseInt(e.target.value))} />
+                                <Input type="number" id="year" name="year" required={true} placeholder="Year" value={year} onChange={e => setYear(parseInt(e.target.value))}></Input>
+                                <span> / </span>
+                                <Input type="number" id="month" name="month" required={true} placeholder="Month" value={month} onChange={e => setMonth(parseInt(e.target.value))}></Input>
                                 <span>/</span>
-                                <input type="number" id="month" name="month" min="1" max="12" placeholder="Month" value={month} onChange={e => setMonth(parseInt(e.target.value))} />
-                                <span>/</span>
-                                <input type="number" id="day" name="day" min="1" max="31" placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))} />
+                                <Input type="number" id="day" name="day" required={true} placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))}></Input>
                                 <Button type="submit" variant="outlined" color="success">Filter</Button>
                                 <button type="button" onClick={e => { if(name === 1) { resetFilter_f(e) } else if(name === 2) { resetFilter_s(e) } } }>Reset</button>
                             </div>
