@@ -1,7 +1,18 @@
+
+.all_news_container {
+    display: grid;
+    grid-column-end: 1;
+    grid-column-start: 3;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: repeat(auto, 2fr);
+    gap: 3em;
+    margin: 0 1.5em;
+    margin-top: 2em;
+}
+
 .item_flex {
     position: relative;
-    width:  40%;
-    height: auto;
+    height: 75vh;
     border: 1px solid gray;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.6);
@@ -11,10 +22,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
-
-    &:nth-child(even) {
-        margin-left: 100px;
-    }
     
     &:hover {
         transform: scale(1.1);
@@ -24,27 +31,43 @@
     }
 }
 
-.image { 
-    margin-top: .95em !important;
-    margin-left: calc(50% - 200px) !important;
-    
+.image {     
     img {
         border-radius: 2px !important;
     }
 }
 
+.date_creation {
+    position: relative;
+    text-align: left;
+    font-size: .5rem;
+    font-weight: normal;
+    font-family: 'Libre Baskerville', sans-serif;
+    opacity: .4;
+}
+
+.headline {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 1rem;
+    cursor: default;
+    width: 90%;
+    margin: .3em auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Libre Baskerville', sans-serif;
+}
 
 .intro_paragraph {
     position: relative;
+    width: 100%;
     z-index: -1;
-    font-size: 1rem;
-    font-weight: normal;
-    width: 95%;
-    text-align: center;
-    font-family: 'Libre Baskerville', sans;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    width: 90%;
+    margin: 0 auto;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: 'Libre Baskerville', sans-serif;
+    font-size: clamp(.55rem, .7rem, 1.05rem);
     overflow: hidden;
     text-overflow: ellipsis
 }

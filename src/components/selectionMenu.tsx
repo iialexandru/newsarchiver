@@ -1,6 +1,6 @@
 import styles from '../styles/scss/NewsComparison.module.scss'
 import nav from '../styles/scss/Navigation.module.scss'
-import { FC, useState, useEffect } from 'react'
+import { FC, useState, useEffect, Fragment } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
 import formatDate from '../utils/formatDate'
 import Image from 'next/image'
@@ -205,6 +205,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                                 <Input type="number" id="day" name="day" required={true} placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))}></Input>
                                 <Button type="submit" variant="outlined" color="success">Filter</Button>
                                 <button type="button" onClick={e => { if(name === 1) { resetFilter_f(e) } else if(name === 2) { resetFilter_s(e) } } }>Reset</button>
+                                    
                             </div>
                         </form>
                             <div className={styles.all_news_container}>
