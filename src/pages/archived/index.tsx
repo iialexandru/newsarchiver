@@ -32,7 +32,7 @@ const ArchivedNews: NextPage = () => {
         return(
             <div className={styles.mini_flexbox}>
                 <Image src={url.toString()}
-                        width={30} height={30} alt={`${name.toLowerCase()}_flag`}/>
+                       width={30} height={30} alt={`${name.toLowerCase()}_flag`} priority/>
                         <span className={styles.country_name_listed}>{name}</span>
             </div>
             )

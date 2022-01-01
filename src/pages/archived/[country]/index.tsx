@@ -175,7 +175,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             <div className={nav.container_flex} style={{marginTop: '2em'}}>
                 <button onClick={prevPage}>
                     <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png" 
-                            width={10} height={15} priority/>
+                            width={10} height={15} alt="left-arrow" priority/>
                 </button>
                 {arrCurBtn.map((value: number, index: number) => 
                 <>
@@ -187,7 +187,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                 )}  
                 <button onClick={nextPage}>
                     <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
-                        width={10} height={15} priority/>
+                        width={10} height={15} alt="right-arrow" priority/>
                 </button>
             </div>
         </>
