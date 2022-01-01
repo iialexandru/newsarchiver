@@ -34,3 +34,12 @@ a {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto/Roboto-Regular.woff2') format('woff2'),
+       url('/fonts/Roboto/Roboto-Regular.woff') format('woff'),
+       url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+

@@ -3,6 +3,7 @@ import styles from '../../styles/scss/ArchivedNews.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 
 interface CountryLogo { 
     url: String;
@@ -19,6 +20,9 @@ const ArchivedNews: NextPage = () => {
 
     const [ listNews, setListNews ] = useState<CountryState>({romania: false, germany: false, france: false})
 
+    const theme = createMuiTheme({
+        
+    })
     
     const newsRomania: string[] = ['DIGI24', 'Antena3']
     const newsGermany: string[] = ['WELT', 'DW']

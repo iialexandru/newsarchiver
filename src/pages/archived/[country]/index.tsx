@@ -10,6 +10,17 @@ import { useRouter } from 'next/router'
 import formatDate from '../../../utils/formatDate'
 import { DateTime } from 'luxon'
 import { server } from '../../../config/index'
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined';
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns'
+import format from 'date-fns/format'
+import parseISO from 'date-fns/parseISO'
 
 interface Data {
     allPage: {[
@@ -25,6 +36,8 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     const router = useRouter()
 
+    const [ value, setValue ] = useState<Date | null>(null)
+    
     const change_page = (page: string) => {
         router.replace({
             pathname: router.pathname,
@@ -32,16 +45,11 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
         })
     }
 
-    const [ year, setYear ] = useState<number>()
-    const [ month, setMonth ] = useState<number>()
-    const [ day, setDay ] = useState<number>()
-
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        const toUTC = (year && month && day) && DateTime.utc(year, month, day)
-        toUTC && router.replace({
+        value && router.replace({
             pathname: router.pathname,
-            query: { ...router.query, year: encodeURIComponent(toUTC.year), month: encodeURIComponent(toUTC.month), day: encodeURIComponent(toUTC.day)}
+            query: { ...router.query, year: encodeURIComponent(value.getFullYear()), month: encodeURIComponent(value.getMonth() + 1), day: encodeURIComponent(value.getDate())}
         })
     }
 
@@ -90,9 +98,6 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     const resetFilter = (e: any) => {
         e.preventDefault();
-        setYear(NaN)
-        setMonth(NaN)
-        setDay(NaN)
         router.replace({
             pathname: router.pathname,
             query: { ...router.query, year: undefined, month: undefined, day: undefined}
@@ -124,13 +129,19 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => handleSubmit(e)}>
                 <label>Date:</label>
                 <div className={styles.flexbox_form_inputs}>
-                    <input type="number" id="year" name="year" min="2021" max="2022" placeholder="Year" value={year} onChange={e => setYear(parseInt(e.target.value))} />
-                    <span>/</span>
-                    <input type="number" id="month" name="month" min="1" max="12" placeholder="Month" value={month} onChange={e => setMonth(parseInt(e.target.value))} />
-                    <span>/</span>
-                    <input type="number" id="day" name="day" min="1" max="31" placeholder="Day" value={day} onChange={e => setDay(parseInt(e.target.value))} />
-                    <button type="submit">Filter</button>
-                    <button type="button" onClick={e => resetFilter(e)}>Reset</button>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            clearable
+                            value={value}
+                            placeholder="10/10/2018"
+                            onChange={date => setValue(date)}
+                            minDate={format(new Date(2021, 11, 28), 'yyyy/MM/dd')}
+                            maxDate={format(new Date(), 'yyyy/MM/dd')}
+                            format="dd/MM/yyyy"
+                        />
+                    </MuiPickersUtilsProvider>
+                    <Button type="submit" variant="outlined" size="small" endIcon={<FilterAltOutlinedIcon />}>FILTER</Button>
+                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetFilter(e) } >RESET</Button>
                 </div>
             </form>
             <div className={specStyles.all_news_container}>
@@ -138,11 +149,11 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                     return(
                     <Link key={index} href={article.linkURL} >
                         <a key={index + 1} target="_blank" rel="noreferrer" className={specStyles.item_flex} href={article.linkURL}>
-                                <h5 key={index} className={specStyles.headline}>{article.title}</h5>
                                 <figure key={index + 1} className={specStyles.image}>
                                     <Image key={index} src={article.image} alt='article-title' width={400} height={250} />
                                     <figcaption className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>
                                 </figure>
+                                <h5 key={index} className={specStyles.headline}>{article.title}</h5>
                                 <p key={index + 2} className={specStyles.intro_paragraph}>{article.desc}</p>
                         </a>
                     </Link>

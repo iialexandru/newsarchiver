@@ -19,8 +19,9 @@
 
 .country_name_listed {
     position: relative;
-    font-family: 'Libre Baskerville', cursive;
+    font-family: 'Cherry Swash', cursive;
     cursor: default;
+    margin-left: .3em;
 
     &::after {
         content: "";

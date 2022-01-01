@@ -13,7 +13,6 @@
     grid-column-end: 2;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    // color: #5C5248;
 
     select { 
         max-height: 50px;
@@ -49,7 +48,7 @@
 }
 
 @keyframes fade_rl_opac {
-    from { transform: translateX(50%); transform-origin: right; opacity: 0; }
+    from { transform: translateX(50%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
 
@@ -58,11 +57,11 @@
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 5vh;
-    row-gap: 5vh;
+    margin-top: 8vh;
+    row-gap: 8vh;
     margin-bottom: 40px;
 
-    &:nth-child(0n + 2) {
+    &:nth-child(n + 10) {
         .item_flex {
             animation: fade_rl_opac .5s 1 !important;
         }
@@ -164,8 +163,8 @@
     }
 
     .image { 
-        margin-top: .95em !important;
-        margin-left: calc(50% - 200px) !important;
+        // margin-top: .95em !important;
+        // margin-left: calc(50% - 200px) !important;
 
         img {
             border-radius: 2px !important;
@@ -202,43 +201,65 @@
 }
 
 .form_filter {
+    display: flex;
+    flex-flow: row nowrap;
 
     input {
         width: 4vw;
         border: none;
         border-bottom: 1px solid gray;
 
+        &:nth-child(1) {
+            width: 9vw;
+            border: none;
+            outline: none;
+        }
+
         &:focus {
             outline: none;
         }
         
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+        // &::-webkit-outer-spin-button,
+        // &::-webkit-inner-spin-button {
+        //     -webkit-appearance: none;
+        //     margin: 0;
+        // }
 
     }
 
-    input[type=number] {
-        -moz-appearance:textfield;
-    }
+    // input[type=number] {
+    //     -moz-appearance: textfield;
+    // }
 
-    display: flex;
-    flex-flow: row nowrap;
 
     label { 
         font-weight: 700;
     }
 
     button { 
-        font-family: 'Libre Baskerville', sans;
-        position: relative;
-        border: 1px solid gray;
-        border-radius: 2px;
-        background: none;
-        cursor: pointer;
-        margin-left: 10px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        &:nth-child(1){
+            &:hover {
+                background: none;
+            }
+        }
+        &:nth-child(n + 2){
+            font-family: 'Roboto', sans;
+            font-weight: bold;
+            font-size: .9rem;
+            position: relative;
+            border: 1px solid gray;
+            border-radius: 2px;
+            background: none;
+            cursor: pointer;
+            color: black;
+            margin-left: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            
+            &:hover {
+                border-color: #5C5248;
+            }
+            
+        }
+
     }
 }

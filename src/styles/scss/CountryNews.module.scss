@@ -10,9 +10,16 @@
     margin-top: 2em;
 }
 
+@for $i from 1 through 3 {
+    @keyframes hover-up-#{$i} {
+        0% { transform: translateY(100px * $i); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+}
+
 .item_flex {
     position: relative;
-    height: 75vh;
+    height: 73.5vh;
     border: 1px solid gray;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.6);
@@ -29,6 +36,18 @@
         background-color: rgba(230, 230, 230, 1);
         border-width: 1.5px;
         transition: all .4s ease-out;
+    }
+
+    &:nth-child(3n + 1) {
+        animation: hover-up-1 .6s;
+    }
+
+    &:nth-child(3n + 2) {
+        animation: hover-up-2 .6s;
+    }
+
+    &:nth-child(3n + 3) {
+        animation: hover-up-3 .6s;
     }
 }
 

@@ -6,6 +6,7 @@ import Selection from '../../components/selectionMenu'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { server } from '../../config/index'
+import Head from 'next/head'
 
 interface Data {
     allPage: {[
@@ -53,6 +54,31 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
     }
 
     return (
+    <>
+        <Head>
+            <link
+                rel="preload"
+                href="/fonts/Roboto/Roboto-Bold.woff2"
+                as="font"
+                type="font/woff2"
+                crossOrigin="anonymous"
+            />
+            <link
+                rel="preload"
+                href="/fonts/Roboto/Roboto-Bold.woff"
+                as="font"
+                type="font/woff"
+                crossOrigin="anonymous"
+            />
+                <link
+                rel="preload"
+                href="/fonts/Roboto/Roboto-Bold.ttf"
+                as="font"
+                type="font/ttf"
+                crossOrigin="anonymous"
+            />
+      </Head>
+
         <div className={styles.container}>
 
                 <Selection name={1} news={latestNews_1} change_news_query={change_first_news} 
@@ -61,6 +87,7 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
                            change_page_query={change_second_page} PAGE={router.query.page_s} URL={router.query.news_s} />
 
         </div>
+    </>
     )
 }
 
