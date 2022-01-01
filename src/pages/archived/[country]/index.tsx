@@ -106,10 +106,11 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     const resetFilter = (e: any) => {
         e.preventDefault();
-        router.replace({
+        value && router.replace({
             pathname: router.pathname,
             query: { ...router.query, year: undefined, month: undefined, day: undefined}
         })
+        setValue(null)
     }
 
     const nextPage = () => {

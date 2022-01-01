@@ -115,18 +115,20 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
 
     const resetFilter_f = (e: any) => {
         e.preventDefault();
-        router.replace({
+        value && router.replace({
             pathname: router.pathname,
             query: { ...router.query, year_f: undefined, month_f: undefined, day_f: undefined}
         })
+        setValue(null)
     }
 
     const resetFilter_s = (e: any) => {
         e.preventDefault();
-        router.replace({
+        value && router.replace({
             pathname: router.pathname,
             query: { ...router.query, year_s: undefined, month_s: undefined, day_s: undefined}
         })
+        setValue(null)
     }
 
     const nextPage = () => {
