@@ -15,7 +15,9 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns'
 import format from 'date-fns/format'
-import parseISO from 'date-fns/parseISO'
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import blueGrey from "@material-ui/core/colors/blueGrey";
 
 interface Default {
     allPage: {[
@@ -37,6 +39,12 @@ interface ChildPropsComponent {
 const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query, change_page_query, PAGE, URL }) => {
 
     const router = useRouter()
+
+    const defaultMaterialTheme = createMuiTheme({
+        palette: {
+            primary: blueGrey,
+        },
+    });
 
     const [ selectCountry, setSelectCountry ] = useState("")
     const [ selectNews, setSelectNews ] = useState<string>("default")
@@ -192,19 +200,21 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                 {news.allPage ?
                         <>
                         <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => { if(name === 1) { handleSubmit_f(e); } else if(name === 2) { handleSubmit_s(e); } } }>
-                            {/* <label>Date:</label> */}
+                            <label>Date:</label>    
                             <div>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardDatePicker
-                                        clearable
-                                        value={value}
-                                        placeholder="10/10/2018"
-                                        onChange={date => setValue(date)}
-                                        minDate={format(new Date(2021, 11, 28), 'yyyy/MM/dd')}
-                                        maxDate={format(new Date(), 'yyyy/MM/dd')}
-                                        format="dd/MM/yyyy"
-                                    />
-                                </MuiPickersUtilsProvider>
+                                <ThemeProvider theme={defaultMaterialTheme}>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardDatePicker
+                                            clearable
+                                            value={value}
+                                            placeholder="10/10/2018"
+                                            onChange={date => setValue(date)}
+                                            minDate={format(new Date(2021, 11, 28), 'yyyy/MM/dd')}
+                                            maxDate={format(new Date(), 'yyyy/MM/dd')}
+                                            format="dd/MM/yyyy"
+                                        />
+                                    </MuiPickersUtilsProvider>
+                                </ThemeProvider>
                                 <Button type="submit" variant="outlined" size="small" endIcon={<FilterAltOutlinedIcon />}>FILTER</Button>
                                 <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => { if(name === 1) { resetFilter_f(e) } else if(name === 2) { resetFilter_s(e) } } }>RESET</Button>
                             </div>
