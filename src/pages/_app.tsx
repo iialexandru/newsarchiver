@@ -29,6 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             type="font/ttf"
             crossOrigin="anonymous"
           />
+          <meta name="description" content="News Archiving" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
       </Head>
       <Nav />
       <Component {...pageProps} />

@@ -8,14 +8,13 @@ import styles from '../styles/scss/Home.module.scss'
 const Home: NextPage = () => {
   const { ref, inView, entry } = useInView({
     triggerOnce: true,
-    threshold: 1,
+    threshold: .3,
   });
   return (
     <>
     
       <Head>
         <title>NewsArchiver</title>
-        <meta name="description" content="News Archiving" />
         <link rel="icon" href="/na.ico" />
         <link
             rel="preload"

@@ -43,7 +43,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
     const [ width, height ] = useWindowSize()
 
     const { ref, inView, entry } = useInView({
-        threshold:  1,
+        threshold: 1,
       });
 
     const defaultMaterialTheme = createMuiTheme({
@@ -141,9 +141,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             }
         }
 
-        console.log(width < 768)
-
-        console.log(entry)
+        console.log(width, height)
 
     return (
         <>
@@ -171,8 +169,8 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                 {news.allPage.map((article: any, index: number) => {
                     return(
                     <Link key={index} href={article.linkURL} >
-                        <a ref={ref} key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex} ${(width < 768) ? (inView ? specStyles.phone_animation_up : '') : ''}`} href={article.linkURL}>
-                                <figure key={index + 1} className={specStyles.image}>
+                        <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex} ${(width < 768) ? (inView ? specStyles.phone_animation_up : '') : ''}`} href={article.linkURL}>
+                                <figure style={""} key={index + 1} className={specStyles.image}>
                                     <Image key={index} src={article.image} alt='article-title' width={400} height={250} priority/>
                                     <figcaption className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>
                                 </figure>
