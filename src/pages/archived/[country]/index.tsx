@@ -24,7 +24,6 @@ import format from 'date-fns/format'
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import blueGrey from "@material-ui/core/colors/blueGrey";
-import useWindowSize from '../../../utils/windowSize'
 
 interface Data {
     allPage: {[
@@ -39,12 +38,6 @@ interface News { news: Data }
 const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     const router = useRouter()
-
-    const [ width, height ] = useWindowSize()
-
-    const { ref, inView, entry } = useInView({
-        threshold: 1,
-      });
 
     const defaultMaterialTheme = createMuiTheme({
         palette: {
@@ -141,8 +134,6 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             }
         }
 
-        console.log(width, height)
-
     return (
         <>
             <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => handleSubmit(e)}>
@@ -169,7 +160,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                 {news.allPage.map((article: any, index: number) => {
                     return(
                     <Link key={index} href={article.linkURL} >
-                        <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex} ${(width < 768) ? (inView ? specStyles.phone_animation_up : '') : ''}`} href={article.linkURL}>
+                        <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex}`} href={article.linkURL}>
                                 <figure key={index + 1} className={specStyles.image}>
                                     <Image key={index} src={article.image} alt='article-title' width={400} height={250} priority/>
                                     <figcaption className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>

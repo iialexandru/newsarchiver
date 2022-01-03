@@ -128,14 +128,6 @@
             transition: none;
         }
     }
-    
-    .phone_animation_up {
-        // transform: scale(1.1);
-        // border-color: #949398FF;
-        // background-color: rgba(230, 230, 230, 1);
-        // border-width: 1.5px;
-        // transition: all .4s ease-out;
-    }
 
     .date_creation {
         text-align: center;
@@ -154,7 +146,7 @@
     }
 
     .item_flex {
-        height: 398px;
+        height: 402px;
         border: none;
         background-color: rgba(220, 220, 220, 1);
 
@@ -196,6 +188,24 @@
   }
   .item_flex {
     height: 400px;
+    
+    &:hover {
+        transform: none;
+        border-color: none;
+        background-color: rgba(220, 220, 220, 1);            
+        transition: none;
+    }
+    &:nth-child(3n + 1) {
+        animation: none;
+    }
+
+    &:nth-child(3n + 2) {
+        animation: none;
+    }
+
+    &:nth-child(3n + 3) {
+        animation: none;
+    }
   }
 }
 
