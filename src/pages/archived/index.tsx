@@ -46,9 +46,11 @@ const ArchivedNews: NextPage = () => {
                     <div className={styles.list_all_channels}>
                         <ul>
                             {newsRomania.map((name, index) => {
-                                return <li key={index}>
-                                            <Link href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>{name}</Link>
-                                    </li>
+                                return <Link href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>
+                                            <li key={index}>
+                                                    {name}
+                                            </li>
+                                        </Link>
                             })}
                         </ul>
                     </div>
@@ -59,9 +61,11 @@ const ArchivedNews: NextPage = () => {
                     <div className={styles.list_all_channels}>
                         <ul>
                             {newsGermany.map((name, index) => {
-                                return <li key={index}>
-                                            <Link key={index} href={`/archived/germany?news=${name.toLowerCase()}&page=1`}>{name}</Link>
-                                        </li>
+                                return <Link key={index} href={`/archived/germany?news=${name.toLowerCase()}&page=1`}>
+                                            <li key={index}>
+                                                {name}
+                                            </li>
+                                        </Link>
                             })}
                         </ul>
                     </div>
@@ -72,9 +76,11 @@ const ArchivedNews: NextPage = () => {
                     <div className={styles.list_all_channels}>
                         <ul>
                             {newsFrance.map((name, index) => {
-                                return <li key={index}>
-                                        <Link href={`/archived/france?news=${name.toLowerCase()}&page=1`}>{name}</Link>
-                                        </li>
+                                return <Link href={`/archived/france?news=${name.toLowerCase()}&page=1`}>
+                                            <li key={index}>
+                                                {name}
+                                            </li>
+                                        </Link>
                             })}
                         </ul>
                     </div>

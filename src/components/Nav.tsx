@@ -30,10 +30,8 @@ const Nav = () => {
       :
       <>
         <nav className={styles.nav_container}>
-          <span>
-              <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
-                    width={90} height={55} alt="logo" priority/>
-          </span>
+              <img src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
+                    width={90} height={55} alt="logo" />
             <button className={styles.nav_p_button} onClick={e => setOpened(!opened)}>
               <span>{chooseName(router.pathname.toString())}</span>
               <MenuIcon fontSize="large" />
