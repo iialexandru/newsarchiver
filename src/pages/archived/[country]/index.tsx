@@ -5,6 +5,7 @@ import specStyles from '../../../styles/scss/CountryNews.module.scss'
 import nav from '../../../styles/scss/Pagination.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useInView } from 'react-intersection-observer'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import formatDate from '../../../utils/formatDate'
@@ -23,6 +24,7 @@ import format from 'date-fns/format'
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import blueGrey from "@material-ui/core/colors/blueGrey";
+import useWindowSize from '../../../utils/windowSize'
 
 interface Data {
     allPage: {[
@@ -37,6 +39,12 @@ interface News { news: Data }
 const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     const router = useRouter()
+
+    const [ width, height ] = useWindowSize()
+
+    const { ref, inView, entry } = useInView({
+        threshold:  1,
+      });
 
     const defaultMaterialTheme = createMuiTheme({
         palette: {
@@ -133,6 +141,10 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             }
         }
 
+        console.log(width < 768)
+
+        console.log(entry)
+
     return (
         <>
             <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => handleSubmit(e)}>
@@ -152,14 +164,14 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                         </MuiPickersUtilsProvider>
                     </ThemeProvider>
                     <Button type="submit" variant="outlined" size="small" endIcon={<FilterAltOutlinedIcon />}>FILTER</Button>
-                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetFilter(e) } >RESET</Button>
+                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetFilter(e) }>RESET</Button>
                 </div>
             </form>
             <div className={specStyles.all_news_container}>
                 {news.allPage.map((article: any, index: number) => {
                     return(
                     <Link key={index} href={article.linkURL} >
-                        <a key={index + 1} target="_blank" rel="noreferrer" className={specStyles.item_flex} href={article.linkURL}>
+                        <a ref={ref} key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex} ${(width < 768) ? (inView ? specStyles.phone_animation_up : '') : ''}`} href={article.linkURL}>
                                 <figure key={index + 1} className={specStyles.image}>
                                     <Image key={index} src={article.image} alt='article-title' width={400} height={250} priority/>
                                     <figcaption className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>

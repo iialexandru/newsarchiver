@@ -1,8 +1,8 @@
 
 .all_news_container {
     display: grid;
-    grid-column-end: 1;
-    grid-column-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
     grid-template-columns: auto auto auto;
     grid-template-rows: repeat(auto, 2fr);
     gap: 3em;
@@ -95,10 +95,82 @@
 
 
 //Phone Portrait & Landscape
-@media screen and (min-width: 0px) and (max-width: 767px) {
+@media screen and (min-width: 0px) and (max-width: 467px) {
     .all_news_container {
-        grid-column-start: 1;
+        grid-column-end: 1;
         grid-template-columns: auto;  
+    }
+
+    .item_flex {
+        height: 70vmax;
+        transform: scale(1);
+        border-color: gray;
+        background-color: rgba(250, 250, 250, 1);
+        border-width: 1px;
+        transition: all .4s ease-out;
+
+        &:hover {
+            transform: none;
+            border-color: none;
+            background-color: none;
+            border-width: none;
+        }
+
+        &:nth-child(3n + 1) {
+            animation: none;
+        }
+    
+        &:nth-child(3n + 2) {
+            animation: none;
+        }
+    
+        &:nth-child(3n + 3) {
+            animation: none;
+        }
+    }
+
+    .phone_animation_up {
+        transform: scale(1.1);
+        border-color: #949398FF;
+        background-color: rgba(230, 230, 230, 1);
+        border-width: 1.5px;
+        transition: all .4s ease-out;
+    }
+}
+
+//Phone Landscape
+@media screen and (min-width: 468px) and (max-width: 767px) {
+    .all_news_container {
+        grid-column-end: 2;
+        grid-template-columns: auto auto;  
+    }
+
+    .item_flex {
+        height: 68.5vmax;
+        transform: scale(1);
+        border-color: gray;
+        background-color: rgba(250, 250, 250, 1);
+        border-width: 1px;
+        transition: all .4s ease-out;
+
+        &:hover {
+            transform: none;
+            border-color: none;
+            background-color: none;
+            border-width: none;
+        }
+
+        &:nth-child(3n + 1) {
+            animation: none;
+        }
+    
+        &:nth-child(3n + 2) {
+            animation: none;
+        }
+    
+        &:nth-child(3n + 3) {
+            animation: none;
+        }
     }
 }
 
