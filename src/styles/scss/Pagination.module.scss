@@ -1,0 +1,45 @@
+.container_flex {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: .5em;
+    width: 100%;
+
+    img { 
+        cursor: pointer;
+    }
+
+    button {
+        padding: 0 .5em;
+        font-size: 1.2rem;
+        border: none;
+        cursor: pointer;
+        background: none;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    span { 
+        cursor: default;
+        opacity: 0.5;
+        font-size: 0.9rem;
+    }
+}
+
+.disactivated {
+    opacity: 0.5;
+    font-size: 0.9rem !important;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+        transform: scale(1.2) !important;
+        transition: all 0.5s ease-in-out;
+    }
+}

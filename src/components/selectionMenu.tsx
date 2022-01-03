@@ -1,5 +1,5 @@
 import styles from '../styles/scss/NewsComparison.module.scss'
-import nav from '../styles/scss/Navigation.module.scss'
+import nav from '../styles/scss/Pagination.module.scss'
 import { FC, useState, useEffect, Fragment } from 'react'
 import countries from '../utils/NewsComparison/countrySelect'
 import formatDate from '../utils/formatDate'
@@ -15,9 +15,15 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns'
 import format from 'date-fns/format'
-import { createMuiTheme } from "@material-ui/core";
+import { createTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import blueGrey from "@material-ui/core/colors/blueGrey";
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';  
+import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
 
 interface Default {
     allPage: {[
@@ -40,7 +46,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
 
     const router = useRouter()
 
-    const defaultMaterialTheme = createMuiTheme({
+    const defaultMaterialTheme = createTheme({
         palette: {
             primary: blueGrey,
         },
@@ -176,27 +182,50 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
     const [ value, setValue ] = useState<Date | null>(null)
 
     return (
-        <div className={styles.flexbox_n}>
-        <div className={styles.item}>
-            <label>Country: </label>
-            <select value={selectCountry} onChange={e => { setSelectCountry(e.target.value); setSelectNews("") }}>
-                <option value="" disabled>Please select country:</option>
-                <option value="romania">Romania</option>
-                <option value="germany">Germany</option>
-                <option value="france">France</option>
-            </select>
-        </div>
-        {selectCountry !== "" && 
-        <>
-            <div className={styles.item}>
-                <label>News Site: </label>
-                <select value={selectNews} onChange={e => { setSelectNews(e.target.value); change_news_query(e.target.value)}}>
-                    <option value="" disabled>Please choose news site:</option>
-                    {countries(selectCountry, allNews).map((n: string, i: number) => {
-                        return <option key={i} value={n.toLowerCase()}>{n}</option>
+        <div className={styles.tot_container}>
+        {/* <div className={styles.item}> */}
+            <Stack direction="row" justifyContent="center" spacing={2} alignItems="center">
+             <FormControl required sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="country">Country</InputLabel>
+                <Select
+                    labelId="country"
+                    id="country"
+                    value={selectCountry}
+                    label="Country*"
+                    onChange={e => { setSelectCountry(e.target.value); setSelectNews(""); } }
+                >
+                <MenuItem value=" " disabled>
+                    <em>Please select a country</em>
+                </MenuItem>
+                <MenuItem value='romania'>Romania</MenuItem>
+                <MenuItem value='germany'>Germany</MenuItem>
+                <MenuItem value='france'>France</MenuItem>
+                </Select>
+            </FormControl>
+        {/* </div> */}
+            {/* <div className={styles.item}> */}
+                <FormControl required sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="news">News</InputLabel>
+                    <Select
+                        labelId="news"
+                        id="news"
+                        value={selectNews}
+                        label="News*"
+                        onChange={e => { setSelectNews(e.target.value); change_news_query(e.target.value); } }
+                    >
+                    <MenuItem value=" " disabled>
+                        {selectCountry !== "" && selectCountry !== " " ? <em>Please select a news channel</em> : <em>Please select a country</em> }
+                    </MenuItem>
+                        {countries(selectCountry, allNews) && countries(selectCountry, allNews)!.map((n: string, i: number) => {
+                        return <MenuItem key={i} value={n.toLowerCase()}>{n}</MenuItem>
                     }) }
-                </select>
+                    </Select>
+            </FormControl>
+            </Stack>
+            {/* </div> */}
+        <div className={styles.mini_flex_selections}>
             </div>
+        <div className={styles.flexbox_n}>
             {(selectNews === URL && selectNews !== '') && 
             <>
                 {news.allPage ?
@@ -259,11 +288,10 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_news_query,
                 :
                 <h1>Loading...</h1>
                 }
-            </> 
-            }
         </>
         }
 
+    </div>
     </div>
     )
 }

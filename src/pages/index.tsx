@@ -11,7 +11,8 @@ const Home: NextPage = () => {
     threshold: 0.1,
   });
   return (
-    <div>
+    <>
+    
       <Head>
         <title>NewsArchiver</title>
         <meta name="description" content="News Archiving" />
@@ -40,7 +41,6 @@ const Home: NextPage = () => {
       </Head>
 
       <div className={styles.main_content}>
-        {/* <h1>News Archived</h1> */}
 
         <div className={styles.mc_flex}>
           <div ref={ref} className={inView ? styles.desc_text : styles.vis_none}>
@@ -54,7 +54,8 @@ const Home: NextPage = () => {
         </div>
 
       </div>
-    </div>
+      
+    </>
   )
 }
 
