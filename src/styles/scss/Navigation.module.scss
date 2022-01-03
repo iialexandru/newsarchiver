@@ -63,6 +63,10 @@
       transform: scaleX(1);
       transform-origin: bottom left;
     }
+
+    .image:hover {
+      animation: none;
+    }
   }
 
 //Phone Portrait & Landscape
@@ -123,6 +127,10 @@
           }
 
         }
+    }
+
+    .image:hover {
+      animation: none;
     }
 }
 

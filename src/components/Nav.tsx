@@ -18,7 +18,7 @@ const Nav = () => {
     return (
       <>
       {width > 700 ? 
-        <nav className={styles.nav_flex}>
+      <nav className={styles.nav_flex}>
         <span className={`${animation ? styles.animation_stop_sm : ''}`} >
             <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
                   width={210} height={125} onMouseLeave={e => setAnimation(!animation)} onMouseEnter={e => setAnimation(!animation)} alt="logo" priority/>
@@ -29,22 +29,22 @@ const Nav = () => {
       </nav>
       :
       <>
-        <div className={styles.nav_container}>
-          <span className={`${animation ? styles.animation_stop_sm : ''}`} >
+        <nav className={styles.nav_container}>
+          <span>
               <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
-                    width={90} height={55} onMouseLeave={e => setAnimation(!animation)} onMouseEnter={e => setAnimation(!animation)} alt="logo" priority/>
+                    width={90} height={55} alt="logo" priority/>
           </span>
             <button className={styles.nav_p_button} onClick={e => setOpened(!opened)}>
               <span>{chooseName(router.pathname.toString())}</span>
               <MenuIcon fontSize="large" />
             </button>
-        </div>  
+        </nav>  
             {opened && 
               <div className={styles.dropmenu_container}>
                 <ul>
-                  <li className={styles.hover}><Link href="/"><a onClick={e => setOpened(!opened)}>Home</a></Link></li>
-                  <li className={styles.hover}><Link href="/archived"><a onClick={e => setOpened(!opened)}>Archived News</a></Link></li>
-                  <li className={styles.hover}><Link href={{pathname: "/ncomparison", query: { news_f: "", news_s: "", page_f: "1", page_s: "1"} }}><a onClick={e => setOpened(!opened)}>News Comparison</a></Link></li>
+                  <li><Link href="/"><a onClick={e => setOpened(!opened)}>Home</a></Link></li>
+                  <li><Link href="/archived"><a onClick={e => setOpened(!opened)}>Archived News</a></Link></li>
+                  <li><Link href={{pathname: "/ncomparison", query: { news_f: "", news_s: "", page_f: "1", page_s: "1"} }}><a onClick={e => setOpened(!opened)}>News Comparison</a></Link></li>
                 </ul>
               </div>
             }
