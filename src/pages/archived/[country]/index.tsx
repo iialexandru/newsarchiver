@@ -170,7 +170,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                     return(
                     <Link key={index} href={article.linkURL} >
                         <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex} ${(width < 768) ? (inView ? specStyles.phone_animation_up : '') : ''}`} href={article.linkURL}>
-                                <figure style={""} key={index + 1} className={specStyles.image}>
+                                <figure key={index + 1} className={specStyles.image}>
                                     <Image key={index} src={article.image} alt='article-title' width={400} height={250} priority/>
                                     <figcaption className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>
                                 </figure>
