@@ -46,7 +46,7 @@ const ArchivedNews: NextPage = () => {
                     <div className={styles.list_all_channels}>
                         <ul>
                             {newsRomania.map((name, index) => {
-                                return <Link href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>
+                                return <Link key={index} href={`/archived/romania?news=${name.toLowerCase()}&page=1`}>
                                             <li key={index}>
                                                     {name}
                                             </li>
@@ -76,7 +76,7 @@ const ArchivedNews: NextPage = () => {
                     <div className={styles.list_all_channels}>
                         <ul>
                             {newsFrance.map((name, index) => {
-                                return <Link href={`/archived/france?news=${name.toLowerCase()}&page=1`}>
+                                return <Link key={index} href={`/archived/france?news=${name.toLowerCase()}&page=1`}>
                                             <li key={index}>
                                                 {name}
                                             </li>
