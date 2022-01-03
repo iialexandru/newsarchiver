@@ -91,3 +91,38 @@
     overflow: hidden;
     text-overflow: ellipsis
 }
+
+
+
+//Phone Portrait & Landscape
+@media screen and (min-width: 0px) and (max-width: 767px) {
+    .all_news_container {
+        grid-column-start: 1;
+        grid-template-columns: auto;  
+    }
+}
+
+//Tablet Portrait & Landscape
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+}
+
+//Tablet Portrait
+@media screen and (min-width: 768px) {
+  
+}
+
+//Tablet Landscape
+@media screen and (max-width: 1024px) {
+  
+}
+
+//Desktop
+@media screen and (min-width: 1224px) {
+  
+}
+
+//Large Desktop
+@media screen and (min-width: 1824px) {
+  
+}

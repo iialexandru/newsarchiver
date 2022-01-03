@@ -52,10 +52,13 @@
 .list_all_channels {
     position: relative;
     background-color: rgba(230, 230, 230, 1);
-    width: 30vw;
+    width: 30vmax;
     height: auto;
     padding: .5em 0;
     margin-left: 1em;
+    border-radius: 2px;
+    backdrop-filter: blur(1px);
+    filter: drop-shadow(10px 10px 10px rgba(80, 80, 80, .4));
 
     ul { 
         font-family: 'Libre Baskerville', cursive;
@@ -77,4 +80,35 @@
         }
 
     }
+}
+
+
+//Phone Portrait & Landscape
+@media screen and (min-width: 0px) and (max-width: 767px) {
+    
+}
+
+//Tablet Portrait & Landscape
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+}
+
+//Tablet Portrait
+@media screen and (min-width: 768px) {
+  
+}
+
+//Tablet Landscape
+@media screen and (max-width: 1024px) {
+  
+}
+
+//Desktop
+@media screen and (min-width: 1224px) {
+  
+}
+
+//Large Desktop
+@media screen and (min-width: 1824px) {
+  
 }

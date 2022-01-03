@@ -72,7 +72,7 @@
 }
 
 //Phone Portrait & Landscape
-@media screen and (min-width: 320px) and (max-width: 480px) {
+@media screen and (min-width: 0px) and (max-width: 767px) {
   .mc_flex {
     flex-flow: column wrap;
     gap: 1em;
