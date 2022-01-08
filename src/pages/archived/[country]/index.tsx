@@ -133,7 +133,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
     }
 
     const handleDateFilter = () => {
-        value && router.replace({
+        (value && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow())) && router.replace({
             pathname: router.pathname,
             query: { ...router.query, year: encodeURIComponent(value.getFullYear()), month: encodeURIComponent(value.getMonth() + 1), day: encodeURIComponent(value.getDate())}
         })
@@ -164,7 +164,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
     }
 
     useEffect(() => {
-        (value && value.getFullYear() && value.getMonth() + 1 && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleDateFilter() : resetDateFilter()
+        // (value && value.getFullYear() && value.getMonth() + 1 && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleDateFilter() : resetDateFilter()
     console.log(value)
     }, [value])
 
@@ -188,20 +188,28 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                         </Stack>
                     </div>
                     
-                    <div className={styles.calendar}>
-                        <label htmlFor="calendar">Specific date:</label>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DesktopDatePicker
-                                label="DATE"
-                                value={value}
-                                onChange={(newValue) => {
-                                setValue(newValue);
-                                }}
-                                maxDate={new Date()}
-                                minDate={new Date(2021, 11, 28)}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </LocalizationProvider>
+                    <div>
+                        <div className={styles.calendar}>
+                            <label htmlFor="calendar">Specific date:</label>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DesktopDatePicker
+                                    label="DATE"
+                                    value={value}
+                                    onChange={(newValue) => {
+                                    setValue(newValue);
+                                    }}
+                                    maxDate={new Date()}
+                                    minDate={new Date(2021, 11, 28)}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        </div>
+                        <div className={styles.submission_buttons}>
+                            <ThemeProvider theme={filterButtonsTheme}>
+                                    <WHButton type="button" variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
+                                    <WHButton type="button" variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                            </ThemeProvider>
+                        </div>
                     </div>
                 </div>
                 }

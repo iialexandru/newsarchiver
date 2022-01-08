@@ -113,6 +113,7 @@
 
 .filters_container {
     display: grid;
+    position: relative;
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto;
     justify-items: start;

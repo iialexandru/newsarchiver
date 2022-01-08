@@ -114,6 +114,21 @@
     margin: .5em 0 0 1em;
 }
 
+.submission_buttons {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 2em;
+    width: 50%;
+    left: 42%;
+    margin-top: .3em;
+    flex-shrink: 2;
+
+    button { 
+        flex: 1;
+    }
+}
+
 .all_news_container {
     display: flex;
     flex-flow: column wrap;
