@@ -2,27 +2,13 @@ import type { NextPage } from 'next'
 import styles from '../../styles/scss/ArchivedNews.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 
 interface CountryLogo { 
     url: String;
     name: String;
 }
 
-interface CountryState { 
-    romania: Boolean;
-    germany: Boolean;
-    france: Boolean;
-}
-
 const ArchivedNews: NextPage = () => {
-
-    const [ listNews, setListNews ] = useState<CountryState>({romania: false, germany: false, france: false})
-
-    const theme = createMuiTheme({
-        
-    })
     
     const newsRomania: string[] = ['DIGI24', 'Antena3']
     const newsGermany: string[] = ['WELT', 'DW']

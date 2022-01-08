@@ -17,7 +17,7 @@ const Nav = () => {
 
     return (
       <>
-      {width > 700 ? 
+      {width > 700 ?
       <nav className={styles.nav_flex}>
         <span className={`${animation ? styles.animation_stop_sm : ''}`} >
             <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
@@ -30,8 +30,8 @@ const Nav = () => {
       :
       <>
         <nav className={styles.nav_container}>
-              <img src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
-                    width={90} height={55} alt="logo" />
+              <div><Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
+                    width={90} height={55} alt="logo" /></div>
             <button className={styles.nav_p_button} onClick={e => setOpened(!opened)}>
               <span>{chooseName(router.pathname.toString())}</span>
               <MenuIcon fontSize="large" />

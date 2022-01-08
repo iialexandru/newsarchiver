@@ -29,12 +29,11 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     const [ value, setValue ] = useState<Date | null>(null)
 
 
-    const WHButton = styled(Button)(({ theme }) => ({
+    const WHButton = styled(Button)(() => ({
         ':hover': {
           backgroundColor: '#e6e6e6',
         },
-      }));
-
+    }));
       
     const defaultMaterialTheme = createTheme({
         palette: {
@@ -52,21 +51,47 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
         }
     })
 
-    const resetFilters = () => {
-                // e.preventDefault();
+
+    const resetDateFilter = () => {
         if(section === 1){
-            (value && router.query.year_f !== "" && router.query.month_f !== "" && router.query.day_f !== "") && router.replace({
+            (router.query.year_f && router.query.month_f && router.query.day_f) && router.replace({
                 pathname: router.pathname,
-                query: { ...router.query, year_f: "", month_f: "", day_f: ""}
+                query: { ...router.query, page_f: encodeURIComponent(1), year_f: null, month_f: null, day_f: null}
             })
-            setValue(null)
         } else {
-            (value && router.query.year_s !== "" && router.query.month_s !== "" && router.query.day_s !== "") && router.replace({
+            (router.query.year_s && router.query.month_s && router.query.day_s) && router.replace({
                 pathname: router.pathname,
-                query: { ...router.query, year_s: "", month_s: "", day_s: ""}
+                query: { ...router.query, page_s: encodeURIComponent(1), year_s: null, month_s: null, day_s: null}
             })
-            setValue(null)
         }
+        setValue(null)
+    }
+
+    const orderingFilter = (e: any) => {
+        if(section === 1) {
+            router.replace({
+                pathname: router.pathname,
+                query: { ...router.query, page_f: encodeURIComponent(1), sort_f: e.target.getAttribute('type-order') === 'oldest' ? encodeURIComponent('oldest') : encodeURIComponent('latest') }
+            })
+        } else {
+            router.replace({
+                pathname: router.pathname,
+                query: { ...router.query, page_s: encodeURIComponent(1), sort_s: e.target.getAttribute('type-order') === 'oldest' ? encodeURIComponent('oldest') : encodeURIComponent('latest') }
+            })
+        }
+    }
+
+    const resetAllFilters = () => {
+        if(section === 1){
+            router.replace({
+                query: { news_f: router.query.news_f, news_s: router.query.news_s, page_f: encodeURIComponent(1), page_s: encodeURIComponent(1), sort_s: router.query.sort_s, year_s: router.query.year_s, month_s: router.query.month_s, day_s: router.query.day_s  }
+            })
+        } else {
+            router.replace({
+                query: { news_f: router.query.news_f, news_s: router.query.news_s, page_f: encodeURIComponent(1), page_s: encodeURIComponent(1), sort_f: router.query.sort_f, year_f: router.query.year_f, month_f: router.query.month_f, day_f: router.query.day_f  }
+            })
+        }
+        setValue(null)
     }
 
     const handleSubmits = () => {
@@ -84,7 +109,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     }
 
     useEffect(() => {
-        (value && value.getFullYear() && value.getMonth() && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleSubmits() : resetFilters()
+        (value && value.getFullYear() && value.getMonth() + 1 && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleSubmits() : resetDateFilter()
     }, [value])
 
     return (
@@ -92,7 +117,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
             <div className={styles.filters_buttons}>
                 <ThemeProvider theme={defaultMaterialTheme}>
                     <Button type="button"  onClick={e => setOpenedFilters(!openedFilters)} variant="outlined" color="primary" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />}>FILTERS</Button>
-                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} color="primary" onClick={e => resetFilters }>RESET</Button>
+                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} color="primary" onClick={e => resetAllFilters() }>RESET</Button>
                 </ThemeProvider>
             </div>
             {openedFilters &&
@@ -101,8 +126,8 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
                         <Stack direction="row" alignItems='center' spacing={2}>
                                 <label>Date added: </label>
                             <ThemeProvider theme={filterButtonsTheme}>
-                                <WHButton type="button" variant="contained" size="small" color='primary'>latest</WHButton>
-                                <WHButton type="button" variant="contained" size="small">oldest</WHButton>
+                                <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
+                                <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
                             </ThemeProvider>
                         </Stack>
                     </div>

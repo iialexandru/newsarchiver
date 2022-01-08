@@ -96,6 +96,41 @@
     text-overflow: ellipsis
 }
 
+.filters_buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 32vw;
+    gap: .2em;
+    margin-top: 2em;
+    margin-left: 1em;
+
+    button {
+        flex: 1;
+    }
+}
+
+.filters_container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    justify-items: start;
+    gap: .5em;
+    width: 32vw;
+    height: auto;
+    margin-top: .5em;
+    margin-left: 1em;
+    background-color: rgba(240, 240, 240, 1);
+    box-shadow: 4px 2px 8px rgba(210, 210, 210, 1);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+
+    label { 
+        color: rgb(100, 100, 100);
+    }
+}
+
 
 
 //Phone Portrait & Landscape

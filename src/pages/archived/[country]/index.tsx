@@ -1,29 +1,29 @@
-import type { NextPage } from 'next'
-import { GetServerSideProps } from 'next'
 import styles from '../../../styles/scss/NewsComparison.module.scss'
 import specStyles from '../../../styles/scss/CountryNews.module.scss'
 import nav from '../../../styles/scss/Pagination.module.scss'
+import formatDate from '../../../utils/formatDate'
+import { server } from '../../../config/index'
+
+import type { NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useInView } from 'react-intersection-observer'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import formatDate from '../../../utils/formatDate'
-import { DateTime } from 'luxon'
-import { server } from '../../../config/index'
+import { isAfter, isBefore, startOfTomorrow } from 'date-fns'
+
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import TextField from '@mui/material/TextField';
+
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Input from '@mui/material/Input';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+
 import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined';
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns'
-import format from 'date-fns/format'
-import { createMuiTheme } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
-import blueGrey from "@material-ui/core/colors/blueGrey";
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
 interface Data {
     allPage: {[
@@ -37,30 +37,33 @@ interface News { news: Data }
 
 const SingleCountryNews: NextPage<News> = ({ news }) => {
 
-    const router = useRouter()
-
-    const defaultMaterialTheme = createMuiTheme({
-        palette: {
-            primary: blueGrey,
+    const WHButton = styled(Button)(() => ({
+        ':hover': {
+          backgroundColor: '#e6e6e6',
         },
+    }));
+      
+    const defaultMaterialTheme = createTheme({
+        palette: {
+            primary: {
+                main: '#5B554F'
+            }
+        }
     });
 
-    const [ value, setValue ] = useState<Date | null>(null)
-    
-    const change_page = (page: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, page: encodeURIComponent(page.toLowerCase()) }
-        })
-    }
+    const filterButtonsTheme = createTheme({
+        palette: {
+            primary: {
+                main: '#fff'
+            }
+        }
+    })
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        value && router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, year: encodeURIComponent(value.getFullYear()), month: encodeURIComponent(value.getMonth() + 1), day: encodeURIComponent(value.getDate())}
-        })
-    }
+    const router = useRouter()
+
+    const [ value, setValue ] = useState<Date | null>(null)
+    const [ openedFilters, setOpenedFilters ] = useState(false)
+
 
     const[ arrCurBtn, setArrCurBtn] = useState<any[]>([])
     const [currentButton, setCurrentButton] = useState<number>(parseInt(router.query.page as string) > 0 ? parseInt(router.query.page as string) : 1)
@@ -101,28 +104,23 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     const changePage = (value: number) => {
         setCurrentButton(value)
-        if(currentButton !== value)
-            change_page((value).toString());  
-    }
-
-    const resetFilter = (e: any) => {
-        e.preventDefault();
-        value && router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, year: undefined, month: undefined, day: undefined}
-        })
-        setValue(null)
+        if(currentButton !== value){
+            router.replace({
+                pathname: router.pathname,
+                query: { ...router.query, page: encodeURIComponent(value.toString().toLowerCase()) }
+            })
+        }
     }
 
     const nextPage = () => {
-            if(news.totalPages >= parseInt(router.query.page!.toString()) + 1) {
-                router.replace({ 
-                    pathname: router.pathname, 
-                    query: { ...router.query, page: encodeURIComponent(parseInt(router.query.page!.toString()) + 1)} 
-                })
-                setCurrentButton(parseInt(router.query.page!.toString()) + 1)
-            }
-    }
+        if(news.totalPages >= parseInt(router.query.page!.toString()) + 1) {
+            router.replace({ 
+                pathname: router.pathname, 
+                query: { ...router.query, page: encodeURIComponent(parseInt(router.query.page!.toString()) + 1)} 
+            })
+            setCurrentButton(parseInt(router.query.page!.toString()) + 1)
+        }
+}
 
     const prevPage = () => {
             if(parseInt(router.query.page!.toString()) - 1 >= 1) {
@@ -132,38 +130,89 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                 })
                 setCurrentButton(parseInt(router.query.page!.toString()) - 1)
             }
-        }
+    }
+
+    const handleDateFilter = () => {
+        value && router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, year: encodeURIComponent(value.getFullYear()), month: encodeURIComponent(value.getMonth() + 1), day: encodeURIComponent(value.getDate())}
+        })
+        return false
+    }
+
+    const resetDateFilter = () => {
+        value && router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, page: encodeURIComponent(1), year: router.query.year && null, month: router.query.month && null, day: router.query.day && null}
+        })
+        setValue(null)
+    }
+    
+    const resetAllFilters = () => {
+        router.replace({
+            pathname: router.pathname,
+            query: { news: router.query.news, page: encodeURIComponent(1) }
+        })
+        setValue(null)   
+    }
+    
+    const orderingFilter = (e: any) => {
+        router.replace({
+            pathname: router.pathname,
+            query: { ...router.query, page: encodeURIComponent(1), sort: e.target.getAttribute('type-order') === 'oldest' ? encodeURIComponent('oldest') : encodeURIComponent('latest')}
+        })
+    }
+
+    useEffect(() => {
+        (value && value.getFullYear() && value.getMonth() + 1 && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleDateFilter() : resetDateFilter()
+    console.log(value)
+    }, [value])
 
     return (
         <>
-            <form className={`${styles.form_filter} ${styles.item}`} style={{marginTop: ".5em"}} method="GET" onSubmit={e => handleSubmit(e)}>
-                <label>Date:</label>
-                <div className={styles.flexbox_form_inputs}>
-                    <ThemeProvider theme={defaultMaterialTheme}>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
-                                clearable
+            <div className={specStyles.filters_buttons}>
+                <ThemeProvider theme={defaultMaterialTheme}>
+                    <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
+                    <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
+                </ThemeProvider>
+            </div>
+            {openedFilters &&
+                <div className={specStyles.filters_container}>
+                    <div className={styles.order_news}>
+                        <Stack direction="row" alignItems='center' spacing={2}>
+                                <label>Date added: </label>
+                            <ThemeProvider theme={filterButtonsTheme}>
+                                <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
+                                <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
+                            </ThemeProvider>
+                        </Stack>
+                    </div>
+                    
+                    <div className={styles.calendar}>
+                        <label htmlFor="calendar">Specific date:</label>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DesktopDatePicker
+                                label="DATE"
                                 value={value}
-                                placeholder="10/10/2018"
-                                onChange={date => setValue(date)}
-                                minDate={format(new Date(2021, 11, 28), 'yyyy/MM/dd')}
-                                maxDate={format(new Date(), 'yyyy/MM/dd')}
-                                format="dd/MM/yyyy"
+                                onChange={(newValue) => {
+                                setValue(newValue);
+                                }}
+                                maxDate={new Date()}
+                                minDate={new Date(2021, 11, 28)}
+                                renderInput={(params) => <TextField {...params} />}
                             />
-                        </MuiPickersUtilsProvider>
-                    </ThemeProvider>
-                    <Button type="submit" variant="outlined" size="small" endIcon={<FilterAltOutlinedIcon />}>FILTER</Button>
-                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetFilter(e) }>RESET</Button>
+                        </LocalizationProvider>
+                    </div>
                 </div>
-            </form>
+                }
             <div className={specStyles.all_news_container}>
                 {news.allPage.map((article: any, index: number) => {
                     return(
                     <Link key={index} href={article.linkURL} >
-                        <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex}`} href={article.linkURL}>
+                        <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex}`}>
                                 <figure key={index + 1} className={specStyles.image}>
-                                    <Image key={index} src={article.image} alt='article-title' width={400} height={250} priority/>
-                                    <figcaption className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>
+                                    <Image key={index} src={article.image} alt='article-title' width={455} height={250} priority/>
+                                    <figcaption key={index + 1} className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>
                                 </figure>
                                 <h5 key={index} className={specStyles.headline}>{article.title}</h5>
                                 <p key={index + 2} className={specStyles.intro_paragraph}>{article.desc}</p>
@@ -179,19 +228,19 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                             width={10} height={15} alt="left-arrow" priority/>
                 </button>
                 {arrCurBtn.map((value: number, index: number) => 
-                <>
+                <div key={index}>
                         { value.toString() !== dotsInitial && value.toString() !== dotsRight && value.toString() !== dotsLeft ?
                             <button type="button" key={index} className={currentButton !== value ? nav.disactivated : ''} 
                         onClick={e => changePage(value)} >{value}</button>
                         : <span key={index}>{value}</span> }
-                </>
+                </div>
                 )}  
                 <button onClick={nextPage}>
                     <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
                         width={10} height={15} alt="right-arrow" priority/>
                 </button>
             </div>
-        </>
+    </>
     )
 }
 
@@ -199,7 +248,7 @@ export default SingleCountryNews;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
-    const { news, page, year, month, day } = query;
+    const { news, page, year, month, day, sort } = query;
 
     const variants = [ 'digi24', 'antena3' ]
  
@@ -208,7 +257,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             notFound: true
         }
 
-    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`${server}/api/news/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}&limit=12`) : (news && await fetch(`${server}/api/news/${news}_nc?page=${(parseInt(page) - 1).toString()}&limit=12`) )
+    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`${server}/api/news/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}&limit=12&sort=${sort}`) : (news && await fetch(`${server}/api/news/${news}_nc?page=${(parseInt(page) - 1).toString()}&limit=12&sort=${sort}`) )
     const data = response && await response.json()
 
     return {

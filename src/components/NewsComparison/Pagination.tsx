@@ -7,7 +7,7 @@ import styles from '../../styles/scss/Pagination.module.scss'
 interface ChildPropsComponent { 
     section: number;
     numberOfPages: number;
-    PAGE: any;
+    PAGE: string | string[] | undefined;
 }
 
 const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) => {
@@ -123,12 +123,12 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
                     width={10} height={15} priority/>
             </button>
             {arrCurBtn.map((value: number, index: number) => 
-            <>
+                <div key={index}>
                     { value.toString() !== dotsInitial && value.toString() !== dotsRight && value.toString() !== dotsLeft ?
                     <button type="button" key={index} className={currentButton !== value ? styles.disactivated : ''} 
                     onClick={e => changePage(value)} >{value}</button>
                     : <span key={index}>{value}</span> }
-            </>
+                </div>
             )}  
             <button onClick={nextPage}>
                 <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
