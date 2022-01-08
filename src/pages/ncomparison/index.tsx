@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
 import styles from '../../styles/scss/NewsComparison.module.scss'
 import axios from 'axios'
-import Selection from '../../components/selectionMenu'
+import Selection from '../../components/NewsComparison/SelectionMenu'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { server } from '../../config/index'
@@ -25,20 +25,6 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
 
     const router = useRouter()
 
-    const change_first_news = (news: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, news_f: encodeURIComponent(news.toLowerCase()) }
-        })
-    }
-
-    const change_second_news = (news: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, news_s: encodeURIComponent(news.toLowerCase()) }
-        })
-    }
-
     const change_first_page = (page: string) => {
         router.replace({
             pathname: router.pathname,
@@ -56,34 +42,34 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
     return (
     <>
         <Head>
+        <link
+            rel="preload"
+            href="/fonts/Roboto/Roboto-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Roboto/Roboto-Regular.woff"
+            as="font"
+            type="font/woff"
+            crossOrigin="anonymous"
+          />
             <link
-                rel="preload"
-                href="/fonts/Roboto/Roboto-Bold.woff2"
-                as="font"
-                type="font/woff2"
-                crossOrigin="anonymous"
-            />
-            <link
-                rel="preload"
-                href="/fonts/Roboto/Roboto-Bold.woff"
-                as="font"
-                type="font/woff"
-                crossOrigin="anonymous"
-            />
-                <link
-                rel="preload"
-                href="/fonts/Roboto/Roboto-Bold.ttf"
-                as="font"
-                type="font/ttf"
-                crossOrigin="anonymous"
-            />
+            rel="preload"
+            href="/fonts/Roboto/Roboto-Regular.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
+          />
       </Head>
 
         <div className={styles.container}>
 
-                <Selection name={1} news={latestNews_1} change_news_query={change_first_news} 
+                <Selection name={1} news={latestNews_1}
                            change_page_query={change_first_page} PAGE={router.query.page_f} URL={router.query.news_f} />
-                <Selection name={2} news={latestNews_2} change_news_query={change_second_news} 
+                <Selection name={2} news={latestNews_2}
                            change_page_query={change_second_page} PAGE={router.query.page_s} URL={router.query.news_s} />
 
         </div>

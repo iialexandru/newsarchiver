@@ -20,7 +20,6 @@
 .item_flex {
     position: relative;
     height: 450px;
-    border: 1px solid gray;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.6);
     animation: fade_lr_opac .5s 1;
@@ -33,7 +32,7 @@
     &:hover {
         transform: scale(1.1);
         border-color: #949398FF;
-        background-color: rgba(230, 230, 230, 1);
+        background-color: rgba(220, 220, 220, 1);
         border-width: 1.5px;
         transition: all .4s ease-out;
     }
@@ -51,15 +50,19 @@
     }
 }
 
-.image {     
+.image {  
+    margin: 0 auto;   
+    
     img {
-        border-radius: 2px !important;
+        border-radius: 2px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
 
 .date_creation {
     position: relative;
-    text-align: left;
+    text-align: center;
     font-size: .5rem;
     font-weight: normal;
     font-family: 'Libre Baskerville', sans-serif;

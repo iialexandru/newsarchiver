@@ -14,8 +14,6 @@ const Home: NextPage = () => {
     <>
     
       <Head>
-        <title>NewsArchiver</title>
-        <link rel="icon" href="/na.ico" />
         <link
             rel="preload"
             href="/fonts/CherrySwash/CherrySwash-Bold.woff2"
@@ -49,7 +47,7 @@ const Home: NextPage = () => {
             <p>FYI: All the news are taken from the most recent section of the respective sites</p>
           </div>
           <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640891680/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
-          width={700} height={450} priority />
+          width={700} height={450}  priority />
         </div>
 
       </div>
