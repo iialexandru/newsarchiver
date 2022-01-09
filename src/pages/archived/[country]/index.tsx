@@ -52,7 +52,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             primary: {
                 main: '#5B554F'
             }
-        }
+        },
     });
 
     const filterButtonsTheme = createTheme({
@@ -174,8 +174,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
     
     const resetAllFilters = () => {
         router.replace({
-            pathname: router.pathname,
-            query: { news: router.query.news, page: encodeURIComponent(1) }
+            query: { news: router.query.news, page: encodeURIComponent(1), country: router.query.country }
         })
         setValue(null)   
     }
@@ -186,11 +185,6 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             query: { ...router.query, page: encodeURIComponent(1), sort: e.target.getAttribute('type-order') === 'oldest' ? encodeURIComponent('oldest') : encodeURIComponent('latest')}
         })
     }
-
-    useEffect(() => {
-        // (value && value.getFullYear() && value.getMonth() + 1 && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleDateFilter() : resetDateFilter()
-    console.log(value)
-    }, [value])
 
     return (
         <>
