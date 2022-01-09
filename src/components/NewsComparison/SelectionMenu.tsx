@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import styles from '../../styles/scss/NewsComparison.module.scss'
 import CountryNewsSelect from './CountryNewsSelect'
-import FilterBox from './FilterBox'
+import FilterBox from './Filters/FilterBox'
 import Pagination from './Pagination'
 
 interface Default {

@@ -17,6 +17,10 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
@@ -101,6 +105,26 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
         
       setArrCurBtn(tempNumberOfPages)
     }, [currentButton, dotsLeft, dotsRight, dotsInitial, news.totalPages])
+
+    const [ posts, setPosts ] = useState(12)
+
+    const customSelectColor = createTheme({
+        palette: {
+            primary: {
+                main: '#646464'
+            }
+        }
+    })
+
+    const handleChange = (e: any) => {
+        setPosts(e.target.value)
+    }
+
+    useEffect(() => {
+        router.replace({
+            query: {...router.query, ppp: encodeURIComponent(posts)}
+        })
+    }, [posts])
 
     const changePage = (value: number) => {
         setCurrentButton(value)
@@ -188,6 +212,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                         </Stack>
                     </div>
                     
+
                     <div>
                         <div className={styles.calendar}>
                             <label htmlFor="calendar">Specific date:</label>
@@ -211,6 +236,31 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                             </ThemeProvider>
                         </div>
                     </div>
+
+
+                    <div className={styles.ppp_select}>
+                        <label htmlFor="postsperpage">Posts per page:</label>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                            <ThemeProvider theme={customSelectColor}>
+                                <Select
+                                labelId="posts-per-page-selection"
+                                id="posts-per-page"
+                                value={posts}
+                                onChange={handleChange}
+                                label="Posts"
+                                >
+                                    <MenuItem value={12}>12</MenuItem>
+                                    <MenuItem value={15}>15</MenuItem>
+                                    <MenuItem value={18}>18</MenuItem>
+                                    <MenuItem value={21}>21</MenuItem>
+                                    <MenuItem value={24}>24</MenuItem>
+                                    <MenuItem value={27}>27</MenuItem>
+                                </Select>
+                            </ThemeProvider>
+                        </FormControl>
+                    </div>
+
+
                 </div>
                 }
             <div className={specStyles.all_news_container}>
@@ -256,7 +306,7 @@ export default SingleCountryNews;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
-    const { news, page, year, month, day, sort } = query;
+    const { news, page, year, month, day, sort, ppp } = query;
 
     const variants = [ 'digi24', 'antena3' ]
  
@@ -265,7 +315,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             notFound: true
         }
 
-    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`${server}/api/news/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}&limit=12&sort=${sort}`) : (news && await fetch(`${server}/api/news/${news}_nc?page=${(parseInt(page) - 1).toString()}&limit=12&sort=${sort}`) )
+    const response = (parseInt(year) && parseInt(month) && parseInt(day) && news) ? await fetch(`${server}/api/news/${news}_nc/filter_by_date?page=${(parseInt(page) - 1).toString()}&year=${year}&month=${month}&day=${day}&limit=${ppp ? ppp : '12'}&sort=${sort}`) : (news && await fetch(`${server}/api/news/${news}_nc?page=${(parseInt(page) - 1).toString()}&limit=${ppp ? ppp : '12'}&sort=${sort}`) )
     const data = response && await response.json()
 
     return {

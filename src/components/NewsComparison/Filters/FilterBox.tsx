@@ -11,8 +11,10 @@ import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
-import styles from '../../styles/scss/NewsComparison.module.scss'
-import { useState, useEffect, FC } from 'react'
+import styles from '../../../styles/scss/NewsComparison.module.scss'
+import ViewsPerPage from './ViewsPerPage';
+
+import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import { isAfter, isBefore, startOfTomorrow } from 'date-fns'
 
@@ -84,11 +86,12 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     const resetAllFilters = () => {
         if(section === 1){
             router.replace({
-                query: { news_f: router.query.news_f, news_s: router.query.news_s, page_f: encodeURIComponent(1), page_s: encodeURIComponent(1), sort_s: router.query.sort_s, year_s: router.query.year_s, month_s: router.query.month_s, day_s: router.query.day_s  }
+                query: { news_f: router.query.news_f, news_s: router.query.news_s, page_f: encodeURIComponent(1), page_s: encodeURIComponent(1), sort_s: router.query.sort_s && router.query.sort_s , year_s: router.query.year_s, month_s: router.query.month_s, day_s: router.query.day_s, ppp_s: router.query.ppp_s  }
+                
             })
         } else {
             router.replace({
-                query: { news_f: router.query.news_f, news_s: router.query.news_s, page_f: encodeURIComponent(1), page_s: encodeURIComponent(1), sort_f: router.query.sort_f, year_f: router.query.year_f, month_f: router.query.month_f, day_f: router.query.day_f  }
+                query: { news_f: router.query.news_f, news_s: router.query.news_s, page_f: encodeURIComponent(1), page_s: encodeURIComponent(1), sort_f: router.query.sort_f, year_f: router.query.year_f, month_f: router.query.month_f, day_f: router.query.day_f, ppp_f: router.query.ppp_f  }
             })
         }
         setValue(null)
@@ -107,10 +110,6 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
             })
         }
     }
-
-    useEffect(() => {
-        // (value && value.getFullYear() && value.getMonth() && value.getDate() && isAfter(value, new Date(2021, 11, 27)) && isBefore(value, startOfTomorrow()) ) ? handleSubmits() : resetDateFilter()
-    }, [value])
 
     return (
         <>
@@ -131,6 +130,8 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
                             </ThemeProvider>
                         </Stack>
                     </div>
+
+
                     <div>
                         <div className={styles.calendar}>
                             <label htmlFor="calendar">Specific date:</label>
@@ -153,6 +154,11 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
                                         <WHButton type="button" variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
                                 </ThemeProvider>
                         </div>
+                    </div>
+
+                    <div className={styles.ppp_select}>
+                        <label htmlFor="postsperpage">Posts per page:</label>
+                        <ViewsPerPage section={section} />
                     </div>
                 </div>
             }
