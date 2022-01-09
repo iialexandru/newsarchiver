@@ -4,7 +4,6 @@ import styles from '../../styles/scss/NewsComparison.module.scss'
 import axios from 'axios'
 import Selection from '../../components/NewsComparison/SelectionMenu'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
 import { server } from '../../config/index'
 import Head from 'next/head'
 
@@ -24,20 +23,6 @@ interface News {
 const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
 
     const router = useRouter()
-
-    const change_first_page = (page: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, page_f: encodeURIComponent(page.toLowerCase()) }
-        })
-    }
-
-    const change_second_page = (page: string) => {
-        router.replace({
-            pathname: router.pathname,
-            query: { ...router.query, page_s: encodeURIComponent(page.toLowerCase()) }
-        })
-    }
 
     return (
     <>
@@ -68,9 +53,9 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
         <div className={styles.container}>
 
                 <Selection name={1} news={latestNews_1}
-                           change_page_query={change_first_page} PAGE={router.query.page_f} URL={router.query.news_f} />
+                            PAGE={router.query.page_f} URL={router.query.news_f} />
                 <Selection name={2} news={latestNews_2}
-                           change_page_query={change_second_page} PAGE={router.query.page_s} URL={router.query.news_s} />
+                            PAGE={router.query.page_s} URL={router.query.news_s} />
 
         </div>
     </>

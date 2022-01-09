@@ -1,12 +1,10 @@
-import styles from '../../styles/scss/NewsComparison.module.scss'
-import { FC, useState, useEffect } from 'react'
+import { FC, useState } from 'react'
 import formatDate from '../../utils/formatDate'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 
-
+import styles from '../../styles/scss/NewsComparison.module.scss'
 import CountryNewsSelect from './CountryNewsSelect'
 import FilterBox from './FilterBox'
 import Pagination from './Pagination'
@@ -22,14 +20,11 @@ interface Default {
 interface ChildPropsComponent {
     name: number;
     news: Default;
-    change_page_query: (page: string) => void;
     PAGE: string | string[] | undefined;
     URL: string | string[] | undefined;
 }
 
-const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, change_page_query, PAGE, URL }) => {
-
-    const router = useRouter()
+const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, PAGE, URL }) => {
 
     const [ selectNews, setSelectNews ] = useState<string>('')
 

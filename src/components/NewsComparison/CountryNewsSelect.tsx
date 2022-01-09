@@ -16,7 +16,7 @@ interface ChildPropsComponent {
     section: number;
 }
 
-const countryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews, section}) => {
+const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews, section}) => {
 
     const router = useRouter()
 
@@ -84,4 +84,4 @@ const countryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
     )
 }
 
-export default countryNewsSelect
+export default CountryNewsSelect;
