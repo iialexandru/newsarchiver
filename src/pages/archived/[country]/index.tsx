@@ -3,6 +3,7 @@ import specStyles from '../../../styles/scss/CountryNews.module.scss'
 import nav from '../../../styles/scss/Pagination.module.scss'
 import formatDate from '../../../utils/formatDate'
 import { server } from '../../../config/index'
+import useWindowSize from '../../../utils/windowSize'
 
 import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
@@ -14,7 +15,7 @@ import { isAfter, isBefore, startOfTomorrow } from 'date-fns'
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import DatePicker from '@mui/lab/DatePicker';
 import TextField from '@mui/material/TextField';
 
 import FormControl from '@mui/material/FormControl';
@@ -41,6 +42,8 @@ interface News { news: Data }
 
 const SingleCountryNews: NextPage<News> = ({ news }) => {
 
+    const [ width, height ] = useWindowSize()
+
     const WHButton = styled(Button)(() => ({
         ':hover': {
           backgroundColor: '#e6e6e6',
@@ -60,7 +63,30 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             primary: {
                 main: '#fff'
             }
+        },
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 481,
+                md: 768,
+                lg: 1024,
+                xl: 1600
+
+            }
         }
+    })
+
+    const customBreakpoints = createTheme({
+        // breakpoints: {
+        //     values: {
+        //         xs: 0,
+        //         sm: 481,
+        //         md: 768,
+        //         lg: 1024,
+        //         xl: 1600
+
+        //     }
+        // }
     })
 
     const router = useRouter()
@@ -177,6 +203,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             query: { news: router.query.news, page: encodeURIComponent(1), country: router.query.country }
         })
         setValue(null)   
+        setPosts(12)
     }
     
     const orderingFilter = (e: any) => {
@@ -188,6 +215,8 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     return (
         <>
+        <div className={styles.filter_but_cont}>
+            <ThemeProvider theme={customBreakpoints}>
             <div className={specStyles.filters_buttons}>
                 <ThemeProvider theme={defaultMaterialTheme}>
                     <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
@@ -196,43 +225,41 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
             </div>
             {openedFilters &&
                 <div className={specStyles.filters_container}>
-                    <div className={styles.order_news}>
-                        <Stack direction="row" alignItems='center' spacing={2}>
-                                <label>Date added: </label>
-                            <ThemeProvider theme={filterButtonsTheme}>
-                                <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
-                                <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
-                            </ThemeProvider>
-                        </Stack>
+                    <div className={specStyles.order_news}>
+                            <label>Date added: </label>
+                                <ThemeProvider theme={filterButtonsTheme}>
+                                    <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
+                                    <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
+                                </ThemeProvider>
                     </div>
                     
 
                     <div>
-                        <div className={styles.calendar}>
+                        <div className={specStyles.calendar}>
                             <label htmlFor="calendar">Specific date:</label>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DesktopDatePicker
-                                    label="DATE"
-                                    value={value}
-                                    onChange={(newValue) => {
-                                    setValue(newValue);
-                                    }}
-                                    maxDate={new Date()}
-                                    minDate={new Date(2021, 11, 28)}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </LocalizationProvider>
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DatePicker
+                                            label="DATE"
+                                            value={value}
+                                            onChange={(newValue) => {
+                                            setValue(newValue);
+                                            }}
+                                            maxDate={new Date()}
+                                            minDate={new Date(2021, 11, 28)}
+                                            renderInput={(params) => <TextField {...params} />}
+                                        />
+                                        </LocalizationProvider>
                         </div>
-                        <div className={styles.submission_buttons}>
-                            <ThemeProvider theme={filterButtonsTheme}>
-                                    <WHButton type="button" variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
-                                    <WHButton type="button" variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
-                            </ThemeProvider>
-                        </div>
+                                    <div className={specStyles.submission_buttons}>
+                                        <ThemeProvider theme={filterButtonsTheme}>
+                                                <WHButton type="button" sx={{ height: { xs: '2.5em' }, fontSize: { xs: 13, md: 'inherit'} }} variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
+                                                <WHButton type="button" sx={{ height: { xs: '2.5em' }, fontSize: { xs: 13, md: 'inherit'} }} variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                                        </ThemeProvider>
+                                    </div>
                     </div>
 
 
-                    <div className={styles.ppp_select}>
+                    <div className={specStyles.ppp_select}>
                         <label htmlFor="postsperpage">Posts per page:</label>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                             <ThemeProvider theme={customSelectColor}>
@@ -257,6 +284,8 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
                 </div>
                 }
+                </ThemeProvider>
+            </div>
             <div className={specStyles.all_news_container}>
                 {news.allPage.map((article: any, index: number) => {
                     return(

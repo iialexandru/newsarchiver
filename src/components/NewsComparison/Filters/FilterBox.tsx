@@ -28,7 +28,9 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     const router = useRouter()
 
     const [ openedFilters, setOpenedFilters ] = useState(false)
-    const [ value, setValue ] = useState<Date | null>(null)
+    const [ value, setValue ] = useState<Date | null>(null) // For calendar filter
+
+    const [ posts, setPosts ] = useState(12) // For posts per page filter
 
 
     const WHButton = styled(Button)(() => ({
@@ -43,7 +45,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
                 main: '#5B554F'
             }
         }
-    });
+    }); //custom primary color
 
     const filterButtonsTheme = createTheme({
         palette: {
@@ -51,7 +53,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
                 main: '#fff'
             }
         }
-    })
+    }) // pure white
 
 
     const resetDateFilter = () => {
@@ -95,6 +97,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
             })
         }
         setValue(null)
+        setPosts(12)
     }
 
     const handleDateFilter = () => {
@@ -158,7 +161,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
 
                     <div className={styles.ppp_select}>
                         <label htmlFor="postsperpage">Posts per page:</label>
-                        <ViewsPerPage section={section} />
+                        <ViewsPerPage section={section} posts={posts} setPosts={setPosts} />
                     </div>
                 </div>
             }

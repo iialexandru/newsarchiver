@@ -5,7 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 
 
-import { useState, FC, Dispatch, SetStateAction } from 'react'
+import { useState, FC } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
 
 import countries from '../../utils/NewsComparison/countrySelect'

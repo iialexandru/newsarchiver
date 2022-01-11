@@ -3,16 +3,20 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
 import { useState, FC, useEffect } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-type Section = { section: number }
+interface Section { 
+    section: number;
+    setPosts: Dispatch<SetStateAction<number>>;
+    posts: number;
+}
 
-export const ViewsPerPage: FC<Section> = ({ section }) => {
+export const ViewsPerPage: FC<Section> = ({ section, posts, setPosts }) => {
 
     const router = useRouter()
 
-    const [ posts, setPosts ] = useState(12)
 
     const customSelectColor = createTheme({
         palette: {
