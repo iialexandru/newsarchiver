@@ -231,7 +231,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                 <div>
                     <div className={specStyles.filters_buttons}>
                         <ThemeProvider theme={defaultMaterialTheme}>
-                            <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
+                            <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => { setOpenedFilters(!openedFilters); setOpenedFilter({ order: false, date: false, ppp: false }) }}>FILTERS</WHButton>
                             <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
                         </ThemeProvider>
                     </div>
