@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import { useState, FC } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import countries from '../../utils/NewsComparison/countrySelect'
 
@@ -21,6 +22,18 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
 
     const router = useRouter()
 
+    const customBreakpoints = createTheme({
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 481,
+                md: 768,
+                lg: 1024,
+                xl: 1600
+
+            }
+        }
+    })
 
     const [ selectCountry, setSelectCountry ] = useState("")
 
@@ -46,14 +59,18 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
     }
 
     return (
-        <Stack direction="row" justifyContent="center" spacing={2} alignItems="center">
+        <ThemeProvider theme={customBreakpoints}>
+        <Stack direction={{xs: 'column', sm: 'row'}} justifyContent="center" spacing={2} alignItems="center">
              <FormControl required sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="country">Country</InputLabel>
                 <Select
                     labelId="country"
+                    autoWidth
                     id="country"
                     value={selectCountry}
                     label="Country*"
+                    // size={{xs: 'small', sm: 'medium'}}
+                    // size='small'
                     onChange={e => { setSelectCountry(e.target.value); setSelectNews(""); } }
                 >
                     <MenuItem value=" " disabled>
@@ -81,7 +98,8 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                             }) }
                     </Select>
             </FormControl>
-            </Stack>
+        </Stack>
+        </ThemeProvider>
     )
 }
 

@@ -115,7 +115,7 @@
     display: grid;
     position: relative;
     grid-template-columns: auto;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto;
     justify-items: start;
     gap: .5em;
     width: max-content;
@@ -136,7 +136,6 @@
 .order_news {
     display: flex;
     flex-flow: row nowrap;
-    align-items: space-between;
     gap: 1em;
     margin: .5em 0 0 1em;
 }
@@ -170,6 +169,97 @@
     display: flex;
     align-items: center;
     margin: .5em 0 0 1em;
+}
+
+        
+.filters_buttons {
+    width: 25vw;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.filters_ph_content {
+    position: relative;
+    width: 30%;
+    background-color: rgb(220, 220, 220,);
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: .5em 0;
+    border-radius: 4px;
+
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        line-height: 1.9;
+
+        li {
+            position: relative;
+            margin: 0 auto;
+            width: fit-content;
+            border-top: 2px solid rgba(160, 160, 160, .3);
+            margin-top: 5px;
+            padding: 0 3px;
+            border-radius: 4px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+            button { 
+                border: none;
+                background: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+    }
+
+}
+
+.order_news {
+    justify-content: center;
+    margin-left: 0;
+    padding: .8em 0;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 2px;
+    background-color: rgba(235, 235, 235, .5);
+}
+
+.calendar {
+    flex-flow: column wrap;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 2px;
+    background-color: rgba(235, 235, 235, .5);
+    justify-content: flex-start;
+    padding: .5em 0;
+
+}
+
+
+.submission_buttons {
+    width: 100%;
+    justify-content: center;
+    left: 0;
+    margin-top: 0;
+
+    button { 
+        flex-grow: 0;
+    }
+}
+
+.ppp_select {
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 2px;
+    background-color: rgba(235, 235, 235, .5);
+    transition: width 5s ease-in;
+    padding: .5em 0;
 }
 
 
@@ -217,12 +307,95 @@
     }
     
     .filters_buttons {
-        width: 280px;
+        width: 75vw;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    
+    .filters_ph_content {
+        position: relative;
+        width: 80%;
+        max-width: 70%;
+        background-color: rgb(220, 220, 220,);
+        margin: 0 auto;
+        margin-top: 10px;
+        padding: .5em 0;
+        border-radius: 4px;
+
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            line-height: 1.9;
+
+            li {
+                position: relative;
+                margin: 0 auto;
+                width: fit-content;
+                border-top: 2px solid rgba(160, 160, 160, .3);
+                margin-top: 5px;
+                padding: 0 3px;
+                border-radius: 4px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+
+                button { 
+                    border: none;
+                    background: none;
+                }
+
+            }
+
+        }
+
     }
 
-    .filters_container {
-        width: 280px;
+    .order_news {
+        justify-content: center;
+        margin-left: 0;
+        padding: .8em 0;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-color: rgb(230, 230, 230);
     }
+
+    .calendar {
+        flex-flow: column wrap;
+        width: 90%;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-color: rgb(230, 230, 230);
+        justify-content: flex-start;
+        padding: .5em 0;
+
+        div:nth-child(0n + 1) { 
+            width: 80% !important;
+        }
+    }
+
+    
+    .submission_buttons {
+        width: 100%;
+        justify-content: center;
+        left: 0;
+        margin-top: 0;
+
+        button { 
+            flex-grow: 0;
+        }
+    }
+
+    .ppp_select {
+        justify-content: center;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-color: rgb(230, 230, 230);
+        transition: width 5s ease-in;
+        padding: .5em 0;
+    }
+
 }
 
 //Phone Landscape
@@ -265,13 +438,97 @@
     .date_creation {
         text-align: center;
     }
-
+        
     .filters_buttons {
-        width: 300px;
+        width: 45vw;
+        margin: 0 auto;
+        margin-top: 20px;
     }
-    .filters_container {
-        width: 300px;
+    
+    .filters_ph_content {
+        position: relative;
+        width: 50%;
+        background-color: rgb(220, 220, 220,);
+        margin: 0 auto;
+        margin-top: 10px;
+        padding: .5em 0;
+        border-radius: 4px;
+
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            line-height: 1.9;
+
+            li {
+                position: relative;
+                margin: 0 auto;
+                width: fit-content;
+                border-top: 2px solid rgba(160, 160, 160, .3);
+                margin-top: 5px;
+                padding: 0 3px;
+                border-radius: 4px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+
+                button { 
+                    border: none;
+                    background: none;
+                }
+
+            }
+
+        }
+
     }
+
+    .order_news {
+        justify-content: center;
+        margin-left: 0;
+        padding: .8em 0;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-color: rgba(235, 235, 235, .5);
+    }
+
+    .calendar {
+        flex-flow: column wrap;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-color: rgba(235, 235, 235, .5);
+        justify-content: flex-start;
+        padding: .5em 0;
+
+        div:nth-child(0n + 1) { 
+            width: 80% !important;
+        }
+
+    }
+
+    
+    .submission_buttons {
+        width: 100%;
+        justify-content: center;
+        left: 0;
+        margin-top: 0;
+
+        button { 
+            flex-grow: 0;
+        }
+    }
+
+    .ppp_select {
+        justify-content: center;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-color: rgba(235, 235, 235, .5);
+        transition: width 5s ease-in;
+        padding: .5em 0;
+    }
+
 }
 
 //Tablet Portrait & Landscape
@@ -302,14 +559,7 @@
     }
   }
 
-  .filters_buttons {
-    width: 340px;
-  }
-
-  .filters_container {
-    width: 340px;
-  }
-
+  
 }
 
 //Desktop
@@ -320,16 +570,18 @@
 //Large Desktop
 @media screen and (min-width: 1500px) {
     .all_news_container {
-        margin: -2vh 24vw 0 24vw;
-    }
-    .filters_buttons {
-        width: 16vw;
+        margin: 3vh 24vw 0 24vw;
     }
     .filters_container {
-        position: absolute;
+        position: relative;
         width: 16vw;
     }   
-    .filter_but_cont {
-        position: relative;
+
+    .filters_buttons {
+        width: 15vw;
+    }
+
+    .filters_ph_content {
+        width: 18vw;
     }
 }

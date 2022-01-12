@@ -29,6 +29,8 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 
 interface Data {
     allPage: {[
@@ -56,6 +58,16 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                 main: '#5B554F'
             }
         },
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 481,
+                md: 768,
+                lg: 1024,
+                xl: 1600
+
+            }
+        }
     });
 
     const filterButtonsTheme = createTheme({
@@ -77,22 +89,23 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
     })
 
     const customBreakpoints = createTheme({
-        // breakpoints: {
-        //     values: {
-        //         xs: 0,
-        //         sm: 481,
-        //         md: 768,
-        //         lg: 1024,
-        //         xl: 1600
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 481,
+                md: 768,
+                lg: 1024,
+                xl: 1600
 
-        //     }
-        // }
+            }
+        }
     })
 
     const router = useRouter()
 
     const [ value, setValue ] = useState<Date | null>(null)
     const [ openedFilters, setOpenedFilters ] = useState(false)
+    const [ openedFilter, setOpenedFilter ] = useState({ order: false, date: false, ppp: false})
 
 
     const[ arrCurBtn, setArrCurBtn] = useState<any[]>([])
@@ -215,77 +228,151 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     return (
         <>
-        <div className={styles.filter_but_cont}>
-            <ThemeProvider theme={customBreakpoints}>
-            <div className={specStyles.filters_buttons}>
-                <ThemeProvider theme={defaultMaterialTheme}>
-                    <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
-                    <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
-                </ThemeProvider>
-            </div>
-            {openedFilters &&
-                <div className={specStyles.filters_container}>
-                    <div className={specStyles.order_news}>
-                            <label>Date added: </label>
-                                <ThemeProvider theme={filterButtonsTheme}>
-                                    <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
-                                    <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
-                                </ThemeProvider>
-                    </div>
-                    
-
-                    <div>
-                        <div className={specStyles.calendar}>
-                            <label htmlFor="calendar">Specific date:</label>
-                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                        <DatePicker
-                                            label="DATE"
-                                            value={value}
-                                            onChange={(newValue) => {
-                                            setValue(newValue);
-                                            }}
-                                            maxDate={new Date()}
-                                            minDate={new Date(2021, 11, 28)}
-                                            renderInput={(params) => <TextField {...params} />}
-                                        />
-                                        </LocalizationProvider>
+        {/* { width > 7670 ? 
+            <div className={styles.filter_but_cont}>
+                <ThemeProvider theme={customBreakpoints}>
+                <div className={specStyles.filters_buttons}>
+                    <ThemeProvider theme={defaultMaterialTheme}>
+                        <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
+                        <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
+                    </ThemeProvider>
+                </div>
+                {openedFilters &&
+                    <div className={specStyles.filters_container}>
+                        <div className={specStyles.order_news}>
+                                <label>Order of news:</label>
+                                    <ThemeProvider theme={filterButtonsTheme}>
+                                        <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
+                                        <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
+                                    </ThemeProvider>
                         </div>
-                                    <div className={specStyles.submission_buttons}>
+                        
+
+                        <div>
+                            <div className={specStyles.calendar}>
+                                <label htmlFor="calendar">Specific date:</label>
+                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                            <DatePicker
+                                                label="DATE"
+                                                value={value}
+                                                onChange={(newValue) => {
+                                                setValue(newValue);
+                                                }}
+                                                maxDate={new Date()}
+                                                minDate={new Date(2021, 11, 28)}
+                                                renderInput={(params) => <TextField {...params} />}
+                                            />
+                                            </LocalizationProvider>
+                            </div>
+                                        <div className={specStyles.submission_buttons}>
+                                            <ThemeProvider theme={filterButtonsTheme}>
+                                                    <WHButton size='small' variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
+                                                    <WHButton size='small' variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                                            </ThemeProvider>
+                                        </div>
+                        </div>
+
+
+                        <div className={specStyles.ppp_select}>
+                            <label htmlFor="postsperpage">Posts per page:</label>
+                            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                <ThemeProvider theme={customSelectColor}>
+                                    <Select
+                                    labelId="posts-per-page-selection"
+                                    id="posts-per-page"
+                                    value={posts}
+                                    onChange={handleChange}
+                                    label="Posts"
+                                    >
+                                        <MenuItem value={12}>12</MenuItem>
+                                        <MenuItem value={15}>15</MenuItem>
+                                        <MenuItem value={18}>18</MenuItem>
+                                        <MenuItem value={21}>21</MenuItem>
+                                        <MenuItem value={24}>24</MenuItem>
+                                        <MenuItem value={27}>27</MenuItem>
+                                    </Select>
+                                </ThemeProvider>
+                            </FormControl>
+                        </div>
+
+
+                    </div>
+                    }
+                    </ThemeProvider>
+                </div> */}
+                {/* : */}
+                <div>
+                    <div className={specStyles.filters_buttons}>
+                        <ThemeProvider theme={defaultMaterialTheme}>
+                            <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
+                            <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
+                        </ThemeProvider>
+                    </div>
+                    {openedFilters && 
+                        <div className={specStyles.filters_ph_content}>
+                            <ul>
+                                <li><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                {openedFilter.order && 
+                                    <div className={specStyles.order_news}>
                                         <ThemeProvider theme={filterButtonsTheme}>
-                                                <WHButton type="button" sx={{ height: { xs: '2.5em' }, fontSize: { xs: 13, md: 'inherit'} }} variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
-                                                <WHButton type="button" sx={{ height: { xs: '2.5em' }, fontSize: { xs: 13, md: 'inherit'} }} variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                                            <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
+                                            <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
                                         </ThemeProvider>
                                     </div>
-                    </div>
-
-
-                    <div className={specStyles.ppp_select}>
-                        <label htmlFor="postsperpage">Posts per page:</label>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <ThemeProvider theme={customSelectColor}>
-                                <Select
-                                labelId="posts-per-page-selection"
-                                id="posts-per-page"
-                                value={posts}
-                                onChange={handleChange}
-                                label="Posts"
-                                >
-                                    <MenuItem value={12}>12</MenuItem>
-                                    <MenuItem value={15}>15</MenuItem>
-                                    <MenuItem value={18}>18</MenuItem>
-                                    <MenuItem value={21}>21</MenuItem>
-                                    <MenuItem value={24}>24</MenuItem>
-                                    <MenuItem value={27}>27</MenuItem>
-                                </Select>
-                            </ThemeProvider>
-                        </FormControl>
-                    </div>
-
-
+                                }
+                                <li><button onClick={e => { setOpenedFilter({order: false, date: !openedFilter.date, ppp: false}); } }>DATE ADDED{!openedFilter.date ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                {openedFilter.date && 
+                                <>
+                                    <div className={specStyles.calendar}>
+                                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                                    <DatePicker
+                                                        label="DATE"
+                                                        value={value}
+                                                        onChange={(newValue) => {
+                                                        setValue(newValue);
+                                                        }}
+                                                        maxDate={new Date()}
+                                                        minDate={new Date(2021, 11, 28)}
+                                                        renderInput={(params) => <TextField {...params} />}
+                                                    />
+                                                    </LocalizationProvider>
+                                                    <div className={specStyles.submission_buttons}>
+                                                        <ThemeProvider theme={filterButtonsTheme}>
+                                                                <WHButton size='small' variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
+                                                                <WHButton size='small' variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                                                        </ThemeProvider>
+                                                    </div>
+                                    </div>
+                                </>
+                                }
+                                <li><button onClick={e => { setOpenedFilter({order: false, date: false, ppp: !openedFilter.ppp}); } }>POSTS PER PAGE{!openedFilter.ppp ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                {openedFilter.ppp && 
+                                    <div className={specStyles.ppp_select}>
+                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                            <ThemeProvider theme={customSelectColor}>
+                                                <Select
+                                                labelId="posts-per-page-selection"
+                                                id="posts-per-page"
+                                                value={posts}
+                                                onChange={handleChange}
+                                                label="Posts"
+                                                >
+                                                    <MenuItem value={12}>12</MenuItem>
+                                                    <MenuItem value={15}>15</MenuItem>
+                                                    <MenuItem value={18}>18</MenuItem>
+                                                    <MenuItem value={21}>21</MenuItem>
+                                                    <MenuItem value={24}>24</MenuItem>
+                                                    <MenuItem value={27}>27</MenuItem>
+                                                </Select>
+                                            </ThemeProvider>
+                                        </FormControl>
+                                    </div>
+                                }
+                            </ul>
+                        </div>
+                    }
                 </div>
-                }
-                </ThemeProvider>
-            </div>
+        {/* } */}
             <div className={specStyles.all_news_container}>
                 {news.allPage.map((article: any, index: number) => {
                     return(
