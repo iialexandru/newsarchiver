@@ -228,79 +228,6 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     return (
         <>
-        {/* { width > 7670 ? 
-            <div className={styles.filter_but_cont}>
-                <ThemeProvider theme={customBreakpoints}>
-                <div className={specStyles.filters_buttons}>
-                    <ThemeProvider theme={defaultMaterialTheme}>
-                        <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => setOpenedFilters(!openedFilters)}>FILTERS</WHButton>
-                        <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
-                    </ThemeProvider>
-                </div>
-                {openedFilters &&
-                    <div className={specStyles.filters_container}>
-                        <div className={specStyles.order_news}>
-                                <label>Order of news:</label>
-                                    <ThemeProvider theme={filterButtonsTheme}>
-                                        <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
-                                        <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
-                                    </ThemeProvider>
-                        </div>
-                        
-
-                        <div>
-                            <div className={specStyles.calendar}>
-                                <label htmlFor="calendar">Specific date:</label>
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                            <DatePicker
-                                                label="DATE"
-                                                value={value}
-                                                onChange={(newValue) => {
-                                                setValue(newValue);
-                                                }}
-                                                maxDate={new Date()}
-                                                minDate={new Date(2021, 11, 28)}
-                                                renderInput={(params) => <TextField {...params} />}
-                                            />
-                                            </LocalizationProvider>
-                            </div>
-                                        <div className={specStyles.submission_buttons}>
-                                            <ThemeProvider theme={filterButtonsTheme}>
-                                                    <WHButton size='small' variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
-                                                    <WHButton size='small' variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
-                                            </ThemeProvider>
-                                        </div>
-                        </div>
-
-
-                        <div className={specStyles.ppp_select}>
-                            <label htmlFor="postsperpage">Posts per page:</label>
-                            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                                <ThemeProvider theme={customSelectColor}>
-                                    <Select
-                                    labelId="posts-per-page-selection"
-                                    id="posts-per-page"
-                                    value={posts}
-                                    onChange={handleChange}
-                                    label="Posts"
-                                    >
-                                        <MenuItem value={12}>12</MenuItem>
-                                        <MenuItem value={15}>15</MenuItem>
-                                        <MenuItem value={18}>18</MenuItem>
-                                        <MenuItem value={21}>21</MenuItem>
-                                        <MenuItem value={24}>24</MenuItem>
-                                        <MenuItem value={27}>27</MenuItem>
-                                    </Select>
-                                </ThemeProvider>
-                            </FormControl>
-                        </div>
-
-
-                    </div>
-                    }
-                    </ThemeProvider>
-                </div> */}
-                {/* : */}
                 <div>
                     <div className={specStyles.filters_buttons}>
                         <ThemeProvider theme={defaultMaterialTheme}>
@@ -372,7 +299,6 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                         </div>
                     }
                 </div>
-        {/* } */}
             <div className={specStyles.all_news_container}>
                 {news.allPage.map((article: any, index: number) => {
                     return(

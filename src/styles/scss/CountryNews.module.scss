@@ -101,86 +101,19 @@
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
-    width: 32vw;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 20px;
     gap: .2em;
-    margin-top: 2em;
-    margin-left: 1em;
 
     button {
         flex: 1;
     }
 }
 
-.filters_container {
-    display: grid;
-    position: relative;
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto;
-    justify-items: start;
-    gap: .5em;
-    width: max-content;
-    height: auto;
-    margin-top: .5em;
-    margin-left: 1em;
-    padding-right: 1em;
-    background-color: rgba(240, 240, 240, 1);
-    box-shadow: 4px 2px 8px rgba(210, 210, 210, 1);
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-
-    label { 
-        color: rgb(100, 100, 100);
-    }
-}
-
-.order_news {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 1em;
-    margin: .5em 0 0 1em;
-}
-
-.calendar {
-    position: relative;
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 1em;
-    align-items: center;
-    margin: .5em 0 0 1em;
-}
-
-.submission_buttons {
-    position: relative;
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 2em;
-    width: 50%;
-    left: 42%;
-    justify-content: flex-end;
-    margin-top: .3em;
-    flex-shrink: 2;
-
-    button { 
-        flex: 1;
-    }
-}
-
-.ppp_select {
-    display: flex;
-    align-items: center;
-    margin: .5em 0 0 1em;
-}
-
-        
-.filters_buttons {
-    width: 25vw;
-    margin: 0 auto;
-    margin-top: 20px;
-}
-
 .filters_ph_content {
     position: relative;
-    width: 30%;
+    width: 450px;
     background-color: rgb(220, 220, 220,);
     margin: 0 auto;
     margin-top: 10px;
@@ -207,9 +140,14 @@
             button { 
                 border: none;
                 background: none;
+                transform: scale(1);
+                transition: transform .2s ease-out;
+
 
                 &:hover {
                     cursor: pointer;
+                    transform: scale(1.1);
+                    transition: transform .2s ease-in;
                 }
             }
 
@@ -220,6 +158,9 @@
 }
 
 .order_news {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1em;
     justify-content: center;
     margin-left: 0;
     padding: .8em 0;
@@ -230,8 +171,12 @@
 }
 
 .calendar {
+    position: relative;
+    display: flex;
+    align-items: center;
     flex-flow: column wrap;
     width: 80%;
+    gap: 1em;
     margin: 0 auto;
     border-radius: 2px;
     background-color: rgba(235, 235, 235, .5);
@@ -242,23 +187,23 @@
 
 
 .submission_buttons {
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
     justify-content: center;
-    left: 0;
-    margin-top: 0;
-
-    button { 
-        flex-grow: 0;
-    }
+    gap: 2em;
+    width: 100%; 
 }
 
 .ppp_select {
+    display: flex;
+    align-items: center;
+    margin: .5em 0 0 1em;
     justify-content: center;
     width: 80%;
     margin: 0 auto;
     border-radius: 2px;
     background-color: rgba(235, 235, 235, .5);
-    transition: width 5s ease-in;
     padding: .5em 0;
 }
 
@@ -342,6 +287,10 @@
                 button { 
                     border: none;
                     background: none;
+                    
+                    &:hover {
+                        transform: scale(1);
+                    }
                 }
 
             }
@@ -474,6 +423,10 @@
                 button { 
                     border: none;
                     background: none;
+
+                    &:hover {
+                        transform: scale(1);
+                    }
                 }
 
             }
@@ -532,7 +485,7 @@
 }
 
 //Tablet Portrait & Landscape
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .all_news_container {
     grid-column-end: 2;
     grid-template-columns: auto auto;  
@@ -559,6 +512,21 @@
     }
   }
 
+  .filters_buttons {
+      width: 35%;
+  }
+
+  .filters_ph_content {
+      width: 40%;
+
+      button { 
+          
+        &:hover {
+            transform: scale(1);
+        }
+      }
+  }
+
   
 }
 
@@ -571,17 +539,5 @@
 @media screen and (min-width: 1500px) {
     .all_news_container {
         margin: 3vh 24vw 0 24vw;
-    }
-    .filters_container {
-        position: relative;
-        width: 16vw;
-    }   
-
-    .filters_buttons {
-        width: 15vw;
-    }
-
-    .filters_ph_content {
-        width: 18vw;
     }
 }
