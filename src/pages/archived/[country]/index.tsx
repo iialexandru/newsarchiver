@@ -238,7 +238,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                     {openedFilters && 
                         <div className={specStyles.filters_ph_content}>
                             <ul>
-                                <li><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                <li className={openedFilter.order ? specStyles.bt_ani : ''}><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
                                 {openedFilter.order && 
                                     <div className={specStyles.order_news}>
                                         <ThemeProvider theme={filterButtonsTheme}>
