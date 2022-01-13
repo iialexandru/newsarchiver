@@ -58,7 +58,7 @@ const ArchivedNews: NextPage = () => {
                 </div>
 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640262682/NewsArchiver/flags/france-re_qsrpdn.png" name="France"/>
+                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1642082820/NewsArchiver/flags/frenchflagframed_nf8kyi.svg" name="France"/>
                     <div className={styles.list_all_channels}>
                         <ul>
                             {newsFrance.map((name, index) => {

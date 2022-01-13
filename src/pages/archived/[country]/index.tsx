@@ -238,7 +238,8 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                     {openedFilters && 
                         <div className={specStyles.filters_ph_content}>
                             <ul>
-                                <li className={openedFilter.order ? specStyles.bt_ani : ''}><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                <div></div>
                                 {openedFilter.order && 
                                     <div className={specStyles.order_news}>
                                         <ThemeProvider theme={filterButtonsTheme}>
@@ -247,7 +248,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                                         </ThemeProvider>
                                     </div>
                                 }
-                                <li><button onClick={e => { setOpenedFilter({order: false, date: !openedFilter.date, ppp: false}); } }>DATE ADDED{!openedFilter.date ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: false, date: !openedFilter.date, ppp: false}); } }>DATE ADDED{!openedFilter.date ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
                                 {openedFilter.date && 
                                 <>
                                     <div className={specStyles.calendar}>
@@ -272,7 +273,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                                     </div>
                                 </>
                                 }
-                                <li><button onClick={e => { setOpenedFilter({order: false, date: false, ppp: !openedFilter.ppp}); } }>POSTS PER PAGE{!openedFilter.ppp ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                                <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: false, date: false, ppp: !openedFilter.ppp}); } }>POSTS PER PAGE{!openedFilter.ppp ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
                                 {openedFilter.ppp && 
                                     <div className={specStyles.ppp_select}>
                                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
