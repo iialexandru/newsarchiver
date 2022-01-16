@@ -306,7 +306,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                     <Link key={index} href={article.linkURL} >
                         <a key={index + 1} target="_blank" rel="noreferrer" className={`${specStyles.item_flex}`}>
                                 <figure key={index + 1} className={specStyles.image}>
-                                    <Image key={index} src={article.image} alt='article-title' width={455} height={250} priority/>
+                                    <Image key={index} src={article.image !== ' ' ? article.image : '/'} alt='An image was not provided by the news site.' width={455} height={250} priority/>
                                     <figcaption key={index + 1} className={specStyles.date_creation}>{formatDate(article.date)}</figcaption>
                                 </figure>
                                 <h5 key={index} className={specStyles.headline}>{article.title}</h5>
@@ -345,7 +345,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
     const { news, page, year, month, day, sort, ppp } = query;
 
-    const variants = [ 'digi24', 'antena3' ]
+    const variants = [ 'digi24', 'antena3', 'dw', 'welt', 'france24', 'lemonde' ]
  
     if(!variants.includes(news.toString()) && news)
         return {

@@ -45,7 +45,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, PAGE, URL }) => {
                                         <Link key={index} href={article.linkURL}>
                                             <a key={index + 1} target="_blank" href={article.linkURL} className={styles.item_flex} rel="noreferrer">
                                                     <figure key={index + 1} className={styles.image}>
-                                                        <Image key={index} src={article.image} alt='article-title' width={500} height={330}/>
+                                                        <Image key={index} src={article.image} alt='An image was not provided by the news site' width={500} height={330}/>
                                                         <figcaption className={styles.date_creation}>{formatDate(article.date)}</figcaption>
                                                     </figure>
                                                     <h5 key={index} className={styles.headline}>{article.title}</h5>
