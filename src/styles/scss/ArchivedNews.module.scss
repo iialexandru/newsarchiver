@@ -1,16 +1,68 @@
-.flexbox {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+.swiper_wrapper {
+    margin: 0 auto;
+    margin-top: 6vh; 
+    width: 80vw;
+    position: relative;
+    
+    img { 
+        border-radius: 5px;
+    }
+}
+
+.swiper_slide_hover {
+    transition: all .25s ease-out;
+
+    &:hover {
+        transform: scale(1.1);
+        transition: transform .25s ease-in;
+    }   
+
+    img { 
+        filter: none;
+        transition: filter .25s;
+
+        &:hover {
+            filter: opacity(.6) grayscale(70%);
+            transition: filter .25s;
+            cursor: pointer;
+        }
+    }
+}
+
+.swiper_inactive_slider {
+    transform: scale(.7);
+    transition: transform .25s ease-in-out;
+}
+
+.slide_abimg {
+    position: relative;
+    background-color: gray;
+
+    figcaption span:first-child {
+        transition: all .25s;
+
+        &:hover {
+            color: #a45ee5 !important;
+            transition: color .25s;
+        }
+    }
+}
+
+.grid_container {
+    display: grid;
     gap: 10px;
-    margin-top: 2em;
-    margin-left: 1em;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    column-gap: 10vw;
+    row-gap: 4vw;
+    margin: 2em 0 2em 0;
 }
 
 .mini_flexbox {
     display: flex;
     flex-flow: row nowrap;
     align-items: center; 
+    margin-bottom: .3em;
 
     a { 
         cursor: pointer !important;

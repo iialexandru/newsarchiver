@@ -2,6 +2,8 @@ import '../styles/scss/globals.scss'
 import Nav from '../components/Nav'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import '../styles/scss/SwiperCustom.scss'
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

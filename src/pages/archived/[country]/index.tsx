@@ -345,7 +345,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
     const { news, page, year, month, day, sort, ppp } = query;
 
-    const variants = [ 'digi24', 'antena3', 'dw', 'welt', 'france24', 'lemonde' ]
+    const variants = [ 'digi24', 'antena3', 'dw', 'welt', 'france24', 'lemonde', '9news', 'sbs', 'expats', 'praguemorning', 'lenews', 'swissinfo' ]
  
     if(!variants.includes(news.toString()) && news)
         return {

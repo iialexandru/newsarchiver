@@ -1,0 +1,19 @@
+.swiper-button-next {
+    opacity: .5;
+    transition: opacity .15s;
+
+    &:hover {
+        opacity: 1;
+        transition: opacity .15s;
+    }
+}
+
+.swiper-button-prev {
+    opacity: .5;
+    transition: opacity .15s;
+
+    &:hover {
+        opacity: 1;
+        transition: opacity .15s;
+    }
+}
