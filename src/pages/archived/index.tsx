@@ -79,19 +79,18 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                     {all_latest_news.map((post, index) => {
                         return ( 
                             <SwiperSlide key={index} className={`${styles.slide_abimg} ${swiperIndex === index ? styles.swiper_slide_hover : styles.swiper_inactive_slider}`}> 
-                                <figure>
-                                <Image key={index} alt="An image was not provided by the news site" src={post.allPage[0].image} width={550} height={400}/>
-                                <span style={{ position: "absolute", top: '40%', left:'37%',}}>Check out the article</span>
-                                <figcaption>
-                                    <Link href={post.allPage[0].linkURL.toString()}><a target="_blank"><span style={{position: 'absolute', fontSize: '.6rem', color: 'rgb(190, 190, 190)', cursor: 'pointer'}}>{post.allPage[0].channel}</span></a></Link>
-                                    <p style={{margin: 0, textAlign: 'right', fontSize: '.6rem', color: 'rgb(190, 190, 190)', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
-                                    <h4 style={{margin: 0, textAlign: 'center', cursor: 'default'}}>{post.allPage[0].title}</h4>
-                                </figcaption>
+                                <figure key={index}>
+                                    <Image key={index} alt="An image was not provided by the news site" src={post.allPage[0].image} width={550} height={400}/>
+                                    <span key={index + 1} style={{ position: "absolute", top: '40%', left:'37%',}}>Check out the article</span>
+                                    <figcaption key={index + 2}>
+                                        <Link key={index} href={post.allPage[0].linkURL.toString()}><a target="_blank"><span style={{position: 'absolute', fontSize: '.6rem', color: 'rgb(190, 190, 190)', cursor: 'pointer'}}>{post.allPage[0].channel}</span></a></Link>
+                                        <p key={index + 1} style={{margin: 0, textAlign: 'right', fontSize: '.6rem', color: 'rgb(190, 190, 190)', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
+                                        <h4 key={index + 1} style={{margin: 0, textAlign: 'center', cursor: 'default'}}>{post.allPage[0].title}</h4>
+                                    </figcaption>
                                 </figure>
                             </SwiperSlide>
                         )
                     })}
-                    {/* ... */}
                 </Swiper>
             </div>
             <div className={styles.grid_container}>
