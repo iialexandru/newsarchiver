@@ -71,6 +71,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
     return (
         <div>
             <div className={styles.swiper_wrapper}>
+                {/* <h1>Latest news</h1> */}
                 <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={2}

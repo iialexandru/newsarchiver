@@ -2,12 +2,27 @@
 
 .swiper_wrapper {
     margin: 0 auto;
-    padding-top: 6vh; 
+    // padding-top: 2vh; 
     width: 100%;
     background-color: rgba(245, 245, 245, 1);
     position: relative;
     overflow: visible !important;
     font-family: 'Libre Baskerville';
+    border-bottom: 5px solid black;
+
+    h1 {
+        width: fit-content;
+        font-family: 'Roboto';
+        font-size: 3rem;
+        margin: 0 auto;
+        margin-top: 10px;
+        cursor: default;
+        text-align: center;
+        // text-decoration: underline;
+        // border-top: 5px solid black;
+        border-bottom: 5px solid black;
+
+    }
     
     
     img { 
@@ -36,10 +51,7 @@ $fill-color: none;
         background-color: $fill-color;
         width: 100%;
         padding-bottom: 10px;
-        // border-left: 2px solid black;
         border-bottom: 2px solid black;
-        // border-right: 2px solid black;
-        // border-top: 2px solid black;
 
 
         span {
@@ -158,14 +170,16 @@ $fill-color: none;
 .grid_container {
     display: grid;
     gap: 10px;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     justify-content: center;
     column-gap: 10vw;
     row-gap: 4vw;
     padding: 2em 0;
-    margin: 2em 0 2em 10vw;
-    width: 80vw;
-    border: 4px dotted #433E3F;
+    margin: 2em 5vw;
+    // border-left: 4px dotted #433E3F;
+    // border-right: 4px dotted #433E3F;
+
+    width: 90vw;
 }
 
 .mini_flexbox {
@@ -214,7 +228,7 @@ $fill-color: none;
 .list_all_channels {
     position: relative;
     background-color: #E4E0DD;
-    width: 30vmax;
+    width: 20vmax;
     height: auto;
     padding: .5em 0;
     margin-left: 1em;
