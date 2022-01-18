@@ -21,7 +21,6 @@
         // text-decoration: underline;
         // border-top: 5px solid black;
         border-bottom: 5px solid black;
-
     }
     
     
@@ -256,6 +255,46 @@ $fill-color: none;
         }
 
     }
+}
+
+.grid_info {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-start: 1;
+    grid-column-end: 1;
+    justify-content: center;
+    gap: 3em;
+    border-top: 5px solid black;
+    padding: 2em 1em;
+    font-family: 'Libre Baskerville';
+}
+
+.heading_secpart {
+    width: fit-content;
+    font-family: 'Roboto';
+    font-size: 3rem;
+    margin: 0;
+    text-indent: 5px;
+    cursor: default;
+}
+
+.text_item {
+    background-color: rgb(210, 210, 210);
+    text-align: justify;
+    text-justify: inter-character;
+    padding-left: 2em;
+    padding-right: 1em;
+
+    h4 {
+        cursor: default;
+    }
+}
+
+.logo_title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 
