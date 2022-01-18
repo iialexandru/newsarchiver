@@ -4,6 +4,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import formatDate from '../../utils/formatDate'
 import chooseSite from '../../utils/chooseSite'
+import { server } from '../../config/index'
 
 import React, { useRef, useState } from 'react'
 import type { NextPage } from 'next'
@@ -141,7 +142,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
 export default ArchivedNews;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-    const url = 'http://localhost:9000/api/news/'
+    const url = `${server}/api/news/`
     const createFetchLink = (id: string) => { return axios.get(`${url}${id}_nc`) }  
     const response = new Array(await createFetchLink('digi24'), await createFetchLink('antena3'), await createFetchLink('france24'), 
                      await createFetchLink('lemonde'), await createFetchLink('dw'), await createFetchLink('welt'), 
