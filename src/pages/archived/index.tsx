@@ -3,16 +3,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import formatDate from '../../utils/formatDate'
+import chooseSite from '../../utils/chooseSite'
 
 import React, { useRef, useState } from 'react'
 import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper'
+import { Navigation, Pagination, Autoplay } from 'swiper'
 
 interface CountryLogo { 
     url: string;
@@ -31,12 +33,13 @@ interface ChildPropsComponent {
 const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
 
     const [ swiperIndex, setSwiperIndex ] = useState(0)
-    console.log(all_latest_news[0].allPage[0].linkURL)
-    
+
+    const router = useRouter()
+        
     const newsRomania: string[] = ['DIGI24', 'Antena3']
     const newsGermany: string[] = ['WELT', 'DW']
     const newsFrance: string[] = ['France24', 'Lemonde']
-    const newsAustralia: string[] = ['9News', 'SBS']
+    const newsAustralia: string[] = ['9News', 'SBS.AU']
     const newsCzRep: string[] = ['Expats', 'PragueMorning']
     const newsSwitzerland: string[] = ['LeNews', 'SwissInfo']
 
@@ -69,23 +72,28 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
         <div>
             <div className={styles.swiper_wrapper}>
                 <Swiper
-                modules={[Navigation, Pagination]}
-                autoplay
+                modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={2}
+                spaceBetween={50}
                 loop={true}
                 navigation
+                autoplay={{ delay: 3000, disableOnInteraction: true }}
                 centeredSlides={true}
                 onSlideChange={(swiper) => setSwiperIndex(swiper.realIndex)}>
                     {all_latest_news.map((post, index) => {
                         return ( 
-                            <SwiperSlide key={index} className={`${styles.slide_abimg} ${swiperIndex === index ? styles.swiper_slide_hover : styles.swiper_inactive_slider}`}> 
+                            <SwiperSlide key={index} className={`${styles.slide_abimg} ${swiperIndex !== index ? styles.swiper_inactive_slider : ''}`}> 
                                 <figure key={index}>
-                                    <Image key={index} alt="An image was not provided by the news site" src={post.allPage[0].image} width={550} height={400}/>
-                                    <span key={index + 1} style={{ position: "absolute", top: '40%', left:'37%',}}>Check out the article</span>
+                                    <div className={swiperIndex === index ? styles.slide_img_but : styles.fill_space}>
+                                        <Image key={index} alt="An image was not provided by the news site" src={post.allPage[0].image ? post.allPage[0].image : '/'} width={550} height={400}/>
+                                        <button key={index + 1}><Link href={post.allPage[0].linkURL}><a target="_blank">Read more</a></Link></button>
+                                    </div>
                                     <figcaption key={index + 2}>
-                                        <Link key={index} href={post.allPage[0].linkURL.toString()}><a target="_blank"><span style={{position: 'absolute', fontSize: '.6rem', color: 'rgb(190, 190, 190)', cursor: 'pointer'}}>{post.allPage[0].channel}</span></a></Link>
-                                        <p key={index + 1} style={{margin: 0, textAlign: 'right', fontSize: '.6rem', color: 'rgb(190, 190, 190)', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
-                                        <h4 key={index + 1} style={{margin: 0, textAlign: 'center', cursor: 'default'}}>{post.allPage[0].title}</h4>
+                                        <div className={styles.wrap_fig_bb}>
+                                            <Link key={index} href={chooseSite(post.allPage[0].channel.toString().toUpperCase())}><a target="_blank"><span style={{position: 'absolute', fontSize: '.6rem', cursor: 'pointer'}}>{post.allPage[0].channel.toUpperCase()}</span></a></Link>
+                                            <p key={index + 1} style={{margin: 0, textAlign: 'right', fontSize: '.6rem', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
+                                        </div>
+                                        <h4 key={index + 1} style={{margin: 0, textAlign: 'center', cursor: 'default', fontSize: 'clamp(.7, 1, 1.3rem)', marginTop: '5px'}}><Link href={post.allPage[0].linkURL}><a target='_blank'>{post.allPage[0].title}</a></Link></h4>
                                     </figcaption>
                                 </figure>
                             </SwiperSlide>

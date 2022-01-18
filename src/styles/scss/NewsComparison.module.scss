@@ -246,7 +246,13 @@
         opacity: .4;
     }
 
+    @keyframes opacity {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
     .image { 
+        animation: opacity 1s 1;
         // background-color: rgb(230, 230, 230);
         img {
             border-radius: 2px !important;

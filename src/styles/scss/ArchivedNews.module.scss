@@ -1,50 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
 .swiper_wrapper {
     margin: 0 auto;
-    margin-top: 6vh; 
-    width: 80vw;
+    padding-top: 6vh; 
+    width: 100%;
+    background-color: rgba(245, 245, 245, 1);
     position: relative;
+    overflow: visible !important;
+    font-family: 'Libre Baskerville';
+    
     
     img { 
-        border-radius: 5px;
-    }
-}
-
-.swiper_slide_hover {
-    transition: all .25s ease-out;
-
-    &:hover {
-        transform: scale(1.1);
-        transition: transform .25s ease-in;
-    }   
-
-    img { 
-        filter: none;
-        transition: filter .25s;
-
-        &:hover {
-            filter: opacity(.6) grayscale(70%);
-            transition: filter .25s;
-            cursor: pointer;
-        }
+        background-color: rgba(150, 150, 150, 1) !important;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        transition: all .25s;
     }
 }
 
 .swiper_inactive_slider {
     transform: scale(.7);
     transition: transform .25s ease-in-out;
+    
+    button {
+        display: none;
+    }
 }
+
+$fill-color: none;
 
 .slide_abimg {
     position: relative;
-    background-color: gray;
+    
+    figcaption {
+        background-color: $fill-color;
+        width: 100%;
+        padding-bottom: 10px;
+        // border-left: 2px solid black;
+        border-bottom: 2px solid black;
+        // border-right: 2px solid black;
+        // border-top: 2px solid black;
 
-    figcaption span:first-child {
-        transition: all .25s;
 
-        &:hover {
-            color: #a45ee5 !important;
-            transition: color .25s;
+        span {
+            transition: all .25s;
+            margin-left: 5px;
+            font-family: sans-serif;
+            
+            &:hover {
+                color: #a45ee5 !important;
+                transition: color .25s;
+            }
         }
+
+        h4 {
+            margin: 0 50px !important;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    p {
+        margin-right: 5px !important;
+        font-family: sans-serif;
+
+    }
+}
+
+.fill_space {
+    background-color: $fill-color;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.slide_img_but {
+    transition: all .25s;
+    background-color: $fill-color;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    button { 
+        position: absolute;
+        opacity: 0;
+        transition: opacity .25s;
+        top: 40%;
+        left: 38%;
+        border: none;
+        background-color: rgba(255, 255, 255, .15);
+        border: 2px solid black;
+        cursor: pointer;
+        font-family: 'Roboto';
+        
+        a {
+            width: 100%;
+            padding: 1em 2em;
+        }
+    }
+
+    &:hover {
+        button {
+            opacity: 1;
+            transition: opacity .25s ease-in;
+            transition: background-color .5s;
+
+            &:hover {
+                transition: all .5s;
+                text-decoration: underline;
+            }
+        }
+        img {
+            transform: scale(1.25);
+            transition: transform .25s ease-in;
+            filter: opacity(.8) grayscale(10%);
+            transition: all .25s;
+            cursor: pointer;
+        }   
+        ~ {
+            figcaption { 
+                div:first-child {
+                    &::after {
+                        transform: scaleX(1);
+                        transform-origin: bottom center;
+                    }
+                }
+
+                h4 {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.wrap_fig_bb {
+    position: relative;
+    padding-bottom: 3px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 50%;
+        margin: 0 auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        // background-color: #B0A084;
+        transform: scaleX(0);
+        transform-origin: bottom center;
+        transition: transform .5s;
     }
 }
 
@@ -55,7 +162,10 @@
     justify-content: center;
     column-gap: 10vw;
     row-gap: 4vw;
-    margin: 2em 0 2em 0;
+    padding: 2em 0;
+    margin: 2em 0 2em 10vw;
+    width: 80vw;
+    border: 4px dotted #433E3F;
 }
 
 .mini_flexbox {
@@ -103,7 +213,7 @@
 
 .list_all_channels {
     position: relative;
-    background-color: rgba(230, 230, 230, 1);
+    background-color: #E4E0DD;
     width: 30vmax;
     height: auto;
     padding: .5em 0;
