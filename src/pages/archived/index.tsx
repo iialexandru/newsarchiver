@@ -90,7 +90,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                                         <button key={index + 1}><Link href={post.allPage[0].linkURL}><a target="_blank">Read more</a></Link></button>
                                     </div>
                                     <figcaption key={index + 2}>
-                                        <div className={styles.wrap_fig_bb}>
+                                        <div key={index} className={styles.wrap_fig_bb}>
                                             <Link key={index} href={chooseSite(post.allPage[0].channel.toString().toUpperCase())}><a target="_blank"><span style={{position: 'absolute', fontSize: '.6rem', cursor: 'pointer'}}>{post.allPage[0].channel.toUpperCase()}</span></a></Link>
                                             <p key={index + 1} style={{margin: 0, textAlign: 'right', fontSize: '.6rem', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
                                         </div>
