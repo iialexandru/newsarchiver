@@ -27,6 +27,8 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
 
     const router = useRouter()
 
+    console.log(latestNews_1)
+
     return (
     <>
         <Head>

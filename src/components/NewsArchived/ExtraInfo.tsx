@@ -14,7 +14,7 @@ const ExtraInfo: FC<ChildPropsComponent> = ({ text }) => {
     return (
         <>
             <p>
-                    {!details ? text.split(' ').slice(0, 20).join(' ') + '...' : text}
+                    {!details ? text.split(' ').slice(0, 21).join(' ') + '...' : text}
             </p>
             <button style={{background: 'none', border: 'none'}} onClick={e => setDetails(!details)}>{!details ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</button>
         </>
