@@ -135,7 +135,7 @@
 
         .list_item_filter {
             position: relative;
-            margin: 0 auto;
+            // margin: 0 auto;
             width: fit-content;
             margin-top: 5px;
             padding: 0 3px;
@@ -143,37 +143,37 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
 
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                height: 2px;
-                background-color: rgba(160, 160, 160, .3);
-                border-radius: 2px;
-            }
+            // &::before {
+            //     content: '';
+            //     position: absolute;
+            //     top: 0;
+            //     left: 0;
+            //     right: 0;
+            //     width: 100%;
+            //     height: 2px;
+            //     background-color: rgba(160, 160, 160, .3);
+            //     border-radius: 2px;
+            // }
             
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                height: 2px;
-                background-color: black;
-                border-radius: 2px;
-                transform: scaleX(0);
-                transform-origin: center;
-                transition: transform .5s ease-in;
-            }
+            // &::after {
+            //     content: '';
+            //     position: absolute;
+            //     top: 0;
+            //     left: 0;
+            //     right: 0;
+            //     width: 100%;
+            //     height: 2px;
+            //     background-color: black;
+            //     border-radius: 2px;
+            //     transform: scaleX(0);
+            //     transform-origin: center;
+            //     transition: transform .5s ease-in;
+            // }
 
-            &:hover::after {
-                content: '';
-                transform: scaleX(1);
-            }
+            // &:hover::after {
+            //     content: '';
+            //     transform: scaleX(1);
+            // }
 
             button { 
                 border: none;
@@ -192,22 +192,6 @@
 
     }
 
-}
-
-.bt_ani {
-    position: relative; 
-
-    &::before {
-        content: 'aaaaaaaaaa';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 20px;
-        background-color: red;   
-        border-radius: 2px;
-    }
 }
 
 .order_news {

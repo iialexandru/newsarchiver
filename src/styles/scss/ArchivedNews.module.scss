@@ -42,6 +42,7 @@
 }
 
 $fill-color: none;
+$link-color: #a45ee5;
 
 .slide_abimg {
     position: relative;
@@ -59,7 +60,7 @@ $fill-color: none;
             font-family: sans-serif;
             
             &:hover {
-                color: #a45ee5 !important;
+                color: $link-color !important;
                 transition: color .25s;
             }
         }
@@ -260,9 +261,10 @@ $fill-color: none;
 .grid_info {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: minmax(1fr, auto);
     grid-column-start: 1;
-    grid-column-end: 1;
+    grid-column-end: 3;
     justify-content: center;
     gap: 3em;
     border-top: 5px solid black;
@@ -279,15 +281,24 @@ $fill-color: none;
     cursor: default;
 }
 
+@keyframes max-content_anim {
+    from { height: 200px; }
+    to { height:400px }
+}
 .text_item {
     background-color: rgb(210, 210, 210);
     text-align: justify;
     text-justify: inter-character;
     padding-left: 2em;
     padding-right: 1em;
+    transition: all .5s;
 
     h4 {
-        cursor: default;
+        cursor: pointer;
+
+        &:hover {
+            color: $link-color;
+        }
     }
 }
 
@@ -295,6 +306,10 @@ $fill-color: none;
     display: flex;
     align-items: center;
     gap: 5px;
+
+    img {
+        border-radius: 50% !important;
+    }
 }
 
 

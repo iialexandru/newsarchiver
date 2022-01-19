@@ -11,13 +11,13 @@ interface ChildPropsComponent {
 const ExtraInfo: FC<ChildPropsComponent> = ({ text }) => {
 
     const [ details, setDetails ] = useState(false)
+
     return (
-        <>
-            <p>
-                    {!details ? text.split(' ').slice(0, 21).join(' ') + '...' : text}
-            </p>
+        
+        <div style={{borderTop: '1px solid black'}}>
+            <p>{!details ? text.split(' ').slice(0, 21).join(' ') + '...' : text}</p>
             <button style={{background: 'none', border: 'none'}} onClick={e => setDetails(!details)}>{!details ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</button>
-        </>
+        </div>
     )
 }
 

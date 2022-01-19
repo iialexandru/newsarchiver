@@ -82,7 +82,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
         <div className={styles.text_item}>
             <div className={styles.logo_title}>
                 <Image src={url} width={30} height={30} />
-                <h4>{name}</h4>
+                <Link href={chooseSite(name)}><a target="_blank"><h4>{name}</h4></a></Link>
             </div>
             <ExtraInfo text={text}/>
         </div>
