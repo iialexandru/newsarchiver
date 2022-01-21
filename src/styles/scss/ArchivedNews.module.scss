@@ -1,28 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
 .swiper_wrapper {
-    margin: 0 auto;
-    // padding-top: 2vh; 
+    // margin: 0 auto;
     width: 100%;
     background-color: rgba(245, 245, 245, 1);
     position: relative;
     overflow: visible !important;
     font-family: 'Libre Baskerville';
     border-bottom: 5px solid black;
-
-    h1 {
-        width: fit-content;
-        font-family: 'Roboto';
-        font-size: 3rem;
-        margin: 0 auto;
-        margin-top: 10px;
-        cursor: default;
-        text-align: center;
-        // text-decoration: underline;
-        // border-top: 5px solid black;
-        border-bottom: 5px solid black;
-    }
-    
     
     img { 
         background-color: rgba(150, 150, 150, 1) !important;
@@ -66,7 +51,6 @@ $link-color: #a45ee5;
         }
 
         h4 {
-            margin: 0 50px !important;
             &:hover {
                 text-decoration: underline;
             }
@@ -78,13 +62,6 @@ $link-color: #a45ee5;
         font-family: sans-serif;
 
     }
-}
-
-.fill_space {
-    background-color: $fill-color;
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 }
 
 .slide_img_but {
@@ -150,6 +127,7 @@ $link-color: #a45ee5;
 .wrap_fig_bb {
     position: relative;
     padding-bottom: 3px;
+    font-size: .6rem;
 
     &::after {
         content: '';
@@ -160,7 +138,6 @@ $link-color: #a45ee5;
         bottom: 0;
         left: 0;
         right: 0;
-        // background-color: #B0A084;
         transform: scaleX(0);
         transform-origin: bottom center;
         transition: transform .5s;
@@ -176,9 +153,6 @@ $link-color: #a45ee5;
     row-gap: 4vw;
     padding: 2em 0;
     margin: 2em 5vw;
-    // border-left: 4px dotted #433E3F;
-    // border-right: 4px dotted #433E3F;
-
     width: 90vw;
 }
 
@@ -281,10 +255,6 @@ $link-color: #a45ee5;
     cursor: default;
 }
 
-@keyframes max-content_anim {
-    from { height: 200px; }
-    to { height:400px }
-}
 .text_item {
     background-color: rgb(210, 210, 210);
     text-align: justify;
@@ -315,12 +285,151 @@ $link-color: #a45ee5;
 
 //Phone Portrait & Landscape
 @media screen and (min-width: 0px) and (max-width: 767px) {
+    .slide_abimg {
+        figcaption h4 {
+            font-size: .65rem;
+        }
+    }
+
+    .slide_img_but {
+        button {
+            display: none;
+        }
+
+        &:hover {
+            img {
+                transform: none;
+                filter: none;
+                transition: none;
+            }   
+            ~ {
+                figcaption { 
+                    div:first-child {
+                        &::after {
+                            transform: none;
+                        }
+                    }
     
+                    h4 {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .wrap_fig_bb {
+        font-size: .45rem !important;
+    }
+
+    .grid_container {
+        grid-template-columns: auto;
+        margin: 0;
+        margin-left: .5em;
+    }
+
+    .list_all_channels {
+        width: 35vmax;
+            ul { 
+                li { 
+                    transform: none;
+                    transition: none;
+        
+                    &:hover {
+                        transform: none;
+                        transition: none
+                    }
+                }
+        
+            }
+    }
+
+    
+    .grid_info {
+        grid-template-columns: auto;
+        grid-column-end: 1;
+        padding-bottom: .5em;
+    }
+
+    .text_item {
+        font-size: .7rem;
+    }
+    
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .grid_container {
+        grid-template-columns: auto auto;
+        margin: 0;
+        margin-left: .5em;
+    }
+
+    .grid_info {
+        grid-template-columns: auto auto;
+        grid-column-end: 1;
+        padding-bottom: .5em;
+    }
+
+    .text_item {
+        font-size: .7rem;
+    }
+
 }
 
 //Tablet Portrait & Landscape
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  
+    .slide_abimg {
+        figcaption h4 {
+            font-size: .8rem;
+        }
+    }
+
+    .list_all_channels {
+        ul { 
+            li { 
+                transform: none;
+                transition: none;
+    
+                &:hover {
+                    transform: none;
+                    transition: none
+                }
+            }
+    
+        }
+    }
+
+    .slide_img_but {
+        button {
+            display: none;
+        }
+
+        &:hover {
+            img {
+                transform: none;
+                filter: none;
+                transition: none;
+            }   
+            ~ {
+                figcaption { 
+                    div:first-child {
+                        &::after {
+                            transform: none;
+                        }
+                    }
+    
+                    h4 {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .text_item {
+        font-size: .55rem;
+    }
+
 }
 
 //Tablet Portrait
@@ -339,6 +448,25 @@ $link-color: #a45ee5;
 }
 
 //Large Desktop
-@media screen and (min-width: 1824px) {
-  
+@media screen and (min-width: 1600px) {
+    .grid_info {
+        padding: 2em 10vw;
+    }
+
+    .text_item {
+        font-size: 1.2rem;
+    }
+
+    .list_all_channels {
+        width: 13   vmax;
+
+    }
+}
+
+@media screen and (min-width: 1850px) {
+    .grid_info {
+        padding: 2em 15vw;
+    }
+
+
 }

@@ -108,7 +108,7 @@
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
-    width: 350px;
+    width: 280px;
     margin-top: 20px;
     margin-left: 20px;
     gap: .2em;
@@ -118,74 +118,35 @@
     }
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
 .filters_ph_content {
     position: relative;
-    width: 350px;
-    background-color: rgb(220, 220, 220,);
+    width: 280px;
+    background-color: #E6E8E6;
+    border: .5px solid black;
     margin-top: 10px;
     margin-left: 20px;
-    padding: .5em 0;
+    // padding-bottom: .1em;
     border-radius: 4px;
-
+    text-align: center;
+    font-family: 'Roboto';
 
     ul {
         list-style-type: none;
         padding: 0;
-        line-height: 1.9;
+        line-height: 1.9;    
 
         .list_item_filter {
             position: relative;
-            // margin: 0 auto;
-            width: fit-content;
+            width: 100%;
             margin-top: 5px;
-            padding: 0 3px;
-            border-radius: 4px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-
-            // &::before {
-            //     content: '';
-            //     position: absolute;
-            //     top: 0;
-            //     left: 0;
-            //     right: 0;
-            //     width: 100%;
-            //     height: 2px;
-            //     background-color: rgba(160, 160, 160, .3);
-            //     border-radius: 2px;
-            // }
-            
-            // &::after {
-            //     content: '';
-            //     position: absolute;
-            //     top: 0;
-            //     left: 0;
-            //     right: 0;
-            //     width: 100%;
-            //     height: 2px;
-            //     background-color: black;
-            //     border-radius: 2px;
-            //     transform: scaleX(0);
-            //     transform-origin: center;
-            //     transition: transform .5s ease-in;
-            // }
-
-            // &:hover::after {
-            //     content: '';
-            //     transform: scaleX(1);
-            // }
-
+        
             button { 
                 border: none;
                 background: none;
-                transform: scale(1);
-                transition: transform .2s ease-out;
-
-
-                &:hover {
-                    cursor: pointer;
-                    transition: transform .2s ease-in;
-                }
+                font-family: 'Roboto';
+                cursor: pointer;
             }
 
         }
@@ -201,10 +162,13 @@
     justify-content: center;
     margin-left: 0;
     padding: .8em 0;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
-    border-radius: 2px;
     background-color: rgba(235, 235, 235, .5);
+    border-radius: 2px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+
 }
 
 .calendar {
@@ -212,14 +176,20 @@
     display: flex;
     align-items: center;
     flex-flow: column wrap;
-    width: 80%;
+    width: 100%;
     gap: 1em;
     margin: 0 auto;
     border-radius: 2px;
     background-color: rgba(235, 235, 235, .5);
     justify-content: flex-start;
     padding: .5em 0;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 
+    div {
+        width: 200px;
+        // margin: 0 auto;
+    }
 }
 
 
@@ -237,11 +207,13 @@
     align-items: center;
     margin: .5em 0 0 1em;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     border-radius: 2px;
-    background-color: rgba(235, 235, 235, .5);
+    // background-color: rgba(235, 235, 235, .5);
     padding: .5em 0;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 }
 
 
