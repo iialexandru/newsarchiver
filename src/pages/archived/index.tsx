@@ -109,7 +109,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                             <SwiperSlide key={index} className={`${styles.slide_abimg} ${swiperIndex !== index ? styles.swiper_inactive_slider : ''}`}> 
                                 <figure key={index}>
                                     <div className={swiperIndex === index ? styles.slide_img_but : ''}>
-                                        <Image key={index} alt="An image was not provided by the news site" src={(post.allPage[0].image && post.allPage[0].image !== ' ') ? post.allPage[0].image : '/'} width={550} height={400} />
+                                        <Image key={index} alt="An image was not provided by the news site" src={(post.allPage[0].image && post.allPage[0].image !== ' ') ? post.allPage[0].image : '/'} width={550} height={400} priority/>
                                         <button key={index + 1}><Link href={post.allPage[0].linkURL}><a target="_blank">Read more</a></Link></button>
                                     </div>
                                     <figcaption key={index + 2}>
