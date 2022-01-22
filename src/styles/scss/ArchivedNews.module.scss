@@ -376,6 +376,10 @@ $link-color: #a45ee5;
                     transform: none;
                     transition: none;
         
+                    &:active {
+                        text-decoration: underline;
+                    }
+                    
                     &:hover {
                         transform: none;
                         transition: none
@@ -435,6 +439,10 @@ $link-color: #a45ee5;
             li { 
                 transform: none;
                 transition: none;
+
+                &:active {
+                    text-decoration: underline;
+                }
     
                 &:hover {
                     transform: none;
