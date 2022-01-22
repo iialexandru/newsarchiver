@@ -112,13 +112,12 @@
     margin-top: 20px;
     margin-left: 20px;
     gap: .2em;
+    font-family: 'Roboto-Bold' !important;
 
     button {
         flex: 1;
     }
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
 .filters_ph_content {
     position: relative;
@@ -130,7 +129,7 @@
     // padding-bottom: .1em;
     border-radius: 4px;
     text-align: center;
-    font-family: 'Roboto';
+    font-family: 'Roboto-Bold';
 
     ul {
         list-style-type: none;
@@ -145,7 +144,7 @@
             button { 
                 border: none;
                 background: none;
-                font-family: 'Roboto';
+                font-family: 'Roboto-Bold';
                 cursor: pointer;
             }
 

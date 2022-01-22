@@ -8,6 +8,7 @@ import useWindowSize from '../../../utils/windowSize'
 import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -228,6 +229,30 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
 
     return (
         <>
+        <Head>
+            <link
+            rel="preload"
+            href="/fonts/Roboto-Bold/Roboto-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Roboto-Bold/Roboto-Bold.woff"
+            as="font"
+            type="font/woff"
+            crossOrigin="anonymous"
+          />
+            <link
+            rel="preload"
+            href="/fonts/Roboto-Bold/Roboto-Bold.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous" 
+          />
+
+        </Head>
                 <div>
                     <div className={specStyles.filters_buttons}>
                         <ThemeProvider theme={defaultMaterialTheme}>

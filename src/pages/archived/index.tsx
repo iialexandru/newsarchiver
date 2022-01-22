@@ -9,13 +9,15 @@ import ExtraInfo from '../../components/NewsArchived/ExtraInfo'
 import einfo from '../../utils/extraInfo.json'
 import useWindowSize from '../../utils/windowSize'
 
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { useInView } from 'react-intersection-observer'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper'
@@ -41,9 +43,13 @@ interface ChildPropsComponent {
 
 const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
 
-    const [ swiperIndex, setSwiperIndex ] = useState(0)
     const [ width, height ] = useWindowSize()
     const [ openInfoOnPhone, setOpenInfoOnPhone ] = useState(false)
+
+    const { ref, inView, entry } = useInView({
+        threshold: 0.2,
+        triggerOnce: true,
+    })
 
     const router = useRouter()
         
@@ -82,7 +88,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
 
     const InfoItem = ({ name, url, text }: ExtraInfo) => {
         return (
-        <div className={styles.text_item}>
+        <div className={`${styles.text_item}`}>
             <div className={styles.logo_title}>
                 <Image src={url} width={30} height={30} />
                 <Link href={chooseSite(name)}><a target="_blank"><h4>{name}</h4></a></Link>
@@ -91,10 +97,34 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
         </div>
         )
     }
+
     return (
         <div>
+        <Head>
+            <link
+            rel="preload"
+            href="/fonts/Roboto-Bold/Roboto-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Roboto-Bold/Roboto-Bold.woff"
+            as="font"
+            type="font/woff"
+            crossOrigin="anonymous"
+          />
+            <link
+            rel="preload"
+            href="/fonts/Roboto-Bold/Roboto-Bold.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous" 
+          />
+
+        </Head>
             <div className={styles.swiper_wrapper}>
-                {/* <h1>Latest news</h1> */}
                 <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={width < 620 ? 1 : 2}
@@ -103,23 +133,27 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                 navigation
                 autoplay={{ delay: 3000, disableOnInteraction: true }}
                 centeredSlides={true}
-                onSlideChange={(swiper) => setSwiperIndex(swiper.realIndex)}>
+                >
                     {all_latest_news.map((post, index) => {
                         return ( 
-                            <SwiperSlide key={index} className={`${styles.slide_abimg} ${swiperIndex !== index ? styles.swiper_inactive_slider : ''}`}> 
-                                <figure key={index}>
-                                    <div className={swiperIndex === index ? styles.slide_img_but : ''}>
-                                        <Image key={index} alt="An image was not provided by the news site" src={(post.allPage[0].image && post.allPage[0].image !== ' ') ? post.allPage[0].image : '/'} width={550} height={400} priority/>
-                                        <button key={index + 1}><Link href={post.allPage[0].linkURL}><a target="_blank">Read more</a></Link></button>
+                            <SwiperSlide key={index} className={`${styles.slide_abimg}`}> 
+                                {({ isActive }) => (
+                                    <div className={!isActive ? styles.swiper_inactive_slider : ''}>
+                                        <figure key={index}>
+                                            <div className={isActive ? styles.slide_img_but : ''}>
+                                                <Image key={index} alt="An image was not provided by the news site" src={(post.allPage[0].image && post.allPage[0].image !== ' ') ? post.allPage[0].image : '/'} width={550} height={400} priority/>
+                                                <button key={index + 1}><Link href={post.allPage[0].linkURL}><a target="_blank">Read more</a></Link></button>
+                                            </div>
+                                            <figcaption key={index + 2}>
+                                                <div key={index} className={styles.wrap_fig_bb}>
+                                                    <Link key={index} href={chooseSite(post.allPage[0].channel.toString().toUpperCase())}><a target="_blank"><span style={{position: 'absolute', cursor: 'pointer'}}>{post.allPage[0].channel.toUpperCase()}</span></a></Link>
+                                                    <p key={index + 1} style={{margin: 0, textAlign: 'right', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
+                                                </div>
+                                                <h4 key={index + 1} style={{margin: 0, textAlign: 'center', cursor: 'default', marginTop: '5px'}}><Link href={post.allPage[0].linkURL}><a target='_blank'>{post.allPage[0].title}</a></Link></h4>
+                                            </figcaption>
+                                        </figure>
                                     </div>
-                                    <figcaption key={index + 2}>
-                                        <div key={index} className={styles.wrap_fig_bb}>
-                                            <Link key={index} href={chooseSite(post.allPage[0].channel.toString().toUpperCase())}><a target="_blank"><span style={{position: 'absolute', cursor: 'pointer'}}>{post.allPage[0].channel.toUpperCase()}</span></a></Link>
-                                            <p key={index + 1} style={{margin: 0, textAlign: 'right', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
-                                        </div>
-                                        <h4 key={index + 1} style={{margin: 0, textAlign: 'center', cursor: 'default', marginTop: '5px'}}><Link href={post.allPage[0].linkURL}><a target='_blank'>{post.allPage[0].title}</a></Link></h4>
-                                    </figcaption>
-                                </figure>
+                                )}
                             </SwiperSlide>
                         )
                     })}
@@ -158,49 +192,52 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                 </div>
             </div>
             <h1 className={styles.heading_secpart}>Extra Info</h1>
-            <div className={styles.grid_info}>
-                    <InfoItem name={'DIGI24'} text={einfo.digi} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642524685/NewsArchiver/news-logos/Logo_Digi_24__2012_1_qrlpor.svg'} />
-                    <InfoItem name={'Antena3'} text={einfo.antena} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642524964/NewsArchiver/news-logos/unnamed_y1rbgm.jpg'} />
-                    <InfoItem name={'WELT'} text={einfo.welt} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525000/NewsArchiver/news-logos/unnamed_cldqcz.png'} />
-                    <InfoItem name={'DW'} text={einfo.dw} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
-                    {width < 400 ? 
-                        <>
-                            {openInfoOnPhone && 
-                                <>
-                                    <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
-                                    <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
-                                    <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
-                                    <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
-                                    <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
-                                    <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
-                                    <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
-                                    <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
-                                </>
-                            }
-                            <a style={{paddingBottom: 0, border: 'none', background: 'none', borderBottom: '1.5px solid black', textAlign: 'center', fontSize: '.7rem'}} onClick={e => setOpenInfoOnPhone(!openInfoOnPhone)}>
-                               {openInfoOnPhone ? 'Read less...' : 'Read more...'} 
-                            </a>
-                            <style jsx>
-                                {`
-                                a:active {
-                                    color: #a45ee5;
-                                    background-color: #a45ee5;
+            
+            <div className={styles.anim_item}>
+                <div ref={ref} className={`${width > 1023 ? styles.grid_info : styles.grid_info_v}  ${(inView && width > 1023) ? styles.vis_true : ''}`}>
+                        <InfoItem name={'DIGI24'} text={einfo.digi} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642524685/NewsArchiver/news-logos/Logo_Digi_24__2012_1_qrlpor.svg'} />
+                        <InfoItem name={'Antena3'} text={einfo.antena} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642524964/NewsArchiver/news-logos/unnamed_y1rbgm.jpg'} />
+                        <InfoItem name={'WELT'} text={einfo.welt} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525000/NewsArchiver/news-logos/unnamed_cldqcz.png'} />
+                        <InfoItem name={'DW'} text={einfo.dw} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
+                        {width < 400 ? 
+                            <>
+                                {openInfoOnPhone && 
+                                    <>
+                                        <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
+                                        <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
+                                        <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
+                                        <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
+                                        <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
+                                        <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
+                                        <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
+                                        <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
+                                    </>
                                 }
-                                `}
-                            </style>
-                        </>
-                        :
-                        <>
-                            <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
-                            <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
-                            <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
-                            <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
-                            <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
-                            <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
-                            <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
-                            <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
-                        </>
-                    }
+                                <a style={{paddingBottom: 0, border: 'none', background: 'none', borderBottom: '1.5px solid black', textAlign: 'center', fontSize: '.7rem'}} onClick={e => setOpenInfoOnPhone(!openInfoOnPhone)}>
+                                {openInfoOnPhone ? 'Read less...' : 'Read more...'} 
+                                </a>
+                                <style jsx>
+                                    {`
+                                    a:active {
+                                        color: #a45ee5;
+                                        background-color: #a45ee5;
+                                    }
+                                    `}
+                                </style>
+                            </>
+                            :
+                            <>
+                                <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
+                                <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
+                                <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
+                                <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
+                                <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
+                                <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
+                                <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
+                                <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
+                            </>
+                        }
+                </div>
             </div>
         </div>
     )

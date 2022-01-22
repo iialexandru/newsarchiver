@@ -1,14 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-
 .swiper_wrapper {
-    // margin: 0 auto;
     width: 100%;
     background-color: rgba(245, 245, 245, 1);
     position: relative;
     overflow: visible !important;
     font-family: 'Libre Baskerville';
     border-bottom: 5px solid black;
-    
+
     img { 
         background-color: rgba(150, 150, 150, 1) !important;
         border-bottom-left-radius: 0;
@@ -81,7 +78,7 @@ $link-color: #a45ee5;
         background-color: rgba(255, 255, 255, .15);
         border: 2px solid black;
         cursor: pointer;
-        font-family: 'Roboto';
+        font-family: 'Roboto-Bold';
         
         a {
             width: 100%;
@@ -101,7 +98,7 @@ $link-color: #a45ee5;
             }
         }
         img {
-            transform: scale(1.25);
+            transform: scale(1.35);
             transition: transform .25s ease-in;
             filter: opacity(.8) grayscale(10%);
             transition: all .25s;
@@ -241,14 +238,55 @@ $link-color: #a45ee5;
     grid-column-end: 3;
     justify-content: center;
     gap: 3em;
-    border-top: 5px solid black;
+    padding: 2em 1em;
+    font-family: 'Libre Baskerville';
+    visibility: hidden;
+}
+
+.grid_info_v {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: minmax(1fr, auto);
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-content: center;
+    gap: 3em;
     padding: 2em 1em;
     font-family: 'Libre Baskerville';
 }
 
+@for $i from 1 through 12 {
+    @keyframes fade-up-#{$i} {
+        from { transform: translateY(30px * $i); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+}
+
+.vis_true {
+    visibility: visible;
+
+    @for $i from 1 through 12 {
+        .text_item:nth-child(0n + #{$i}) {
+            animation: fade-up-#{$i};
+            animation-iteration-count: 1;
+            @if $i < 4 {
+                animation-duration: .4s * $i; 
+            } 
+            @else {
+                animation-duration: .2s * $i;
+            }
+        }
+    }
+}
+
+.anim_item {
+    border-top: 5px solid black;
+}
+
 .heading_secpart {
     width: fit-content;
-    font-family: 'Roboto';
+    font-family: 'Roboto-Bold';
     font-size: 3rem;
     margin: 0;
     text-indent: 5px;
@@ -262,6 +300,8 @@ $link-color: #a45ee5;
     padding-left: 2em;
     padding-right: 1em;
     transition: all .5s;
+    border-top-left-radius: 40px 30px;
+    border-bottom-right-radius: 40px 30px;
 
     h4 {
         cursor: pointer;
@@ -271,6 +311,7 @@ $link-color: #a45ee5;
         }
     }
 }
+
 
 .logo_title {
     display: flex;
@@ -345,7 +386,7 @@ $link-color: #a45ee5;
     }
 
     
-    .grid_info {
+    .grid_info_v {
         grid-template-columns: auto;
         grid-column-end: 1;
         padding-bottom: .5em;
@@ -361,10 +402,10 @@ $link-color: #a45ee5;
     .grid_container {
         grid-template-columns: auto auto;
         margin: 0;
-        margin-left: .5em;
+        margin-left: 1.5em;
     }
 
-    .grid_info {
+    .grid_info_v {
         grid-template-columns: auto auto;
         grid-column-end: 1;
         padding-bottom: .5em;
@@ -372,6 +413,10 @@ $link-color: #a45ee5;
 
     .text_item {
         font-size: .7rem;
+    }
+
+    .list_all_channels {
+        width: 30vmax;
     }
 
 }
@@ -385,6 +430,7 @@ $link-color: #a45ee5;
     }
 
     .list_all_channels {
+        width: 23vmax;
         ul { 
             li { 
                 transform: none;
@@ -467,6 +513,4 @@ $link-color: #a45ee5;
     .grid_info {
         padding: 2em 15vw;
     }
-
-
 }
