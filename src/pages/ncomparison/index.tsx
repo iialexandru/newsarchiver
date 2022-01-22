@@ -8,6 +8,7 @@ import axios from 'axios'
 import styles from '../../styles/scss/NewsComparison.module.scss'
 import Selection from '../../components/NewsComparison/SelectionMenu'
 import { server } from '../../config/index'
+import useWindowSize from '../../utils/windowSize'
 
 
 interface Data {
@@ -26,6 +27,8 @@ interface News {
 const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
 
     const router = useRouter()
+
+    const [ width, height ] = useWindowSize()
 
     return (
     <>
@@ -52,6 +55,8 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
             crossOrigin="anonymous"
           />
       </Head>
+
+        {width < 500 && <p style={{textAlign: 'center', fontSize: '.6rem'}}>*For best perspective on a phone, use it in landscape mode</p> }
 
         <div className={styles.container}>
 

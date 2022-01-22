@@ -58,6 +58,20 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
         }
     }
 
+    const change_country = (e: any) => {
+        setSelectCountry(e.target.value); 
+        setSelectNews("");
+        if(section === 1) {
+            router.replace({
+                query: { ...router.query, news_f: null, sort_f: null, year_f: null, month_f: null, day_f: null}
+            })
+        } else {
+            router.replace({
+                query: { ...router.query, news_s: null, sort_s: null, year_s: null, month_s: null, day_s: null}
+            })
+        }
+    }   
+
     return (
         <ThemeProvider theme={customBreakpoints}>
         <Stack direction={{xs: 'column', sm: 'row'}} justifyContent="center" spacing={2} alignItems="center">
@@ -71,7 +85,7 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                     label="Country*"
                     // size={{xs: 'small', sm: 'medium'}}
                     // size='small'
-                    onChange={e => { setSelectCountry(e.target.value); setSelectNews(""); } }
+                    onChange={e => change_country(e) }
                 >
                     <MenuItem value=" " disabled>
                         <em>Please select a country</em>
