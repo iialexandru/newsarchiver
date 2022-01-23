@@ -25,7 +25,7 @@ const Nav = () => {
         </span>
         <span className={styles.hover}><Link href="/">Home</Link></span>
         <span className={styles.hover}><Link href="/archived">Archived News</Link></span>
-        <span className={styles.hover}><Link href={{pathname: "/ncomparison", query: { news_f: "", news_s: "", page_f: "1", page_s: "1"} }}  >News Comparison</Link></span>
+        <span className={styles.hover}><Link href={{pathname: "/ncomparison", query: { news_f: "", news_s: "", page_f: "1", page_s: "1"} }}>News Comparison</Link></span>
       </nav>
       :
       <>

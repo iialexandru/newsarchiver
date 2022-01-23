@@ -1,6 +1,7 @@
 .tot_container {
     display: flex;
     flex-flow: column wrap;
+    overflow: hidden;
 }
 
 .flexbox_n {
@@ -10,20 +11,20 @@
 }
 
 .container {
-    font-family: 'Libre Baskerville', sans;
+    font-family: 'Libre Baskerville', sans, serif;
     font-weight: 700;
     font-size: 1.3rem;
     display: grid;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    // justify-items: center;
 
     select { 
         max-height: 50px;
         overflow-y: scroll;
         border-radius: 50px;
-        font-family: 'Libre Baskerville', sans;
+        font-family: 'Libre Baskerville', sans, serif;
         margin-top: 3vh;
         
         &:nth-child(1) {
@@ -98,10 +99,6 @@
     }
 }
 
-// .date_picker {
-//     grid-area: filter-3-1;
-//     place-self: center;
-// }
 .order_news {
     margin: .5em 0 0 1em;
 }
@@ -139,7 +136,7 @@
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    justify-content: center;    
+    // justify-content: flex-start;    
     margin-top: 8vh;
     row-gap: 8vh;
     margin-bottom: 40px;
@@ -153,8 +150,8 @@
     
     .item_flex {
         position: relative;
-        width:  80%;
-        height: 85vh;   
+        width: 80%;
+        height: 85vh;
         animation: fade_lr_opac .5s 1;
         transition: all .4s ease-in;
         box-sizing: border-box;
@@ -231,7 +228,7 @@
             border-color: #949398FF;
             border-width: 1.5px;
             background-color: rgba(230, 230, 230, 1);
-            border-top-right-radius: 70px 100px;
+            border-top-right-radius: 70px 60px;
             box-shadow: -2px -2px 15px -2px rgba(70, 70, 70, 1);
             transition: all .7s ease-out;
         }
@@ -239,9 +236,8 @@
 
     .date_creation {
         position: relative;
-        text-align: left !important;
-        margin-left: 9vw;
-        font-size: .5rem;
+        text-align: right;
+        font-size: .45rem;
         font-weight: normal;
         opacity: .4;
     }
@@ -253,7 +249,7 @@
 
     .image { 
         animation: opacity 1s 1;
-        // background-color: rgb(230, 230, 230);
+
         img {
             border-radius: 2px !important;
         }
@@ -262,7 +258,6 @@
 
     .headline {
         margin: 0;
-        margin-top: 5px;
         font-size: 1rem;
         cursor: default;
         width: 90%;
@@ -274,7 +269,6 @@
 
     .intro_paragraph {
         position: relative;
-        z-index: -1;
         font-size: 1rem;
         font-weight: normal;
         width: 90%;
@@ -320,7 +314,7 @@
             }
         }
         &:nth-child(n + 2){
-            font-family: 'Roboto', sans;
+            font-family: 'Roboto', sans, serif;
             font-weight: bold;
             font-size: .9rem;
             position: relative;
@@ -339,4 +333,276 @@
         }
 
     }
+}
+
+//Phone Portrait & Landscape 767px
+@media screen and (min-width: 0px) and (max-width: 481px) {
+
+    .container {
+        grid-template-columns: 55% 55%;
+    }
+
+    .all_news_container {
+        align-items: flex-start;
+        margin-left: 2px;
+    }
+
+    .image {
+        margin: 0 auto;
+    }
+
+    .item_flex {
+        height: 35vh !important;
+        background-color: rgba(220, 220, 220, 1) !important;
+
+        &::before {
+            content: none;
+            display: none !important;
+        }
+
+        &:nth-child(even)::before {
+            display: none !important;
+        }
+
+        &:hover::before {
+            display: none !important;
+        }
+
+        &:nth-child(even):hover::before {
+            display: none !important;
+        }
+
+
+        &::after {
+            display: none !important;
+        }
+
+        &:nth-child(even)::after {
+            display: none !important;
+        }
+
+        &:hover::after {
+            display: none !important;
+        }
+
+        &:nth-child(even):hover::after {
+            display: none !important;
+        }
+        
+        &:hover {
+            transform: none !important;
+            border-color: revert !important;
+            border-width: revert !important;
+            background-color: revert !important;
+            border-top-right-radius: 0 0 !important;
+            box-shadow: none !important;
+            transition: none;
+        }
+    }
+
+    .headline {
+        font-size: .45rem !important;
+        border-bottom: .5px solid rgb(200, 200, 200, 0.4);
+    }
+
+    .intro_paragraph {
+        font-size: .35rem !important;
+        z-index: 20;
+    }
+
+    .date_creation {
+        text-align: center !important;
+        margin: 0; 
+        font-size: .3rem !important;
+        margin-top: -4px;
+    }
+    
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .image {
+        margin: 0 auto;
+    }
+
+    .item_flex {
+        height: 110vh !important ;
+        background-color: rgba(220, 220, 220, 1) !important;
+
+        &::before {
+            content: none;
+            display: none !important;
+        }
+
+        &:nth-child(even)::before {
+            display: none !important;
+        }
+
+        &:hover::before {
+            display: none !important;
+        }
+
+        &:nth-child(even):hover::before {
+            display: none !important;
+        }
+
+
+        &::after {
+            display: none !important;
+        }
+
+        &:nth-child(even)::after {
+            display: none !important;
+        }
+
+        &:hover::after {
+            display: none !important;
+        }
+
+        &:nth-child(even):hover::after {
+            display: none !important;
+        }
+
+        &:hover {
+            transform: none !important;
+            border-color: none !important;
+            border-width: none !important;
+            background-color: none !important;
+            border-top-right-radius: 0 0 !important;
+            box-shadow: none !important;
+            transition: none;
+        }
+    }
+
+    .headline {
+        font-size: .725rem !important;
+        border-bottom: .5px solid rgb(200, 200, 200, 0.4);
+    }
+
+    .intro_paragraph {
+        font-size: .52rem !important;
+        z-index: 20;
+    }
+
+    .date_creation {
+        text-align: center !important;
+        margin: 0;
+        font-size: .325rem !important;
+        margin-top: -4px;
+    }
+}
+
+//Tablet Portrait & Landscape
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .image {
+        margin: 0 auto;
+    }
+
+    .item_flex {
+        background-color: rgba(220, 220, 220, 1) !important;
+        height: 43vh !important;
+
+        &::before {
+            content: none;
+            display: none !important;
+        }
+
+        &:nth-child(even)::before {
+            display: none !important;
+        }
+
+        &:hover::before {
+            display: none !important;
+        }
+
+        &:nth-child(even):hover::before {
+            display: none !important;
+        }
+
+
+        &::after {
+            display: none !important;
+        }
+
+        &:nth-child(even)::after {
+            display: none !important;
+        }
+
+        &:hover::after {
+            display: none !important;
+        }
+
+        &:nth-child(even):hover::after {
+            display: none !important;
+        }
+
+        &:hover {
+            transform: none !important;
+            border-width: revert !important;
+            background-color: revert !important;
+            border-top-right-radius: 0 0 !important;
+            box-shadow: none !important;
+            transition: none;
+        }
+    }
+}
+
+//Tablet Portrait
+@media screen and (min-width: 768px) {
+  
+}
+
+//Tablet Landscape
+@media screen and (max-width: 1024px) {
+  
+}
+
+//Desktop
+@media screen and (min-width: 1024px) and (max-width: 1224px) {
+    .item_flex {
+        //height: 60vh !important;
+    }
+}
+
+//Large Desktop
+//@media screen and (min-width: 1224px) {
+//    .container {
+//        width: 80%;
+//        margin: 0 auto;
+//    }
+//
+//    //.item_flex {
+//    //    height: 50vh !important;
+//    //}
+//
+//    .headline {
+//        font-size: 1.15rem !important;
+//    }
+//
+//    .intro_paragraph {
+//        font-size: .92rem !important;
+//    }
+//}
+
+@media screen and (min-width: 1600px) {
+    .headline {
+        font-size: 1.15rem !important;
+    }
+
+    .intro_paragraph {
+        font-size: .92rem !important;
+    }
+
+    .container {
+        width: 100vmin;
+        margin: 0 auto;
+    }
+
+    .item_flex {
+        height: 50vmin !important;
+    }
+
+}
+
+@media screen and (min-width: 1850px) {
+
 }

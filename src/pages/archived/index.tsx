@@ -47,7 +47,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
     const [ openInfoOnPhone, setOpenInfoOnPhone ] = useState(false)
 
     const { ref, inView, entry } = useInView({
-        threshold: 0.2,
+        threshold: 0.1,
         triggerOnce: true,
     })
 

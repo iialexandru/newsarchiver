@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import countries from '../../utils/NewsComparison/countrySelect'
+import useWindowSize from '../../utils/windowSize'
 
 interface ChildPropsComponent { 
     selectNews: string;
@@ -21,6 +22,8 @@ interface ChildPropsComponent {
 const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews, section}) => {
 
     const router = useRouter()
+
+    const [ width, height ] = useWindowSize()
 
     const customBreakpoints = createTheme({
         breakpoints: {
@@ -74,34 +77,36 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
 
     return (
         <ThemeProvider theme={customBreakpoints}>
-        <Stack direction={{xs: 'column', sm: 'row'}} justifyContent="center" spacing={2} alignItems="center">
-             <FormControl required sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="country">Country</InputLabel>
-                <Select
-                    labelId="country"
-                    autoWidth
-                    id="country"
-                    value={selectCountry}
-                    label="Country*"
-                    // size={{xs: 'small', sm: 'medium'}}
-                    // size='small'
-                    onChange={e => change_country(e) }
-                >
-                    <MenuItem value=" " disabled>
-                        <em>Please select a country</em>
-                    </MenuItem>
-                    <MenuItem value='romania'>Romania</MenuItem>
-                    <MenuItem value='germany'>Germany</MenuItem>
-                    <MenuItem value='france'>France</MenuItem>
-                </Select>
-            </FormControl>
-                <FormControl required sx={{ m: 1, minWidth: 120 }}>
+            <Stack direction={{xs: 'column', md: 'row'}} justifyContent="center" spacing={2} alignItems="center">
+                <div>
+                 <FormControl required sx={{ m: 1, minWidth: { xs: 110, sm: 120 } }} size={`${width < 500 ? 'small' : 'medium'}`}>
+                    <InputLabel id="country" >Country</InputLabel>
+                    <Select
+                        labelId="country"
+                        autoWidth
+                        id="country"
+                        value={selectCountry}
+                        label="Country*"
+                        // size={'small'}
+                        onChange={e => change_country(e) }
+                    >
+                        <MenuItem value=" " disabled>
+                            <em>Please select a country</em>
+                        </MenuItem>
+                        <MenuItem value='romania'>Romania</MenuItem>
+                        <MenuItem value='germany'>Germany</MenuItem>
+                        <MenuItem value='france'>France</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <FormControl required sx={{ m: 1, minWidth: { xs: 110, sm: 120 } }} size={width < 500 ? 'small' : 'medium'}>
                     <InputLabel id="news">News</InputLabel>
                         <Select
                             labelId="news"
                             id="news"
                             value={selectNews}
                             label="News*"
+                            // size={`${width < 482 ? 'small' : 'medium'}`}
                             onChange={e => { setSelectNews(e.target.value); change_news_query(e.target.value); } }
                         >
                             <MenuItem value=" " disabled>
@@ -111,8 +116,9 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                                 return <MenuItem key={i} value={n.toLowerCase()}>{n}</MenuItem>
                             }) }
                     </Select>
-            </FormControl>
-        </Stack>
+                </FormControl>
+                </div>
+            </Stack>
         </ThemeProvider>
     )
 }

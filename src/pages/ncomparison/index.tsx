@@ -56,7 +56,7 @@ const Comparison: NextPage<News> = ({ latestNews_1, latestNews_2 }) => {
           />
       </Head>
 
-        {width < 500 && <p style={{textAlign: 'center', fontSize: '.6rem'}}>*For best perspective on a phone, use it in landscape mode</p> }
+        {width < 500 && <p style={{textAlign: 'center', fontSize: '.55rem'}}>*For best perspective on a smaller device, use it in landscape mode</p> }
 
         <div className={styles.container}>
 

@@ -43,3 +43,8 @@
         transition: all 0.5s ease-in-out;
     }
 }
+
+//Phone Portrait & Landscape 767px
+@media screen and (min-width: 0px) and (max-width: 481px) {
+    .container_flex {}
+}

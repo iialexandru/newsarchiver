@@ -7,7 +7,7 @@ import '../styles/scss/SwiperCustom.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div style={{overflow: 'hidden'}}>
       <Head>
         <link rel="icon" href="/news_archived_icon.jpg" />
         <link
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Nav />
       <Component {...pageProps} />
-    </>
+    </div>
   )
 }
 

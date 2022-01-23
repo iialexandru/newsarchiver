@@ -30,7 +30,7 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     const [ openedFilters, setOpenedFilters ] = useState(false)
     const [ value, setValue ] = useState<Date | null>(null) // For calendar filter
 
-    const [ posts, setPosts ] = useState(12) // For posts per page filter
+    const [ posts, setPosts ] = useState(10) // For posts per page filter
 
 
     const WHButton = styled(Button)(() => ({

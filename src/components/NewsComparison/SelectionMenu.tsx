@@ -38,7 +38,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, PAGE, URL }) => {
             <>
                 {news.allPage &&
                         <>
-                            <FilterBox section={name} />
+                             <FilterBox section={name} />
                             <div className={styles.all_news_container}>
                                     {news.allPage.map((article: any, index: number) => {
                                         return (
@@ -55,7 +55,7 @@ const SelectionMenu: FC<ChildPropsComponent> = ({ name, news, PAGE, URL }) => {
                                         )
                                     })}
                             </div>
-                            <Pagination section={name} numberOfPages={news.totalPages} PAGE={PAGE} />
+                             <Pagination section={name} numberOfPages={news.totalPages} PAGE={PAGE} />
                         </>
                 }
         </>
