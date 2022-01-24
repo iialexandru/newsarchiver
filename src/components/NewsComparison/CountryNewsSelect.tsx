@@ -87,7 +87,6 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                         id="country"
                         value={selectCountry}
                         label="Country*"
-                        // size={'small'}
                         onChange={e => change_country(e) }
                     >
                         <MenuItem value=" " disabled>
@@ -106,7 +105,6 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                             id="news"
                             value={selectNews}
                             label="News*"
-                            // size={`${width < 482 ? 'small' : 'medium'}`}
                             onChange={e => { setSelectNews(e.target.value); change_news_query(e.target.value); } }
                         >
                             <MenuItem value=" " disabled>

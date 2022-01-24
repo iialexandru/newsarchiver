@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import { useState, useEffect, FC } from 'react'
 import { useRouter } from 'next/router'
+
 import styles from '../../styles/scss/Pagination.module.scss'
+import useWindowSize from '../../utils/windowSize'
 
 
 interface ChildPropsComponent { 
@@ -13,6 +15,8 @@ interface ChildPropsComponent {
 const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) => {
 
     const router = useRouter()
+
+    const [ width, height ] = useWindowSize()
 
     const nextPage = () => {
         if(section === 1){
@@ -118,20 +122,29 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
 
     return (
         <div className={styles.container_flex}>
-            <button onClick={prevPage}>
-                <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png" 
+            <button onClick={prevPage} style={{opacity: `${currentButton <= 1 ? '0.5' : '1'}`}} disabled={currentButton <= 1}>
+                <Image
+                    src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
                     width={10} height={15} priority/>
             </button>
-            {arrCurBtn.map((value: number, index: number) => 
-                <div key={index}>
-                    { value.toString() !== dotsInitial && value.toString() !== dotsRight && value.toString() !== dotsLeft ?
-                    <button type="button" key={index} className={currentButton !== value ? styles.disactivated : ''} 
-                    onClick={e => changePage(value)} >{value}</button>
-                    : <span key={index}>{value}</span> }
+            {width > 620 ?
+                arrCurBtn.map((value: number, index: number) =>
+                        <div key={index}>
+                            {value.toString() !== dotsInitial && value.toString() !== dotsRight && value.toString() !== dotsLeft ?
+                                <button type="button" key={index}
+                                        className={currentButton !== value ? styles.disactivated : ''}
+                                        onClick={e => changePage(value)}>{value}</button>
+                                : <span key={index}>{value}</span>}
+                        </div>
+                    )
+                :
+                <div className={styles.pag_ph_nc}>
+                    <p>{currentButton}/{numberOfPages}</p>
                 </div>
-            )}  
-            <button onClick={nextPage}>
-                <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png" 
+            }
+            <button onClick={nextPage} style={{opacity: `${currentButton >= numberOfPages ? '0.5' : '1'}`}} disabled={currentButton >= numberOfPages}>
+                <Image
+                    src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
                     width={10} height={15} priority/>
             </button>
         </div>

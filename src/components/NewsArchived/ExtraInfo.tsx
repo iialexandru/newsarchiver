@@ -1,5 +1,3 @@
-import styles from '../../styles/scss/NewsArchived/ExtraInfo.module.scss'
-
 import { FC, useState } from 'react'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'

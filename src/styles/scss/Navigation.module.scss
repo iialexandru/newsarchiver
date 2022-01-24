@@ -13,7 +13,7 @@
     height: auto;
     border-bottom: 1px #5C5248 solid;
     border-bottom-width: 3px;
-    box-shadow: 0px 2px 10px gray;
+    box-shadow: 0 2px 10px gray;
     padding-top: .2em;
   
     span {
@@ -53,7 +53,7 @@
       height: 2px;
       bottom: 0;
       left: 0;
-      background-color: gray;
+      background-color: rgba(30, 30, 30, 1);
       transform: scaleX(0);
       transform-origin: bottom right;
       transition: transform 0.25s ease-out;
@@ -85,11 +85,21 @@
         display: flex;
         flex-flow: row nowrap;
         align-items: center; 
-        margin: 0 1em 0 0;
+        margin: 0 1em 0 auto;
         position: relative;
-        margin-left: auto;
         border: none;
         background: none;
+
+      svg {
+        transition: all .5s;
+        transform: scale(1);
+      }
+
+        &:active {
+          svg {
+            transform: scale(1.5);
+          }
+        }
 
         span:nth-child(1) { 
           font-family: 'Cherry Swash', cursive;
@@ -106,6 +116,11 @@
         animation: rotate-90 .5s 1;
     }
 
+    @keyframes pop_up {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
     .dropmenu_container {
         position: absolute;
         background-color: rgba(250, 250, 250, .8);
@@ -116,15 +131,22 @@
         height: auto;
         font-family: 'Cherry Swash', cursive;
         font-size: 1.25em;
-        z-index: 10;
+        z-index: 10000;
 
-        ul { 
+        ul {
+          animation: pop_up .5s;
           list-style: none;
           padding: 0;
           
           li { 
             width: fit-content;
             margin: 0 auto;
+
+            a {
+              &:active {
+                text-decoration: underline;
+              }
+            }
           }
 
         }

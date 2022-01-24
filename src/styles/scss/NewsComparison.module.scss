@@ -18,7 +18,6 @@
     grid-column-start: 1;
     grid-column-end: 2;
     grid-template-columns: 1fr 1fr;
-    // justify-items: center;
 
     select { 
         max-height: 50px;
@@ -31,8 +30,8 @@
             margin-top: 5vh;
         }
 
-        option { 
-            font-family: 'Libre Baskerville', sans;
+        option {
+            font-family: 'Libre Baskerville', sans, serif;
         }
     }
 }
@@ -87,8 +86,7 @@
     gap: .5em;
     width: 70%;
     height: auto;
-    margin: 0 auto;
-    margin-top: .5em;
+    margin: .5em auto 0 auto;
     background-color: rgba(240, 240, 240, 1);
     box-shadow: 4px 2px 8px rgba(210, 210, 210, 1);
     border-radius: 5px;
@@ -136,7 +134,6 @@
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    // justify-content: flex-start;    
     margin-top: 8vh;
     row-gap: 8vh;
     margin-bottom: 40px;
@@ -151,7 +148,7 @@
     .item_flex {
         position: relative;
         width: 80%;
-        height: 85vh;
+        height: 520px;
         animation: fade_lr_opac .5s 1;
         transition: all .4s ease-in;
         box-sizing: border-box;
@@ -257,7 +254,6 @@
     }
 
     .headline {
-        margin: 0;
         font-size: 1rem;
         cursor: default;
         width: 90%;
@@ -269,7 +265,6 @@
 
     .intro_paragraph {
         position: relative;
-        font-size: 1rem;
         font-weight: normal;
         width: 90%;
         margin: 0 auto;
@@ -345,6 +340,7 @@
     .all_news_container {
         align-items: flex-start;
         margin-left: 2px;
+        margin-bottom: 10px;
     }
 
     .image {
@@ -352,7 +348,7 @@
     }
 
     .item_flex {
-        height: 35vh !important;
+        height: 210px !important;
         background-color: rgba(220, 220, 220, 1) !important;
 
         &::before {
@@ -412,20 +408,23 @@
 
     .date_creation {
         text-align: center !important;
-        margin: 0; 
         font-size: .3rem !important;
-        margin-top: -4px;
+        margin: -4px 0 0 0;
     }
     
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 769px) {
     .image {
         margin: 0 auto;
     }
 
+    .all_news_container {
+        margin-bottom: 10px;
+    }
+
     .item_flex {
-        height: 110vh !important ;
+        height: 330px !important ;
         background-color: rgba(220, 220, 220, 1) !important;
 
         &::before {
@@ -464,9 +463,9 @@
 
         &:hover {
             transform: none !important;
-            border-color: none !important;
-            border-width: none !important;
-            background-color: none !important;
+            border-color: revert !important;
+            border-width: revert !important;
+            background-color: revert !important;
             border-top-right-radius: 0 0 !important;
             box-shadow: none !important;
             transition: none;
@@ -485,21 +484,20 @@
 
     .date_creation {
         text-align: center !important;
-        margin: 0;
         font-size: .325rem !important;
-        margin-top: -4px;
+        margin: -4px 0 0 0;
     }
 }
 
 //Tablet Portrait & Landscape
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) and (max-width: 1024px) {
     .image {
         margin: 0 auto;
     }
 
     .item_flex {
         background-color: rgba(220, 220, 220, 1) !important;
-        height: 43vh !important;
+        height: 450px !important;
 
         &::before {
             content: none;
@@ -544,6 +542,23 @@
             transition: none;
         }
     }
+
+    .headline {
+        font-size: .825rem !important;
+        border-bottom: .5px solid rgb(200, 200, 200, 0.4);
+    }
+
+    .intro_paragraph {
+        font-size: .62rem !important;
+        z-index: 20;
+    }
+
+    .date_creation {
+        text-align: center !important;
+        font-size: .425rem !important;
+        margin: -4px 0 0 0;
+    }
+
 }
 
 //Tablet Portrait
@@ -593,12 +608,13 @@
     }
 
     .container {
-        width: 100vmin;
+        width: 60%;
         margin: 0 auto;
     }
 
     .item_flex {
-        height: 50vmin !important;
+        height: 580px !important;
+        width: 100%;
     }
 
 }

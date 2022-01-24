@@ -3,7 +3,7 @@
     background-color: rgba(245, 245, 245, 1);
     position: relative;
     overflow: visible !important;
-    font-family: 'Libre Baskerville';
+    font-family: 'Libre Baskerville', serif;
     border-bottom: 5px solid black;
 
     img { 
@@ -64,9 +64,6 @@ $link-color: #a45ee5;
 .slide_img_but {
     transition: all .25s;
     background-color: $fill-color;
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 
     button { 
         position: absolute;
@@ -74,11 +71,10 @@ $link-color: #a45ee5;
         transition: opacity .25s;
         top: 40%;
         left: 39%;
-        border: none;
         background-color: rgba(255, 255, 255, .15);
         border: 2px solid black;
         cursor: pointer;
-        font-family: 'Roboto-Bold';
+        font-family: 'Roboto-Bold', cursive;
         
         a {
             width: 100%;
@@ -89,8 +85,7 @@ $link-color: #a45ee5;
     &:hover {
         button {
             opacity: 1;
-            transition: opacity .25s ease-in;
-            transition: background-color .5s;
+            transition: background-color .5s, opacity .25s ease-in;
 
             &:hover {
                 transition: all .5s;
@@ -99,7 +94,6 @@ $link-color: #a45ee5;
         }
         img {
             transform: scale(1.35);
-            transition: transform .25s ease-in;
             filter: opacity(.8) grayscale(10%);
             transition: all .25s;
             cursor: pointer;
@@ -239,7 +233,7 @@ $link-color: #a45ee5;
     justify-content: center;
     gap: 3em;
     padding: 2em 1em;
-    font-family: 'Libre Baskerville';
+    font-family: 'Libre Baskerville', sans-serif;
     visibility: hidden;
 }
 
@@ -253,7 +247,7 @@ $link-color: #a45ee5;
     justify-content: center;
     gap: 3em;
     padding: 2em 1em;
-    font-family: 'Libre Baskerville';
+    font-family: 'Libre Baskerville', sans-serif;
 }
 
 @for $i from 1 through 12 {
@@ -286,7 +280,7 @@ $link-color: #a45ee5;
 
 .heading_secpart {
     width: fit-content;
-    font-family: 'Roboto-Bold';
+    font-family: 'Roboto-Bold', cursive;
     font-size: 3rem;
     margin: 0;
     text-indent: 5px;
@@ -365,8 +359,7 @@ $link-color: #a45ee5;
 
     .grid_container {
         grid-template-columns: auto;
-        margin: 0;
-        margin-left: .5em;
+        margin: 0 0 0 .5em;
     }
 
     .list_all_channels {
@@ -405,8 +398,7 @@ $link-color: #a45ee5;
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .grid_container {
         grid-template-columns: auto auto;
-        margin: 0;
-        margin-left: 1.5em;
+        margin: 0 0 0 1.5em;
     }
 
     .grid_info_v {
@@ -512,7 +504,7 @@ $link-color: #a45ee5;
     }
 
     .list_all_channels {
-        width: 13   vmax;
+        width: 13vmax;
 
     }
 }

@@ -1,6 +1,6 @@
 @keyframes appear_anim {
   from { transform: translateY(-100%); transform-origin: top; opacity: 0; }
-  to { transform: transteY(0); opacity: 1; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes appear_desc_anim {
@@ -9,7 +9,7 @@
 }
 
 .main_content {
-  margin-top: none;
+  margin-top: revert;
   text-align: center;
   font-size: 3em;
 }
@@ -81,6 +81,23 @@
 
   .desc_text {
     max-width: 100vw;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 2px;
+      left: 0;
+      margin-left: 20%;
+      border-bottom: 2px solid black;
+      border-radius: 2px;
+    }
+
+    a {
+      &:active {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -94,12 +111,29 @@
 
   .desc_text {
     max-width: 80vw;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 2px;
+      left: 0;
+      margin-left: 20%;
+      border-bottom: 2px solid black;
+      border-radius: 2px;
+    }
+
+    a {
+      &:active {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
 //Tablet Portrait
 @media screen and (min-width: 768px) {
-  
+
 }
 
 //Tablet Landscape
