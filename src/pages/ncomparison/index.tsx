@@ -75,7 +75,7 @@ export default Comparison;
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const { query } = context;
     const { news_f, news_s, page_f, page_s, year_f, month_f, day_f, year_s, month_s, day_s, sort_f, sort_s, ppp_f, ppp_s } = query;
-    const variants = [ 'digi24', 'antena3', 'dw', 'welt', 'france24', 'lemonde', 'news9', 'sbsau', 'expats', 'praguems', 'lenews', 'swissinfo' ]
+    const variants = [ 'digi24', 'antena3', 'dw', 'welt', 'france24', 'lemonde', '9news', 'sbs', 'expats', 'praguemorning', 'lenews', 'swissinfo' ]
  
     if((!variants.includes(news_f) && news_f) || (!variants.includes(news_s) && news_s) )
         return {

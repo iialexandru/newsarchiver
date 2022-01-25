@@ -60,6 +60,48 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
         }
     }
 
+    const sendToFirstPage = () => {
+        if(section === 1) {
+            if(parseInt(PAGE!.toString()) - 1 >= 1) {
+                router.replace({
+                    pathname: router.pathname,
+                    query: { ...router.query, page_f: encodeURIComponent(1)}
+                })
+                setCurrentButton(1)
+            }
+        }
+        else {
+            if(parseInt(PAGE!.toString()) - 1 >= 1) {
+                router.replace({
+                    pathname: router.pathname,
+                    query: { ...router.query, page_s: encodeURIComponent(1)}
+                })
+                setCurrentButton(1)
+            }
+        }
+    }
+
+    const sendToLastPage = () => {
+        if(section === 1){
+            if(numberOfPages >= parseInt(PAGE!.toString()) + 1) {
+                router.replace({
+                    pathname: router.pathname,
+                    query: { ...router.query, page_f: encodeURIComponent(numberOfPages)}
+                })
+                setCurrentButton(numberOfPages)
+            }
+        }
+        else {
+            if(numberOfPages >= parseInt(PAGE!.toString()) + 1) {
+                router.replace({
+                    pathname: router.pathname,
+                    query: { ...router.query, page_s: encodeURIComponent(numberOfPages)}
+                })
+                setCurrentButton(numberOfPages)
+            }
+        }
+    }
+
     const[ arrCurBtn, setArrCurBtn] = useState<any[]>([])
     const [currentButton, setCurrentButton] = useState<number>(parseInt(PAGE as string) > 0 ? parseInt(PAGE as string) : 1)
   
@@ -122,10 +164,20 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
 
     return (
         <div className={styles.container_flex}>
+            {width <= 620 &&
+                <button onClick={sendToFirstPage} style={{opacity: `${currentButton <= 1 ? '0.5' : '1'}`}} disabled={currentButton <= 1}>
+                    <Image
+                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
+                        width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
+                    <Image
+                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
+                        width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
+                </button>
+            }
             <button onClick={prevPage} style={{opacity: `${currentButton <= 1 ? '0.5' : '1'}`}} disabled={currentButton <= 1}>
                 <Image
                     src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
-                    width={10} height={15} priority/>
+                    width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
             </button>
             {width > 620 ?
                 arrCurBtn.map((value: number, index: number) =>
@@ -145,8 +197,19 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
             <button onClick={nextPage} style={{opacity: `${currentButton >= numberOfPages ? '0.5' : '1'}`}} disabled={currentButton >= numberOfPages}>
                 <Image
                     src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
-                    width={10} height={15} priority/>
+                    width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
             </button>
+            {width <= 620 &&
+                <button onClick={sendToLastPage} style={{opacity: `${currentButton >= numberOfPages ? '0.5' : '1'}`}}
+                        disabled={currentButton >= numberOfPages}>
+                    <Image
+                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
+                        width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
+                    <Image
+                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
+                        width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
+                </button>
+            }
         </div>
     )
 }

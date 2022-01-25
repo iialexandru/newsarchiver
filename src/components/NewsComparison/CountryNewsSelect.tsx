@@ -44,7 +44,10 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
     const newsRomania: string[] = ['DIGI24', 'Antena3']
     const newsGermany: string[] = ['WELT', 'DW']
     const newsFrance: string[] = ['France24', 'Lemonde']
-    const allNews = [newsRomania, newsGermany, newsFrance]
+    const newsAustralia: string[] = ['9News', 'SBS']
+    const newsCzRep: string[] = ['Expats', 'PragueMorning']
+    const newsSwitzerland: string[] = ['LeNews', 'SwissInfo']
+    const allNews = [newsRomania, newsGermany, newsFrance, newsAustralia, newsCzRep, newsSwitzerland]
 
 
     const change_news_query = (news: string) => {
@@ -78,7 +81,7 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
     return (
         <ThemeProvider theme={customBreakpoints}>
             <Stack direction={{xs: 'column', md: 'row'}} justifyContent="center" spacing={2} alignItems="center">
-                <div>
+
                  <FormControl required sx={{ m: 1, minWidth: { xs: 110, sm: 120 } }} size={`${width < 500 ? 'small' : 'medium'}`}>
                     <InputLabel id="country" >Country</InputLabel>
                     <Select
@@ -95,6 +98,9 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                         <MenuItem value='romania'>Romania</MenuItem>
                         <MenuItem value='germany'>Germany</MenuItem>
                         <MenuItem value='france'>France</MenuItem>
+                        <MenuItem value='australia'>Australia</MenuItem>
+                        <MenuItem value='czrep'>Czech Republic</MenuItem>
+                        <MenuItem value='switzerland'>Switzerland</MenuItem>
                     </Select>
                 </FormControl>
 
@@ -115,7 +121,7 @@ const CountryNewsSelect: FC<ChildPropsComponent> = ({ selectNews, setSelectNews,
                             }) }
                     </Select>
                 </FormControl>
-                </div>
+
             </Stack>
         </ThemeProvider>
     )

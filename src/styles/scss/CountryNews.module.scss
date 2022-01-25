@@ -118,11 +118,10 @@
 .filters_ph_content {
     position: relative;
     width: 280px;
-    background-color: #E6E8E6;
+    background-color: rgb(220, 220, 220);
     border: .5px solid black;
     margin-top: 10px;
     margin-left: 20px;
-    // padding-bottom: .1em;
     border-radius: 4px;
     text-align: center;
     font-family: 'Roboto-Bold', cursive;
@@ -159,7 +158,6 @@
     width: 100%;
     margin: 0 auto;
     background-color: rgba(235, 235, 235, .5);
-    border-radius: 2px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
 
@@ -173,7 +171,6 @@
     width: 100%;
     gap: 1em;
     margin: 0 auto;
-    border-radius: 2px;
     background-color: rgba(235, 235, 235, .5);
     justify-content: flex-start;
     padding: .5em 0;
@@ -182,7 +179,6 @@
 
     div {
         width: 200px;
-        // margin: 0 auto;
     }
 }
 
@@ -202,8 +198,7 @@
     justify-content: center;
     width: 100%;
     margin: 0 auto;
-    border-radius: 2px;
-    // background-color: rgba(235, 235, 235, .5);
+     background-color: rgba(235, 235, 235, .5);
     padding: .5em 0;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
@@ -253,7 +248,8 @@
     }
     
     .filters_buttons {
-        width: 70vw;
+        width: 80%;
+        max-width: 250px;
         margin-left: 20px;
         margin-top: 20px;
     }
@@ -261,7 +257,7 @@
     .filters_ph_content {
         position: relative;
         width: 80%;
-        max-width: 70%;
+        max-width: 250px;
         background-color: rgb(220, 220, 220,);
         margin-top: 10px;
         margin-left: 20px;
@@ -279,7 +275,7 @@
                 margin: 5px auto 0 auto;
                 width: fit-content;
                 padding: 0 3px;
-                
+
                 &::after {
                     content: none;
                 }
@@ -291,7 +287,7 @@
                 button { 
                     border: none;
                     background: none;
-                    
+
                     &:hover {
                         transform: scale(1);
                     }
@@ -306,24 +302,18 @@
     .order_news {
         justify-content: center;
         padding: .8em 0;
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
-        border-radius: 2px;
         background-color: rgb(230, 230, 230);
     }
 
     .calendar {
         flex-flow: column wrap;
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
-        border-radius: 2px;
         background-color: rgb(230, 230, 230);
         justify-content: flex-start;
         padding: .5em 0;
-
-        div:nth-child(0n + 1) { 
-            width: 80% !important;
-        }
     }
 
     
@@ -340,11 +330,9 @@
 
     .ppp_select {
         justify-content: center;
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
-        border-radius: 2px;
         background-color: rgb(230, 230, 230);
-        transition: width 5s ease-in;
         padding: .5em 0;
     }
 
@@ -402,7 +390,7 @@
     .filters_ph_content {
         position: relative;
         width: 300px;
-        background-color: rgb(220, 220, 220,);
+        background-color: rgb(220, 220, 220);
         margin-left: 20px;
         margin-top: 10px;
         padding: .5em 0;
@@ -446,25 +434,18 @@
     .order_news {
         justify-content: center;
         padding: .8em 0;
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
-        border-radius: 2px;
         background-color: rgba(235, 235, 235, .5);
     }
 
     .calendar {
         flex-flow: column wrap;
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
-        border-radius: 2px;
         background-color: rgba(235, 235, 235, .5);
         justify-content: flex-start;
         padding: .5em 0;
-
-        div:nth-child(0n + 1) { 
-            width: 80% !important;
-        }
-
     }
 
     
@@ -481,11 +462,9 @@
 
     .ppp_select {
         justify-content: center;
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
-        border-radius: 2px;
         background-color: rgba(235, 235, 235, .5);
-        transition: width 5s ease-in;
         padding: .5em 0;
     }
 
@@ -548,7 +527,6 @@
       }
   }
 
-  
 }
 
 //Desktop

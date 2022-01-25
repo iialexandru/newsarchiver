@@ -49,13 +49,15 @@
     .pag_ph_nc {
         font-size: .6rem !important;
         font-family: 'Libre Baskerville', sans-serif;
+        align-self: flex-end;
+        justify-self: flex-end;
     }
 
     .container_flex {
         align-items: center;
         justify-content: center;
-        width: 85%;
         margin-bottom: 5px;
+        gap: 0;
     }
 }
 
@@ -68,6 +70,6 @@
     .container_flex {
         align-items: center;
         justify-content: center;
-        //width: 85%;
+        gap: 0;
     }
 }
