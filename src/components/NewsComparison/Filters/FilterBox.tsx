@@ -3,7 +3,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
@@ -11,12 +10,17 @@ import FilterAltOffOutlinedIcon from '@mui/icons-material/FilterAltOffOutlined';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
-import styles from '../../../styles/scss/NewsComparison.module.scss'
-import ViewsPerPage from './ViewsPerPage';
+import specStyles from '../../../styles/scss/FilterBox.module.scss'
 
-import { useState, FC } from 'react'
+import {useState, FC, useEffect} from 'react'
 import { useRouter } from 'next/router'
 import { isAfter, isBefore, startOfTomorrow } from 'date-fns'
+import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
+import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
+import DatePicker from "@mui/lab/DatePicker";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 interface ChildPropsComponent { 
     section: number;
@@ -28,17 +32,33 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     const router = useRouter()
 
     const [ openedFilters, setOpenedFilters ] = useState(false)
+    const [ openedFilter, setOpenedFilter ] = useState({ order: false, date: false, ppp: false})
     const [ value, setValue ] = useState<Date | null>(null) // For calendar filter
 
-    const [ posts, setPosts ] = useState(10) // For posts per page filter
+    const [ posts, setPosts ] = useState(12) // For posts per page filter
 
+    const handleChange = (e: any) => {
+        setPosts(e.target.value)
+    }
+
+    useEffect(() => {
+        if(section === 1){
+            router.replace({
+                query: {...router.query, ppp_f: encodeURIComponent(posts)}
+            })
+        } else {
+            router.replace({
+                query: {...router.query, ppp_s: encodeURIComponent(posts)}
+            })
+        }
+    }, [posts])
 
     const WHButton = styled(Button)(() => ({
         ':hover': {
           backgroundColor: '#e6e6e6',
         },
     }));
-      
+
     const defaultMaterialTheme = createTheme({
         palette: {
             primary: {
@@ -50,10 +70,19 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     const filterButtonsTheme = createTheme({
         palette: {
             primary: {
-                main: '#fff'
+                main: 'rgb(240, 240, 240)'
             }
         }
-    }) // pure white
+    })
+
+    const customSelectColor = createTheme({
+        palette: {
+            primary: {
+                main: '#646464'
+            }
+        }
+    })
+
 
 
     const resetDateFilter = () => {
@@ -115,57 +144,77 @@ const FilterBox: FC<ChildPropsComponent> = ({ section }) => {
     }
 
     return (
-        <>
-            <div className={styles.filters_buttons}>
+        <div style={{ display: 'flex', flexFlow: 'column wrap', alignItems: 'center', marginLeft: -20}}>
+            <div className={specStyles.filters_buttons}>
                 <ThemeProvider theme={defaultMaterialTheme}>
-                    <Button type="button"  onClick={e => setOpenedFilters(!openedFilters)} variant="outlined" color="primary" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />}>FILTERS</Button>
-                    <Button type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} color="primary" onClick={e => resetAllFilters() }>RESET</Button>
+                    <WHButton type="button" variant="outlined" size="small" endIcon={!openedFilters ? <KeyboardArrowDownRoundedIcon /> : <KeyboardArrowUpRoundedIcon />} onClick={e => { setOpenedFilters(!openedFilters); setOpenedFilter({ order: false, date: false, ppp: false }) }}>FILTERS</WHButton>
+                    <WHButton type="button" variant="outlined" size="small" endIcon={<FilterAltOffOutlinedIcon />} onClick={e => resetAllFilters()}>RESET</WHButton>
                 </ThemeProvider>
             </div>
             {openedFilters &&
-                <div className={styles.filters_container}>
-                    <div className={styles.order_news}>
-                        <Stack direction="row" alignItems='center' spacing={2}>
-                                <label>Date added: </label>
-                            <ThemeProvider theme={filterButtonsTheme}>
-                                <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
-                                <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
-                            </ThemeProvider>
-                        </Stack>
-                    </div>
-
-
-                    <div>
-                        <div className={styles.calendar}>
-                            <label htmlFor="calendar">Specific date:</label>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DesktopDatePicker
-                                    label="DATE"
-                                    value={value}
-                                    onChange={(newValue) => {
-                                    setValue(newValue);
-                                    }}
-                                    maxDate={new Date()}
-                                    minDate={new Date(2021, 11, 28)}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </LocalizationProvider>
-                        </div>
-                        <div className={styles.submission_buttons}>
+                <div className={specStyles.filters_ph_content}>
+                    <ul>
+                        <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                        {openedFilter.order &&
+                            <div className={specStyles.order_news}>
                                 <ThemeProvider theme={filterButtonsTheme}>
-                                        <WHButton type="button" variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
-                                        <WHButton type="button" variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                                    <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>
+                                    <WHButton type="button" variant="contained" type-order="oldest" size="small" onClick={e => orderingFilter(e)}>oldest</WHButton>
                                 </ThemeProvider>
-                        </div>
-                    </div>
-
-                    <div className={styles.ppp_select}>
-                        <label htmlFor="postsperpage">Posts per page:</label>
-                        <ViewsPerPage section={section} posts={posts} setPosts={setPosts} />
-                    </div>
+                            </div>
+                        }
+                        <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: false, date: !openedFilter.date, ppp: false}); } }>DATE ADDED{!openedFilter.date ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                        {openedFilter.date &&
+                            <>
+                                <div className={specStyles.calendar}>
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DatePicker
+                                            label="DATE"
+                                            value={value}
+                                            onChange={(newValue) => {
+                                                setValue(newValue);
+                                            }}
+                                            maxDate={new Date()}
+                                            minDate={new Date(2021, 11, 28)}
+                                            renderInput={(params) => <TextField {...params} />}
+                                        />
+                                    </LocalizationProvider>
+                                    <div className={specStyles.submission_buttons}>
+                                        <ThemeProvider theme={filterButtonsTheme}>
+                                            <WHButton size='small' variant="contained" onClick={e => handleDateFilter()}>submit</WHButton>
+                                            <WHButton size='small' variant="contained" onClick={e => resetDateFilter()}>clear</WHButton>
+                                        </ThemeProvider>
+                                    </div>
+                                </div>
+                            </>
+                        }
+                        <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: false, date: false, ppp: !openedFilter.ppp}); } }>POSTS PER PAGE{!openedFilter.ppp ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
+                        {openedFilter.ppp &&
+                            <div className={specStyles.ppp_select}>
+                                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                    <ThemeProvider theme={customSelectColor}>
+                                        <Select
+                                            labelId="posts-per-page-selection"
+                                            id="posts-per-page"
+                                            value={posts}
+                                            onChange={handleChange}
+                                            label="Posts"
+                                        >
+                                            <MenuItem value={12}>12</MenuItem>
+                                            <MenuItem value={15}>15</MenuItem>
+                                            <MenuItem value={18}>18</MenuItem>
+                                            <MenuItem value={21}>21</MenuItem>
+                                            <MenuItem value={24}>24</MenuItem>
+                                            <MenuItem value={27}>27</MenuItem>
+                                        </Select>
+                                    </ThemeProvider>
+                                </FormControl>
+                            </div>
+                        }
+                    </ul>
                 </div>
             }
-        </>
+        </div>
     )
 }
 

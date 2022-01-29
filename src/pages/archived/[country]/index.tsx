@@ -1,4 +1,3 @@
-import styles from '../../../styles/scss/NewsComparison.module.scss'
 import specStyles from '../../../styles/scss/CountryNews.module.scss'
 import nav from '../../../styles/scss/Pagination.module.scss'
 import formatDate from '../../../utils/formatDate'
@@ -23,7 +22,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
@@ -74,7 +72,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
     const filterButtonsTheme = createTheme({
         palette: {
             primary: {
-                main: '#fff'
+                main: 'rgb(240, 240, 240)'
             }
         },
         breakpoints: {
@@ -264,8 +262,7 @@ const SingleCountryNews: NextPage<News> = ({ news }) => {
                         <div className={specStyles.filters_ph_content}>
                             <ul>
                                 <li className={`${specStyles.list_item_filter} ${openedFilter.order ? specStyles.bt_ani : ''}`}><button onClick={e => { setOpenedFilter({order: !openedFilter.order, date: false, ppp: false}); } }>ORDER OF NEWS{!openedFilter.order ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button></li>
-                                <div></div>
-                                {openedFilter.order && 
+                                {openedFilter.order &&
                                     <div className={specStyles.order_news}>
                                         <ThemeProvider theme={filterButtonsTheme}>
                                             <WHButton type="button" variant="contained" type-order="latest" size="small" onClick={e => orderingFilter(e)}>latest</WHButton>

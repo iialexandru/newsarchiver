@@ -4,10 +4,7 @@
     grid-column-start: 1;
     grid-column-end: 3;
     grid-template-columns: auto auto auto;
-    //grid-template-rows: repeat(auto, 2fr);
     gap: 3em;
-    //margin: 0 1.5em;
-    //margin-top: 2em;
     margin: 2em 1.5em 0 1.5em;
 }
 
@@ -122,19 +119,22 @@
     border: .5px solid black;
     margin-top: 10px;
     margin-left: 20px;
-    border-radius: 4px;
+    padding: .2em 0;
+    border-radius: 2px;
+    box-shadow: 2px 5px 10px gray;
     text-align: center;
     font-family: 'Roboto-Bold', cursive;
 
     ul {
         list-style-type: none;
         padding: 0;
-        line-height: 1.9;    
+        line-height: 1.9;
 
         .list_item_filter {
             position: relative;
             width: 100%;
             margin-top: 5px;
+
         
             button { 
                 border: none;
@@ -382,14 +382,14 @@
     }
         
     .filters_buttons {
-        width: 300px;
+        width: 260px;
         margin-left: 20px;
         margin-top: 20px;
     }
     
     .filters_ph_content {
         position: relative;
-        width: 300px;
+        width: 260px;
         background-color: rgb(220, 220, 220);
         margin-left: 20px;
         margin-top: 10px;
@@ -474,7 +474,7 @@
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .all_news_container {
     grid-column-end: 2;
-    grid-template-columns: auto auto;  
+    grid-template-columns: auto auto;
   }
   .item_flex {
     height: 400px;
@@ -499,11 +499,11 @@
   }
 
   .filters_buttons {
-      width: 330px;
+      width: 280px;
   }
 
   .filters_ph_content {
-      width: 330px;
+      width: 280px;
 
       .list_item_filter {
             &::before {
@@ -536,6 +536,24 @@
 
 //Large Desktop
 @media screen and (min-width: 1500px) {
+    .all_news_container {
+        margin: 3vh 10vw 0 10vw;
+    }
+}
+
+@media screen and (min-width: 1780px) {
+    .all_news_container {
+        margin: 3vh 15vw 0 15vw;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .all_news_container {
+        margin: 3vh 20vw 0 20vw;
+    }
+}
+
+@media screen and (min-width: 2415px) {
     .all_news_container {
         margin: 3vh 24vw 0 24vw;
     }

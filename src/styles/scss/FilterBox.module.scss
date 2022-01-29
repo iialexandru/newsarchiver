@@ -1,0 +1,373 @@
+.filters_buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 280px;
+  margin-top: 20px;
+  margin-left: 20px;
+  gap: .2em;
+  font-family: 'Roboto-Bold', cursive !important;
+
+  button {
+    flex: 1;
+  }
+}
+
+.filters_ph_content {
+  position: relative;
+  width: 280px;
+  background-color: rgb(220, 220, 220);
+  border: .5px solid black;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: .2em 0;
+  border-radius: 2px;
+  box-shadow: 2px 5px 10px gray;
+  text-align: center;
+  font-family: 'Roboto-Bold', cursive;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    line-height: 1.9;
+
+    .list_item_filter {
+      position: relative;
+      width: 100%;
+      margin-top: 5px;
+
+
+      button {
+        border: none;
+        background: none;
+        font-family: 'Roboto-Bold', cursive;
+        cursor: pointer;
+      }
+
+    }
+
+  }
+
+}
+
+.order_news {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1em;
+  justify-content: center;
+  padding: .8em 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(235, 235, 235, .5);
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+
+}
+
+.calendar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+  width: 100%;
+  gap: 1em;
+  margin: 0 auto;
+  background-color: rgba(235, 235, 235, .5);
+  justify-content: flex-start;
+  padding: .5em 0;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+
+  div {
+    width: 200px;
+  }
+}
+
+
+.submission_buttons {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 2em;
+  width: 100%;
+}
+
+.ppp_select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(235, 235, 235, .5);
+  padding: .5em 0;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+
+
+
+//Phone Portrait & Landscape
+
+@media screen and (min-width: 0px) and (max-width: 380px) {
+  .filters_ph_content {
+    .order_news {
+      flex-flow: row wrap;
+    }
+    .calendar {
+      overflow: hidden;
+      flex-flow: column wrap;
+      width: 100%;
+      margin: 0;
+      background-color: rgb(230, 230, 230);
+      justify-content: flex-start;
+      padding: .5em 0;
+
+      div {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+
+    .submission_buttons {
+      width: 100%;
+      justify-content: center;
+      flex-flow: row wrap;
+      left: 0;
+      margin-top: 0;
+      gap: .2em;
+
+      button {
+        flex-grow: 0;
+      }
+    }
+
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 300px) {
+  .filters_ph_content {
+    width: 140px;
+
+    .order_news {
+      justify-content: center;
+      flex-flow: row wrap;
+      padding: .8em 0;
+      width: 100%;
+      margin: 0 auto;
+      background-color: rgb(230, 230, 230);
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  .filters_buttons {
+    width: 30%;
+    max-width: 250px;
+    margin-left: -60px;
+    margin-top: 20px;
+
+    button {
+      font-size: .55rem;
+    }
+  }
+
+  .filters_ph_content {
+    position: relative;
+    width: 80%;
+    max-width: 250px;
+    background-color: rgb(220, 220, 220,);
+    margin-top: 10px;
+    margin-left: 20px;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 4px;
+
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      line-height: 1.3;
+      margin: 0 !important;
+
+      .list_item_filter {
+        position: relative;
+        margin: 0 auto 0 auto;
+        width: fit-content;
+        padding: 0 0;
+
+        &::after {
+          content: none;
+        }
+
+        &:hover::after {
+          content: none;
+        }
+
+        button {
+          border: none;
+          background: none;
+          font-size: .6rem;
+
+          &:hover {
+            transform: scale(1);
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  .order_news {
+    justify-content: center;
+    padding: .8em 0;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(230, 230, 230);
+  }
+
+  .calendar {
+    overflow: scroll;
+    flex-flow: column wrap;
+    width: 100%;
+    margin: 0;
+    background-color: rgb(230, 230, 230);
+    justify-content: flex-start;
+    padding: .5em 0;
+
+    div {
+      width: 100%;
+    }
+  }
+
+
+  .submission_buttons {
+    width: 100%;
+    justify-content: center;
+    left: 0;
+    margin-top: 0;
+
+    button {
+      flex-grow: 0;
+    }
+  }
+
+  .ppp_select {
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(230, 230, 230);
+    padding: .5em 0;
+    border: none;
+    border-radius: 3px;
+  }
+
+
+
+}
+
+//Phone Landscape
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .filters_buttons {
+    width: 220px;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  .filters_ph_content {
+    position: relative;
+    width: 220px;
+    background-color: rgb(220, 220, 220);
+    margin-left: 20px;
+    margin-top: 10px;
+    padding: .5em 0;
+    border-radius: 4px;
+
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      line-height: 1.9;
+
+      .list_item_filter {
+        position: relative;
+        margin: 5px auto 0 auto;
+        width: fit-content;
+        padding: 0 3px;
+
+        &::after {
+          content: none;
+        }
+
+        &:hover::after {
+          content: none;
+        }
+
+        button {
+          border: none;
+          background: none;
+
+          &:hover {
+            transform: scale(1);
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  .order_news {
+    justify-content: center;
+    padding: .8em 0;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(235, 235, 235, .5);
+  }
+
+  .calendar {
+    flex-flow: column wrap;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(235, 235, 235, .5);
+    justify-content: flex-start;
+    padding: .5em 0;
+  }
+
+
+  .submission_buttons {
+    width: 100%;
+    justify-content: center;
+    left: 0;
+    margin-top: 0;
+
+    button {
+      flex-grow: 0;
+    }
+  }
+
+  .ppp_select {
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(235, 235, 235, .5);
+    padding: .5em 0;
+  }
+
+}
+
+//Tablet Portrait & Landscape
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  .filters_buttons {
+    width: 280px;
+  }
+
+  .filters_ph_content {
+    width: 280px;
+
+}
+}
