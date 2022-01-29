@@ -28,6 +28,8 @@ $link-color: #a45ee5;
 
 .slide_abimg {
     position: relative;
+    display: flex;
+    justify-content: center;
     
     figcaption {
         background-color: $fill-color;
@@ -64,6 +66,7 @@ $link-color: #a45ee5;
 .slide_img_but {
     transition: all .25s;
     background-color: $fill-color;
+    margin: 0 auto !important;
 
     button { 
         position: absolute;
@@ -365,6 +368,7 @@ $link-color: #a45ee5;
 
     .list_all_channels {
         width: 35vmax;
+        width: 65vmin;
             ul { 
                 li { 
                     transform: none;
@@ -414,6 +418,8 @@ $link-color: #a45ee5;
 
     .list_all_channels {
         width: 30vmax;
+        width: 40vmin;
+
     }
 
 }
@@ -491,7 +497,7 @@ $link-color: #a45ee5;
 
 //Desktop
 @media screen and (min-width: 1224px) {
-  
+
 }
 
 //Large Desktop
@@ -508,10 +514,42 @@ $link-color: #a45ee5;
         width: 13vmax;
 
     }
+
+    .slide_abimg {
+
+        figcaption {
+            width: 550px
+        }
+
+    }
 }
 
 @media screen and (min-width: 1850px) {
     .grid_info {
         padding: 2em 15vw;
+    }
+
+    .slide_abimg {
+
+        span {
+
+        }
+
+        figcaption {
+            width: inherit;
+        }
+    }
+
+}
+
+@media screen and (min-width: 2000px) {
+    .slide_img_but {
+
+        button {
+            top: 44%;
+            left: 43%;
+
+            border-width: 3px;
+        }
     }
 }

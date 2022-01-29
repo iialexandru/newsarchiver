@@ -136,12 +136,14 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                 >
                     {all_latest_news.map((post, index) => {
                         return ( 
-                            <SwiperSlide key={index} className={`${styles.slide_abimg}`}> 
+                            <SwiperSlide key={index} className={styles.slide_abimg}>
                                 {({ isActive }) => (
                                     <div className={!isActive ? styles.swiper_inactive_slider : ''}>
-                                        <figure key={index}>
-                                            <div className={isActive ? styles.slide_img_but : ''}>
-                                                <Image key={index} alt="An image was not provided by the news site" src={(post.allPage[0].image && post.allPage[0].image !== ' ') ? post.allPage[0].image : '/'} width={550} height={400} priority/>
+                                        <figure key={index} style={{ position: 'relative', width: `${ width > 2000 ? '800px' : 'inherit'}` }}>
+                                            <div className={isActive ? styles.slide_img_but : ''} style={{ display: 'flex', justifyContent: 'center'}}>
+                                                <div>
+                                                    <Image key={index} alt="An image was not provided by the news site" src={(post.allPage[0].image && post.allPage[0].image !== ' ') ? post.allPage[0].image : '/'} width={width < 2000 ? 550 : 800} height={width < 2000 ? 400 : 600} priority/>
+                                                </div>
                                                 <button key={index + 1}><Link href={post.allPage[0].linkURL}><a target="_blank">Read more</a></Link></button>
                                             </div>
                                             <figcaption key={index + 2}>
@@ -149,7 +151,7 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                                                     <Link key={index} href={chooseSite(post.allPage[0].channel.toString().toUpperCase())}><a target="_blank"><span style={{position: 'absolute', cursor: 'pointer'}}>{post.allPage[0].channel.toUpperCase()}</span></a></Link>
                                                     <p key={index + 1} style={{margin: 0, textAlign: 'right', cursor: 'default'}}>{formatDate(post.allPage[0].date)}</p>
                                                 </div>
-                                                <h4 key={index + 1} style={{margin: 0, textAlign: 'center', cursor: 'default', marginTop: '5px'}}><Link href={post.allPage[0].linkURL}><a target='_blank'>{post.allPage[0].title}</a></Link></h4>
+                                                <h4 key={index + 1}  style={{margin: 0, textAlign: 'center', cursor: 'default', marginTop: '5px'}}><Link href={post.allPage[0].linkURL}><a target='_blank'>{post.allPage[0].title}</a></Link></h4>
                                             </figcaption>
                                         </figure>
                                     </div>
