@@ -250,8 +250,7 @@
     .filters_buttons {
         width: 80%;
         max-width: 250px;
-        margin-left: 20px;
-        margin-top: 20px;
+        margin: 20px auto 0 auto;
     }
     
     .filters_ph_content {
@@ -259,10 +258,9 @@
         width: 80%;
         max-width: 250px;
         background-color: rgb(220, 220, 220,);
-        margin-top: 10px;
-        margin-left: 20px;
         padding: .5em 0;
         border-radius: 4px;
+        margin: 10px auto 0 auto;
 
 
         ul {
@@ -537,24 +535,24 @@
 //Large Desktop
 @media screen and (min-width: 1500px) {
     .all_news_container {
-        margin: 3vh 10vw 0 10vw;
+        margin: 5vh 10vw 0 10vw;
     }
 }
 
 @media screen and (min-width: 1780px) {
     .all_news_container {
-        margin: 3vh 15vw 0 15vw;
+        margin: 5vh 15vw 0 15vw;
     }
 }
 
 @media screen and (min-width: 2000px) {
     .all_news_container {
-        margin: 3vh 20vw 0 20vw;
+        margin: 5vh 20vw 0 20vw;
     }
 }
 
 @media screen and (min-width: 2415px) {
     .all_news_container {
-        margin: 3vh 24vw 0 24vw;
+        margin: 5vh 24vw 0 24vw;
     }
 }
