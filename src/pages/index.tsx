@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import styles from '../styles/scss/Home.module.scss'
 
 const Home: NextPage = () => {
-  const { ref, inView, entry } = useInView({
+  const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: .1,
   });

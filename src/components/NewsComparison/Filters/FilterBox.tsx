@@ -1,6 +1,5 @@
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 
 import Button from '@mui/material/Button';
