@@ -325,11 +325,6 @@
 
 //Phone Portrait & Landscape 767px
 @media screen and (min-width: 0px) and (max-width: 481px) {
-
-    .container {
-        //grid-template-columns: 55% 55%;
-    }
-
     .all_news_container {
         margin: 4vh 0 10px 2px;
         row-gap: 2vh;
@@ -387,7 +382,7 @@
             transform: none !important;
             border-color: revert !important;
             border-width: revert !important;
-            background-color: revert !important;
+            background-color: rgba(220, 220, 220, 1) !important;
             border-top-right-radius: 0 0 !important;
             box-shadow: none !important;
             transition: none;
@@ -472,7 +467,7 @@
             transform: none !important;
             border-color: revert !important;
             border-width: revert !important;
-            background-color: revert !important;
+            background-color: rgba(220, 220, 220, 1) !important;
             border-top-right-radius: 0 0 !important;
             box-shadow: none !important;
             transition: none;
@@ -547,7 +542,7 @@
         &:hover {
             transform: none !important;
             border-width: revert !important;
-            background-color: revert !important;
+            background-color: rgba(220, 220, 220, 1) !important;
             border-top-right-radius: 0 0 !important;
             box-shadow: none !important;
             transition: none;
