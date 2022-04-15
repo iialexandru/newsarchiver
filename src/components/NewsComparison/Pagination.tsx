@@ -167,16 +167,16 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
             {width <= 620 &&
                 <button onClick={sendToFirstPage} style={{opacity: `${currentButton <= 1 ? '0.5' : '1'}`}} disabled={currentButton <= 1}>
                     <Image
-                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
+                        src="https://res.cloudinary.com/multimediarog/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
                         width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
                     <Image
-                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
+                        src="https://res.cloudinary.com/multimediarog/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
                         width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
                 </button>
             }
             <button onClick={prevPage} style={{opacity: `${currentButton <= 1 ? '0.5' : '1'}`}} disabled={currentButton <= 1}>
                 <Image
-                    src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
+                    src="https://res.cloudinary.com/multimediarog/image/upload/v1640607832/NewsArchiver/arrows/clipart2203023_vvyiac.png"
                     width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
             </button>
             {width > 620 ?
@@ -196,17 +196,17 @@ const Pagination: FC<ChildPropsComponent> = ({ section, numberOfPages, PAGE }) =
             }
             <button onClick={nextPage} style={{opacity: `${currentButton >= numberOfPages ? '0.5' : '1'}`}} disabled={currentButton >= numberOfPages}>
                 <Image
-                    src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
+                    src="https://res.cloudinary.com/multimediarog/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
                     width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
             </button>
             {width <= 620 &&
                 <button onClick={sendToLastPage} style={{opacity: `${currentButton >= numberOfPages ? '0.5' : '1'}`}}
                         disabled={currentButton >= numberOfPages}>
                     <Image
-                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
+                        src="https://res.cloudinary.com/multimediarog/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
                         width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
                     <Image
-                        src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
+                        src="https://res.cloudinary.com/multimediarog/image/upload/v1640607832/NewsArchiver/arrows/clipart2826625_fd0ave.png"
                         width={width > 481 ? 10 : 5} height={width > 481 ? 15 : 10} priority/>
                 </button>
             }

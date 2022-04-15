@@ -20,7 +20,7 @@ const Nav = () => {
       {width > 700 ?
       <nav className={styles.nav_flex}>
         <span className={`${animation ? styles.animation_stop_sm : ''}`} >
-            <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
+            <Image src="https://res.cloudinary.com/multimediarog/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
                   width={210} height={125} onMouseLeave={e => setAnimation(!animation)} onMouseEnter={e => setAnimation(!animation)} alt="logo" priority/>
         </span>
         <span className={styles.hover}><Link href="/">Home</Link></span>
@@ -30,7 +30,7 @@ const Nav = () => {
       :
       <>
         <nav className={styles.nav_container}>
-              <div><Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
+              <div><Image src="https://res.cloudinary.com/multimediarog/image/upload/v1640892991/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
                     width={90} height={55} alt="logo" /></div>
             <button className={styles.nav_p_button} onClick={e => setOpened(!opened)}>
               <span>{chooseName(router.pathname.toString())}</span>

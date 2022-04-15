@@ -46,7 +46,7 @@ const Home: NextPage = () => {
             </p>
             <p>FYI: All the news are taken from the most recent section of the respective sites</p>
           </div>
-          <Image src="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640891680/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
+          <Image src="https://res.cloudinary.com/multimediarog/image/upload/v1640891680/NewsArchiver/main-logos/logo_transparent_background_m6vxus.png"
           width={700} height={450}  priority />
         </div>
 

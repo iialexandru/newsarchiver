@@ -164,32 +164,32 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
             <div className={styles.grid_container}>
                 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640252545/NewsArchiver/flags/Flag_of_Romania_etbciq.svg" name="Romania"/>
+                    <CountryLogo url="https://res.cloudinary.com/multimediarog/image/upload/v1640252545/NewsArchiver/flags/Flag_of_Romania_etbciq.svg" name="Romania"/>
                     <ListOfTheNews country='Romania' news={newsRomania} />
                 </div>
 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1640252544/NewsArchiver/flags/Flag_of_Germany_hr9lyu.svg" name="Germany"/>
+                    <CountryLogo url="https://res.cloudinary.com/multimediarog/image/upload/v1640252544/NewsArchiver/flags/Flag_of_Germany_hr9lyu.svg" name="Germany"/>
                     <ListOfTheNews country='Germany' news={newsGermany} />
                 </div>
 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1642082820/NewsArchiver/flags/frenchflagframed_nf8kyi.svg" name="France"/>
+                    <CountryLogo url="https://res.cloudinary.com/multimediarog/image/upload/v1642082820/NewsArchiver/flags/frenchflagframed_nf8kyi.svg" name="France"/>
                     <ListOfTheNews country='France' news={newsFrance} />
                 </div>
 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1642411448/NewsArchiver/flags/Flag_of_Australia_fsptnt.svg" name="Australia"/>
+                    <CountryLogo url="https://res.cloudinary.com/multimediarog/image/upload/v1642411448/NewsArchiver/flags/Flag_of_Australia_fsptnt.svg" name="Australia"/>
                     <ListOfTheNews country='Australia' news={newsAustralia} />
                 </div>
 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1642412526/NewsArchiver/flags/czech-flag_zehxfs.svg" name="Czech Republic"/>
+                    <CountryLogo url="https://res.cloudinary.com/multimediarog/image/upload/v1642412526/NewsArchiver/flags/czech-flag_zehxfs.svg" name="Czech Republic"/>
                     <ListOfTheNews country='CzechRepublic' news={newsCzRep} />
                 </div>
 
                 <div>
-                    <CountryLogo url="https://res.cloudinary.com/media-cloud-dw/image/upload/v1642411800/NewsArchiver/flags/flag-switzerland_c2a3xq.svg" name="Switzerland"/>
+                    <CountryLogo url="https://res.cloudinary.com/multimediarog/image/upload/v1642411800/NewsArchiver/flags/flag-switzerland_c2a3xq.svg" name="Switzerland"/>
                     <ListOfTheNews country='Switzerland' news={newsSwitzerland} />
                 </div>
             </div>
@@ -197,22 +197,22 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
             
             <div className={styles.anim_item}>
                 <div ref={ref} className={`${width > 1023 ? styles.grid_info : styles.grid_info_v}  ${(inView && width > 1023) ? styles.vis_true : ''}`}>
-                        <InfoItem name={'DIGI24'} text={einfo.digi} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642524685/NewsArchiver/news-logos/Logo_Digi_24__2012_1_qrlpor.svg'} />
-                        <InfoItem name={'Antena3'} text={einfo.antena} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642524964/NewsArchiver/news-logos/unnamed_y1rbgm.jpg'} />
-                        <InfoItem name={'WELT'} text={einfo.welt} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525000/NewsArchiver/news-logos/unnamed_cldqcz.png'} />
-                        <InfoItem name={'DW'} text={einfo.dw} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
+                        <InfoItem name={'DIGI24'} text={einfo.digi} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642524685/NewsArchiver/news-logos/Logo_Digi_24__2012_1_qrlpor.svg'} />
+                        <InfoItem name={'Antena3'} text={einfo.antena} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642524964/NewsArchiver/news-logos/unnamed_y1rbgm.jpg'} />
+                        <InfoItem name={'WELT'} text={einfo.welt} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525000/NewsArchiver/news-logos/unnamed_cldqcz.png'} />
+                        <InfoItem name={'DW'} text={einfo.dw} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
                         {width < 400 ? 
                             <>
                                 {openInfoOnPhone && 
                                     <>
-                                        <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
-                                        <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
-                                        <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
-                                        <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
-                                        <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
-                                        <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
-                                        <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
-                                        <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
+                                        <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
+                                        <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
+                                        <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
+                                        <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
+                                        <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
+                                        <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
+                                        <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
+                                        <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
                                     </>
                                 }
                                 <a style={{paddingBottom: 0, border: 'none', background: 'none', borderBottom: '1.5px solid black', textAlign: 'center', fontSize: '.7rem'}} onClick={e => setOpenInfoOnPhone(!openInfoOnPhone)}>
@@ -229,14 +229,14 @@ const ArchivedNews: NextPage<ChildPropsComponent> = ({ all_latest_news }) => {
                             </>
                             :
                             <>
-                                <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
-                                <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
-                                <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
-                                <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
-                                <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
-                                <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
-                                <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
-                                <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/media-cloud-dw/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
+                                <InfoItem name={'France24'} text={einfo.france} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525017/NewsArchiver/news-logos/unnamed_1_fztcob.png'} />
+                                <InfoItem name={'Le Monde'} text={einfo.lemonde} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525076/NewsArchiver/news-logos/unnamed_2_plixas.png'} />
+                                <InfoItem name={'9News'} text={einfo.newsn} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525098/NewsArchiver/news-logos/unnamed_3_xnzkj8.png'} />
+                                <InfoItem name={'SBS'} text={einfo.sbs} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525137/NewsArchiver/news-logos/download_jhyjyb.png'} />
+                                <InfoItem name={'Expats'} text={einfo.expats} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525164/NewsArchiver/news-logos/expats_zhlj93.jpg'} />
+                                <InfoItem name={'Prague Morning'} text={einfo.praguemorning} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525198/NewsArchiver/news-logos/download_1_bzvzd6.png'} />
+                                <InfoItem name={'Le News'} text={einfo.lenews} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525217/NewsArchiver/news-logos/download_dtcw0z.jpg'} />
+                                <InfoItem name={'SwissInfo'} text={einfo.swissinfo} url={'https://res.cloudinary.com/multimediarog/image/upload/v1642525242/NewsArchiver/news-logos/icon_ntmu4q.webp'} />
                             </>
                         }
                 </div>
